@@ -19,6 +19,7 @@ typedef struct
 }VilleIut;
 
 // Liste.c
+ListeDept ajouter(ListeDept ldept, char nomDept[], char resp[], int nbP);
 ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
 ListeDept supprimerEnTete(ListeDept ldept);
 ListeDept listenouv();

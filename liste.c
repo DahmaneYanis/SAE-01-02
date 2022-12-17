@@ -14,20 +14,24 @@ ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP)
 {
     MaillonDept *m;
 
+    // Allocation de la memoire pour le nouveau maillon.
     m = (MaillonDept *)malloc(sizeof(MaillonDept));
     if (!m)
     {
         printf("Erreur de malloc\n");
         exit(1);
     }
+    // On ajoute le nom du departement, le nom du responsable ainsi que le nombre de places en 1ere année.
     strcpy(m->nomDept, nomDept);
     strcpy(m->resp, resp);
     m->nbP = nbP;
     if (vide(ldept))
     {
+        // La liste est vide, alors m n'as pas de suiv:
         m->suiv = NULL;
         return m;
     }
+    // La liste n'est pas vide, on ajoute le maillon en tete de la nouvelle liste qu'on renvois.
     m->suiv = ldept;
     return m;
 }
@@ -67,6 +71,33 @@ bool vide(ListeDept ldept)
         return true;
     return false;
 }
+
+/**
+ * \brief Ajoute un maillon à la liste de départements, en ordre alphabétique.
+ *
+ * \param ldept La liste de départements à laquelle le maillon doit être ajouté.
+ * \param nomDept Le nom du département à ajouter.
+ * \param resp Le responsable du département à ajouter.
+ * \param nbP Le nombre de personnes dans le département à ajouter.
+ *
+ * \return La nouvelle liste de départements, avec le maillon ajouté à la bonne position.
+ *
+ * Si la liste est vide, le maillon est ajouté en tête de la liste.
+ * Si la liste contient déjà des éléments, le maillon est ajouté en ordre alphabétique selon le nom du département.
+ */
+ListeDept ajouter(ListeDept ldept, char nomDept[], char resp[], int nbP)
+{
+    MaillonDept *temp;
+
+    if (vide(ldept))
+        return ajouterEnTete(ldept, nomDept, resp, nbP);
+    temp = ldept;
+    while (temp->suiv && strcmp(temp->suiv->nomDept, nomDept) < 0)
+        temp = temp->suiv;
+    temp->suiv = ajouterEnTete(temp->suiv, nomDept, resp, nbP);
+    return ldept;
+}
+
 /**
  * @brief Créer une nouvelle liste de départements vide.
  * 

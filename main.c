@@ -7,9 +7,9 @@ int main(void)
 
 	ldept = listenouv();
 	
-	ldept = ajouterEnTete(ldept, "Informatique", "John Doe", 15);
-	ldept = ajouterEnTete(ldept, "Bio", "Ryan Taro", 20);
+	ldept = ajouterEnTete(ldept, "Informatique", "John Doe", 150);
+	ldept = ajouterEnTete(ldept, "Bio", "Ryan Taro", 200);
 	afficherListe(ldept);
-	ldept = supprimerEnTete(ldept);
+	ajouter(ldept, "Chimie", "Henri Laserre", 80);
 	afficherListe(ldept);
 }
