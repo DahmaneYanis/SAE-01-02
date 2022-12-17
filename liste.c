@@ -60,17 +60,7 @@ ListeDept supprimerEnTete(ListeDept ldept)
     return aux;
 }
 
-/**
- * @brief Vérifie si une liste de départements est vide.
- * @param ldept La liste de départements à vérifier.
- * @return true si la liste est vide, false sinon.
- */
-bool vide(ListeDept ldept)
-{
-    if (!ldept)
-        return true;
-    return false;
-}
+
 
 /**
  * \brief Ajoute un maillon à la liste de départements, en ordre alphabétique.
@@ -109,6 +99,34 @@ ListeDept listenouv()
 
     l = NULL;
     return l;
+}
+
+/**
+ * @brief Vérifie si une liste de départements est vide.
+ * @param ldept La liste de départements à vérifier.
+ * @return true si la liste est vide, false sinon.
+ */
+bool vide(ListeDept ldept)
+{
+    if (!ldept)
+        return true;
+    return false;
+}
+
+/**
+ * @brief Calcule la longueur d'une liste de départements.
+ * @param ldept La liste de département à compter
+ * @return La longueur de la liste.
+ */
+int longueur(ListeDept ldept)
+{
+    int i = 0;
+    while (ldept)
+    {
+        ldept = ldept->suiv;
+        i++;
+    }
+    return i;
 }
 
 /**

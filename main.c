@@ -12,4 +12,5 @@ int main(void)
 	afficherListe(ldept);
 	ajouter(ldept, "Chimie", "Henri Laserre", 80);
 	afficherListe(ldept);
+	printf("%d", longueur(ldept));
 }
