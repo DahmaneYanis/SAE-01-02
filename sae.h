@@ -9,11 +9,18 @@ typedef struct maillonDept
     char resp[30];
     int nbP;
     struct maillonDept *suiv;
-}MaillonDept, *Ldept;
+}MaillonDept, *ListeDept;
 
 // Utilise pour le tableau de pointeurs sur cette structure (pour Guillaume)
 typedef struct 
 {
     char nom[30];
-    Ldept l;
+    ListeDept ldept;
 }VilleIut;
+
+// Liste.c
+ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
+ListeDept supprimerEnTete(ListeDept ldept);
+ListeDept listenouv();
+bool vide(ListeDept ldept);
+void afficherListe(ListeDept ldept);
