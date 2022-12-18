@@ -4,13 +4,12 @@
 int main(void)
 {
 	ListeDept ldept;
+	VilleIut iut;
 
-	ldept = listenouv();
-	
-	ldept = ajouterEnTete(ldept, "Informatique", "John Doe", 150);
-	ldept = ajouterEnTete(ldept, "Bio", "Ryan Taro", 200);
-	afficherListe(ldept);
-	ajouter(ldept, "Chimie", "Henri Laserre", 80);
-	afficherListe(ldept);
-	printf("%d", longueur(ldept));
+	//TESTS des fonctions de manipulation des structures VilleIut et ListeDept
+	iut.ldept = listenouv();
+	strcpy(iut.nom, "Clermont Ferrand");
+	iut.ldept = ajouterDept(iut.ldept, "Chimie", "Henri Laserre", 80);
+	iut.ldept = ajouterDept(iut.ldept, "Chimie", "Henri Laserre", 80);
+	afficherListe(iut.ldept);
 }

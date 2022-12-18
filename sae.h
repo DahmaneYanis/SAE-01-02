@@ -18,11 +18,14 @@ typedef struct
     ListeDept ldept;
 }VilleIut;
 
-// Liste.c
+// listeDeparements.c
 ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
 ListeDept supprimerEnTete(ListeDept ldept);
-ListeDept ajouter(ListeDept ldept, char nomDept[], char resp[], int nbP);
+ListeDept supprimer(ListeDept ldept, char nom[]);
+ListeDept ajouterDept(ListeDept ldept, char nomDept[], char resp[], int nbP);
 ListeDept listenouv();
 bool vide(ListeDept ldept);
 int longueur(ListeDept ldept);
 void afficherListe(ListeDept ldept);
+
+// iut.c

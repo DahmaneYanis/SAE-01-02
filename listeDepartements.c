@@ -75,15 +75,23 @@ ListeDept supprimerEnTete(ListeDept ldept)
  * Si la liste est vide, le maillon est ajouté en tête de la liste.
  * Si la liste contient déjà des éléments, le maillon est ajouté en ordre alphabétique selon le nom du département.
  */
-ListeDept ajouter(ListeDept ldept, char nomDept[], char resp[], int nbP)
+ListeDept ajouterDept(ListeDept ldept, char nomDept[], char resp[], int nbP)
 {
     MaillonDept *temp;
 
     if (vide(ldept))
         return ajouterEnTete(ldept, nomDept, resp, nbP);
     temp = ldept;
-    while (temp->suiv && strcmp(temp->suiv->nomDept, nomDept) < 0)
+    while (temp->suiv && strcmp(temp->suiv->nomDept, nomDept) <= 0)
+    {
         temp = temp->suiv;
+    }
+    if (strcmp(temp->nomDept, nomDept) == 0)
+    {
+        printf("Ce département existe déjà.\n");
+        // [A completer]
+        return ldept;
+    }
     temp->suiv = ajouterEnTete(temp->suiv, nomDept, resp, nbP);
     return ldept;
 }
