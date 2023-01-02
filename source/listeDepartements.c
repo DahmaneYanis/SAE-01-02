@@ -88,7 +88,7 @@ ListeDept ajouterDept(ListeDept ldept, char nomDept[], char resp[], int nbP)
     }
     if (strcmp(temp->nomDept, nomDept) == 0)
     {
-        printf("Ce département existe déjà.\n");
+        printf("Ce departement existe deja.\n");
         // [A completer]
         return ldept;
     }
@@ -144,7 +144,7 @@ int longueur(ListeDept ldept)
 void afficherListe(ListeDept ldept)
 {
     // Affichage de l'en-tête du tableau
-    printf("| %-30s | %-30s | %-10s |\n", "Nom du département", "Responsable", "Places");
+    printf("| %-30s | %-30s | %-10s |\n", "Nom du departement", "Responsable", "Places");
     printf("+--------------------------------+--------------------------------+------------+\n");
 
     // Parcours de la liste
