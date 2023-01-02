@@ -47,6 +47,12 @@ typedef struct
                             Les structures
 ------------------------------------------------------------------------
 */
+// sae.c
+void Globale(void);
+void menuVisiteur(void);
+int afficherMenuVisiteur(void);
+int choixMenuVisiteur(void);
+
 // listeDeparements.c
 ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
 ListeDept supprimerEnTete(ListeDept ldept);

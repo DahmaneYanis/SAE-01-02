@@ -3,6 +3,9 @@
 
 int main(void)
 {
+	Globale();
+
+	/*
 	ListeDept ldept;
 	VilleIut iut;
 
@@ -12,4 +15,5 @@ int main(void)
 	iut.ldept = ajouterDept(iut.ldept, "Chimie", "Henri Laserre", 80);
 	iut.ldept = ajouterDept(iut.ldept, "Chimie", "Henri Laserre", 80);
 	afficherListe(iut.ldept);
+	*/
 }
