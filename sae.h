@@ -10,12 +10,16 @@
 */
 
 #ifdef _WIN32
-#define clean   system("cls")
+#define clean   system("cls");
+#define color   system("color 70");
+void testColor(void);
 #endif
 
 #ifdef __linux__
 #define clean   system("clear")
 #endif
+
+
 
 /*
 ------------------------------------------------------------------------
