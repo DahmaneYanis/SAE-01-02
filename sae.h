@@ -3,6 +3,25 @@
 #include <string.h>
 #include <stdbool.h>
 
+/*
+------------------------------------------------------------------------
+        Prise en charge de l'OS pour le nettoyage de l'affichage
+------------------------------------------------------------------------
+*/
+
+#ifdef _WIN32
+#define clean   system("cls")
+#endif
+
+#ifdef __linux__
+#define clean   system("clear")
+#endif
+
+/*
+------------------------------------------------------------------------
+                            Les structures
+------------------------------------------------------------------------
+*/
 typedef struct maillonDept
 {
     char nomDept[30];
@@ -18,6 +37,12 @@ typedef struct
     ListeDept ldept;
 }VilleIut;
 
+
+/*
+------------------------------------------------------------------------
+                            Les structures
+------------------------------------------------------------------------
+*/
 // listeDeparements.c
 ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
 ListeDept supprimerEnTete(ListeDept ldept);
