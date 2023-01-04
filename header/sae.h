@@ -64,3 +64,38 @@ int longueur(ListeDept ldept);
 void afficherListe(ListeDept ldept);
 
 // iut.c
+
+
+//Proposition structure de candidat & choix pour la partie 2 ( jean ) : 
+typedef struct
+{
+    char ville[50];
+    char departement[50];
+    int decisionDepartement;
+    int validationCandidat;
+}Choix;
+
+typedef struct
+{
+    int numero;
+    char nom[50];
+    char prenom[50];
+    float notes[4];
+    int nbChoix;
+    Choix *choix;
+}Candidat;
+
+//Proposition de structure de candidature pour la Partie 3 ( jean ) :
+typedef struct
+{
+    int nbAdmis;
+    int noteMin;
+    PileCandidats *admis;
+    PileCandidats *attente;
+}Candidature;
+
+typedef struct PileCandidats
+{
+    Candidat *candidat;
+    struct PileCandidats *suivant;
+}PileCandidats;
