@@ -19,8 +19,6 @@ void testColor(void);
 #define clean   system("clear")
 #endif
 
-
-
 /*
 ------------------------------------------------------------------------
                             Les structures
@@ -92,6 +90,15 @@ void banniereConnection(void);
 void saisieNomUtilisateur(char * utilisateur);
 void saisieMdp(char * mdp);
 void seConnecterTest(void);
+
+int modifiePlacesDept(VilleIut *villeIut, int nbVilles, char *ville, char *nomDept, int nbP);
+void afficheIUTDept(VilleIut *villeIut, int nbVilles, char *nomDept);
+void afficheVillesIUT(VilleIut *villeIut, int nbVilles);
+void menuAdmin(VilleIut *villeIut, int nbVilles);
+
+void afficherCandidat(Candidat candidat);
+void afficherCandidats(Candidat *candidats, int nbCandidats);
+
 
 // listeDeparements.c
 ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
