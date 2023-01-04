@@ -118,10 +118,6 @@ int choixMenuVisiteur(void)
     return choix;
 }
 
-#include "sae.h"
-
-//fonctions Jean PARTIE 1 :
-
 /**
  * Modifie le nombre de places d'un département dans un IUT.
  *
@@ -272,7 +268,11 @@ void menuAdmin(VilleIut *villeIut, int nbVilles)
     } while (choix != 7);
 }
 
-// Fonctions Jean PARTIE 2 : 
+/*
+================================================
+                    Partie 2
+================================================
+*/
 
 /**
  * @brief Affiche les informations d'un candidat
@@ -309,4 +309,3 @@ void afficherCandidats(Candidat *candidats, int nbCandidats)
         afficherCandidat(candidats[i]);
     }
 }
-
