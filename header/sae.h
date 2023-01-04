@@ -61,6 +61,13 @@ typedef struct
 }Candidat;
 
 //Proposition de structure de candidature pour la Partie 3 ( jean ) :
+typedef struct pileCandidats
+{
+    Candidat *candidat;
+    struct pileCandidats *suivant;
+}PileCandidats;
+
+
 typedef struct
 {
     int nbAdmis;
@@ -69,11 +76,6 @@ typedef struct
     PileCandidats *attente;
 }Candidature;
 
-typedef struct PileCandidats
-{
-    Candidat *candidat;
-    struct PileCandidats *suivant;
-}PileCandidats;
 
 /*
 ------------------------------------------------------------------------
@@ -82,6 +84,7 @@ typedef struct PileCandidats
 */
 // sae.c
 void Globale(void);
+//void menuVisiteur(VilleIut *villeIut, int nbVilles);
 void menuVisiteur(void);
 int afficherMenuVisiteur(void);
 int choixMenuVisiteur(void);

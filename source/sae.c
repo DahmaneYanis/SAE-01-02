@@ -38,7 +38,7 @@ void menuVisiteur(void)
         {
             case 1:
                 //afficheVillesIUT(villeIut, nbVilles);
-                printf("Affiche les villes qui ont des IUT. (En attente de la fonction de chargement)");
+                printf("Affiche les villes qui ont des IUT. (En attente de la fonction de chargement)\n");
                 break;
             case 2:
                 printf("Affiche le nombre de place dans un departement (En attente de Guillaume)\n");

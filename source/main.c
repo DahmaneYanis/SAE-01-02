@@ -3,7 +3,13 @@
 
 int main(void)
 {
+	#ifdef _WIN32
+	color
+	#endif
+
 	Globale();
+
+	//system("color 01");
 
 	/*
 	ListeDept ldept;
