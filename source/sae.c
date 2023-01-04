@@ -92,6 +92,7 @@ int afficherMenuVisiteur(void) {
     scanf("%d%*c", &choix);
     return choix; 
 }
+
 /**
  * @brief Demande à l'utilisateur de faire un choix parmi les options du menu visiteur
  * 

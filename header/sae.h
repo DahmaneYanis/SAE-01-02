@@ -41,31 +41,6 @@ typedef struct
     ListeDept ldept;
 }VilleIut;
 
-
-/*
-------------------------------------------------------------------------
-                            Les structures
-------------------------------------------------------------------------
-*/
-// sae.c
-void Globale(void);
-void menuVisiteur(void);
-int afficherMenuVisiteur(void);
-int choixMenuVisiteur(void);
-
-// listeDeparements.c
-ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
-ListeDept supprimerEnTete(ListeDept ldept);
-ListeDept supprimer(ListeDept ldept, char nom[]);
-ListeDept ajouterDept(ListeDept ldept, char nomDept[], char resp[], int nbP);
-ListeDept listenouv();
-bool vide(ListeDept ldept);
-int longueur(ListeDept ldept);
-void afficherListe(ListeDept ldept);
-
-// iut.c
-
-
 //Proposition structure de candidat & choix pour la partie 2 ( jean ) : 
 typedef struct
 {
@@ -99,3 +74,26 @@ typedef struct PileCandidats
     Candidat *candidat;
     struct PileCandidats *suivant;
 }PileCandidats;
+
+/*
+------------------------------------------------------------------------
+                            Les structures
+------------------------------------------------------------------------
+*/
+// sae.c
+void Globale(void);
+void menuVisiteur(void);
+int afficherMenuVisiteur(void);
+int choixMenuVisiteur(void);
+
+// listeDeparements.c
+ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
+ListeDept supprimerEnTete(ListeDept ldept);
+ListeDept supprimer(ListeDept ldept, char nom[]);
+ListeDept ajouterDept(ListeDept ldept, char nomDept[], char resp[], int nbP);
+ListeDept listenouv();
+bool vide(ListeDept ldept);
+int longueur(ListeDept ldept);
+void afficherListe(ListeDept ldept);
+
+// iut.c
