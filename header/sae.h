@@ -19,8 +19,6 @@ void testColor(void);
 #define clean   system("clear")
 #endif
 
-
-
 /*
 ------------------------------------------------------------------------
                             Les structures
@@ -88,6 +86,15 @@ void Globale(void);
 void menuVisiteur(void);
 int afficherMenuVisiteur(void);
 int choixMenuVisiteur(void);
+
+int modifiePlacesDept(VilleIut *villeIut, int nbVilles, char *ville, char *nomDept, int nbP);
+void afficheIUTDept(VilleIut *villeIut, int nbVilles, char *nomDept);
+void afficheVillesIUT(VilleIut *villeIut, int nbVilles);
+void menuAdmin(VilleIut *villeIut, int nbVilles);
+
+void afficherCandidat(Candidat candidat);
+void afficherCandidats(Candidat *candidats, int nbCandidats);
+
 
 // listeDeparements.c
 ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
