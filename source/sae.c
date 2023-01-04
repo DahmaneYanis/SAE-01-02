@@ -23,6 +23,7 @@ void Globale(void)
  * ou met fin à l'exécution de la fonction.
 */
 void menuVisiteur(void)
+//void menuVisiteur(VilleIut *villeIut, int nbVilles)
 {
     int choix;
     int actif = 1;
@@ -36,7 +37,8 @@ void menuVisiteur(void)
         switch(choix)
         {
             case 1:
-                printf("Affiche toutes les villes possedant des IUT (En attente de Jean)\n");
+                //afficheVillesIUT(villeIut, nbVilles);
+                printf("Affiche les villes qui ont des IUT. (En attente de la fonction de chargement)");
                 break;
             case 2:
                 printf("Affiche le nombre de place dans un departement (En attente de Guillaume)\n");
