@@ -88,6 +88,10 @@ void Globale(void);
 void menuVisiteur(void);
 int afficherMenuVisiteur(void);
 int choixMenuVisiteur(void);
+void banniereConnection(void);
+void saisieNomUtilisateur(char * utilisateur);
+void saisieMdp(char * mdp);
+void seConnecterTest(void);
 
 // listeDeparements.c
 ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);

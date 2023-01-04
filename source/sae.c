@@ -50,7 +50,8 @@ void menuVisiteur(void)
                 printf("Affiche les IUT possedant un departement donne (En attente de Jean)\n");
                 break;
             case 5 :
-                printf("Fonction pour se connecter (En attente de Yanis)\n");
+                seConnecterTest();
+                clean
                 break;
             case 0 :
                 actif = 0;
@@ -119,6 +120,63 @@ int choixMenuVisiteur(void)
     }
 
     return choix;
+}
+
+/**
+ * @brief Fonction de test pour la connection
+ * 
+ */
+void seConnecterTest(void)
+{
+    char mdp[30], utilisateur[30];
+
+    banniereConnection(); // Affichage
+
+    saisieNomUtilisateur(utilisateur); // Récupération du nom d'utilisateur
+
+    saisieMdp(mdp); // Récupération du mot de passe
+}
+
+
+/**
+ * @brief Affichage de la bannière de connexion.
+ */
+void banniereConnection(void)
+{
+    clean
+    printf("------------------------------------------------------------\n\t\t\tSE CONNECTER\n------------------------------------------------------------\n\n");
+}
+
+/**
+ * @brief Saisie du nom d'utilisateur par l'utilisateur.
+ * 
+ * Affiche une invite à l'écran et enregistre la saisie de l'utilisateur
+ * dans la chaîne de caractères passée en paramètre.
+ * 
+ * @param utilisateur [POINTEUR] Pointeur vers la chaîne de caractères où enregistrer
+ * la saisie de l'utilisateur.
+ */
+void saisieNomUtilisateur(char * utilisateur)
+{
+    printf("\tNom d'utilisateur : ");
+    scanf("%s%*c", utilisateur);
+    printf("\n");
+}
+
+/**
+ * @brief Saisie du mot de passe par l'utilisateur.
+ * 
+ * Affiche une invite à l'écran et enregistre la saisie de l'utilisateur
+ * dans la chaîne de caractères passée en paramètre.
+ * 
+ * @param mdp [POINTEUR] Pointeur vers la chaîne de caractères où enregistrer
+ * la saisie de l'utilisateur.
+ */
+void saisieMdp(char * mdp)
+{
+    printf("\tMot de passe : ");
+    scanf("%s%*c", mdp);
+    printf("\n");
 }
 
 /**
