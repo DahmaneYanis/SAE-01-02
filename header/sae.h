@@ -24,26 +24,6 @@ void testColor(void);
                             Les structures
 ------------------------------------------------------------------------
 */
-typedef struct log
-{
-    char utilisateur[30];
-    char mdp[30];
-}Log;
-
-typedef struct maillonDept
-{
-    char nomDept[30];
-    char resp[30];
-    int nbP;
-    struct maillonDept *suiv;
-}MaillonDept, *ListeDept;
-
-// Utilise pour le tableau de pointeurs sur cette structure (pour Guillaume)
-typedef struct 
-{
-    char nom[30];
-    ListeDept ldept;
-}VilleIut;
 
 //Proposition structure de candidat & choix pour la partie 2 ( jean ) : 
 typedef struct
@@ -72,6 +52,35 @@ typedef struct maillonCandidat
     struct maillonCandidat * suiv;
 } MaillonCandidat, * ListeCandidats;
 
+
+// Structures de la partie 1 : 
+typedef struct log
+{
+    char utilisateur[30];
+    char mdp[30];
+}Log;
+
+typedef struct maillonDept
+{
+    char nomDept[30];
+    char resp[30];
+    int nbP;
+
+    //Mise a jour du maillon pour correspondre à la partie 3 : 
+    int moyMin;
+    int admisMax;
+    ListeCandidats ladmis;
+    ListeCandidats lattente;
+
+    struct maillonDept *suiv;
+}MaillonDept, *ListeDept;
+
+// Utilise pour le tableau de pointeurs sur cette structure (pour Guillaume)
+typedef struct 
+{
+    char nom[30];
+    ListeDept ldept;
+}VilleIut;
 
 /*
 ------------------------------------------------------------------------
