@@ -20,7 +20,7 @@ void Globale(void)
     tLog = chargementLog("../donnees/log.don");
 
     //Appel du menu visiteur
-    //menuVisiteur();
+    menuVisiteur(tLog);
 
     //Sauvegarde dans les fichiers
 }
@@ -83,7 +83,7 @@ Log * chargementLog(char * nomFichier)
  * choixMenuVisiteur. Selon le choix de l'utilisateur, la fonction appelle la fonction correspondante
  * ou met fin à l'exécution de la fonction.
 */
-void menuVisiteur(void)
+void menuVisiteur(Log * tLog)
 //void menuVisiteur(VilleIut *villeIut, int nbVilles)
 {
     int choix;
@@ -98,7 +98,7 @@ void menuVisiteur(void)
         switch(choix)
         {
             case 1:
-                //afficheVillesIUT(villeIut, nbVilles);
+                //afficheVillesIUT(villeIut, 0);
                 printf("Affiche les villes qui ont des IUT. (En attente de la fonction de chargement)\n");
                 break;
             case 2:
