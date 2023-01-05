@@ -90,7 +90,7 @@ typedef struct
 void Globale(void);
 Log * chargementLog(char * nomFichier);
 //void menuVisiteur(VilleIut *villeIut, int nbVilles);
-void menuVisiteur(void);
+void menuVisiteur(Log * tLog);
 int afficherMenuVisiteur(void);
 int choixMenuVisiteur(void);
 void banniereConnection(void);
