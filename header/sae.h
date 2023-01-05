@@ -65,20 +65,12 @@ typedef struct
 }Candidat;
 
 //Proposition de structure de candidature pour la Partie 3 ( jean ) :
-typedef struct pileCandidats
-{
-    Candidat *candidat;
-    struct pileCandidats *suivant;
-}PileCandidats;
 
-
-typedef struct
+typedef struct maillonCandidat
 {
-    int nbAdmis;
-    int noteMin;
-    PileCandidats *admis;
-    PileCandidats *attente;
-}Candidature;
+    Candidat candidat;
+    struct maillonCandidat * suiv;
+} MaillonCandidat, * ListeCandidats;
 
 
 /*
