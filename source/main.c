@@ -1,14 +1,13 @@
 #include "../header/sae.h"
-void testJean(void);
 
 int main(void)
 {
-	testJean();
+
 	#ifdef _WIN32
 	color
 	#endif
 
-	//Globale();
+	Globale();
 
 	//system("color 01");
 
