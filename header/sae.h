@@ -24,6 +24,12 @@ void testColor(void);
                             Les structures
 ------------------------------------------------------------------------
 */
+typedef struct log
+{
+    char utilisateur[30];
+    char mdp[30];
+}Log;
+
 typedef struct maillonDept
 {
     char nomDept[30];
@@ -82,6 +88,7 @@ typedef struct
 */
 // sae.c
 void Globale(void);
+Log * chargementLog(char * nomFichier);
 //void menuVisiteur(VilleIut *villeIut, int nbVilles);
 void menuVisiteur(void);
 int afficherMenuVisiteur(void);
