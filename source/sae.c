@@ -1,5 +1,11 @@
 #include "../header/sae.h"
 
+/*
+================================================
+                    Partie 1
+================================================
+*/
+
 /**
  * @brief Fonction globale qui :
  * - Charge les fichiers dans les structures adaptées
@@ -8,12 +14,67 @@
  */
 void Globale(void)
 {
+    Log * tLog;
+
     //Chargement des fichiers
+    tLog = chargementLog("../donnees/log.don");
 
     //Appel du menu visiteur
-    menuVisiteur();
+    //menuVisiteur();
 
     //Sauvegarde dans les fichiers
+}
+
+/**
+ * @brief Charge un fichier de logs dans un tableau de structures Log
+ * @param nomFichier [CHAINE DE CARACTERE] Le nom du fichier à charger
+ * @return Log* [TABLEAU DYNAMIQUE DE STRUCTURE] Le tableau de structures Log contenant les logs du fichier
+    */
+Log * chargementLog(char * nomFichier)
+{
+    FILE * fichier;
+    Log * tLog;
+    Log * tAnnexe;
+    
+    int nbLogMax;
+    int nbLog;
+    int i;
+
+    fichier = fopen(nomFichier, "r");
+
+    if (fichier == NULL)
+    {
+        printf("Erreur de fichier\n");
+        exit(1);
+    }
+
+    tLog = (Log *) malloc(sizeof(Log)*5);
+    nbLogMax = 5;
+    
+    i = 0;
+    while (!feof(fichier))
+    {
+        // Taille physique insuffisante
+        if (i == nbLogMax)
+        {
+            tAnnexe = realloc(tLog, sizeof(Log)*(nbLogMax + 5));
+            
+            // Test si le realloc n'a pas fonctionné
+            if (tAnnexe == NULL)
+            {
+                printf("Problème de realloc\n");
+                exit(1);
+            }
+
+            tLog = tAnnexe;
+            nbLogMax+= 5;
+        }
+
+        fscanf(fichier, "%s %s", tLog[i].utilisateur, tLog[i].mdp);
+        i++;
+    }
+
+    return tLog;
 }
 
 /**
@@ -136,7 +197,6 @@ void seConnecterTest(void)
 
     saisieMdp(mdp); // Récupération du mot de passe
 }
-
 
 /**
  * @brief Affichage de la bannière de connexion.
