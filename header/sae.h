@@ -16,7 +16,7 @@ void testColor(void);
 #endif
 
 #ifdef __linux__
-#define clean   system("clear")
+#define clean   system("clear");
 #endif
 
 /*
