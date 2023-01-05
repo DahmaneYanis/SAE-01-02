@@ -3,3 +3,4 @@ a.out
 *.gch
 *.vscode*
 exe*
+.nfs*
