@@ -15,9 +15,10 @@
 void Globale(void)
 {
     Log * tLog;
+    int nbLog;
 
     //Chargement des fichiers
-    tLog = chargementLog("../donnees/log.don");
+    tLog = chargementLog("../donnees/log.don", &nbLog);
 
     //Appel du menu visiteur
     menuVisiteur(tLog);
@@ -30,14 +31,14 @@ void Globale(void)
  * @param nomFichier [CHAINE DE CARACTERE] Le nom du fichier à charger
  * @return Log* [TABLEAU DYNAMIQUE DE STRUCTURE] Le tableau de structures Log contenant les logs du fichier
     */
-Log * chargementLog(char * nomFichier)
+Log * chargementLog(char * nomFichier, int * nbLog)
 {
     FILE * fichier;
     Log * tLog;
     Log * tAnnexe;
     
     int nbLogMax;
-    int nbLog;
+
     int i;
 
     fichier = fopen(nomFichier, "r");
@@ -74,6 +75,7 @@ Log * chargementLog(char * nomFichier)
         i++;
     }
 
+    *nbLog = i;
     return tLog;
 }
 
@@ -189,13 +191,50 @@ int choixMenuVisiteur(void)
  */
 void seConnecterTest(void)
 {
+    Log * tLog;
+
     char mdp[30], utilisateur[30];
+
+    int indice, existe, nbLog;
+
+    nbLog = 0;
+    tLog = chargementLog("../donnees/log.don", &nbLog); //TEMP
 
     banniereConnection(); // Affichage
 
     saisieNomUtilisateur(utilisateur); // Récupération du nom d'utilisateur
 
+    existe = existeUtilisateur(utilisateur, &indice, tLog, nbLog);
+
+    if (existe)
+        printf("True\n");
+    else
+        printf("False\n");
+
     saisieMdp(mdp); // Récupération du mot de passe
+}
+
+/**
+ * @brief Vérifie si un utilisateur existe dans le tableau de structures de log.
+ * 
+ * @param utilisateur [CHAINE DE CARACTERES] Le nom de l'utilisateur à rechercher.
+ * @param indice [POINTEUR] Pointeur vers un entier qui sera modifié pour stocker l'indice de l'utilisateur s'il est trouvé.
+ * @param tLog [TABLEAU] Tableau de structures de log.
+ * @param nbLog [Taille Logique] Nombre d'éléments dans le tableau de structures de log.
+ * 
+ * @return int 1 --> l'utilisateur existe | 0 --> l'utilisateur n'existe pas
+ */
+int existeUtilisateur(char * utilisateur, int * indice, Log * tLog, int nbLog)
+{
+    for (int i = 0 ; i < nbLog ; i++)
+    {
+        if (strcmp(tLog[i].utilisateur,utilisateur) == 0)
+        {
+            *indice = i;
+            return 1;
+        }
+    }
+    return 0;
 }
 
 /**
