@@ -34,10 +34,10 @@ int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[])
             strcpy(tVilleIut[i]->nom, nom);
             tVilleIut[i]->ldept = listenouv();
             ajouterDept(tVilleIut[i]->ldept, nomDept, resp, nbP);
+            i = i + 1;
         }
         if(trouve==1)
             ajouterDept(tVilleIut[indice]->ldept, nomDept, resp, nbP);
-        i = i + 1;
         fscanf(flot, "%s", nom);
         lireDep(flot, nomDept, &nbP, resp);
     }

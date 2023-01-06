@@ -8,11 +8,11 @@
 void testJean(void)
 {
     int nbvilles;
-    VilleIut **tIut ;
+    VilleIut *tIut[50] ;
 
-    nbvilles=  chargIutDon(tIut, 50, "iut.don");
+    nbvilles=  chargIutDon(tIut, 50, "../donnees/iut.don");
 
-    tIut =  (VilleIut **)malloc(sizeof(VilleIut *)*nbvilles);
+    //tIut =  (VilleIut **)malloc(sizeof(VilleIut *)*nbvilles);
     // strcpy(tIut[0]->nom, "John");
     // strcpy(tIut[0]->ldept->nomDept, "Info");
     // strcpy(tIut[0]->ldept->resp, "YAnis");
