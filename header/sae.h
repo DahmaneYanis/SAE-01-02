@@ -119,3 +119,9 @@ int longueur(ListeDept ldept);
 void afficherListe(ListeDept ldept);
 
 // iut.c
+
+
+// chargEtSauvFich.c
+int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[]);
+void lireDep(FILE *flot, char nomDept[], int *nbP, char resp[]);
+int appartientIut(VilleIut *tVilleIut[], int nb, char nom[], int *trouve);
