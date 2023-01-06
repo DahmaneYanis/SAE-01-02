@@ -91,7 +91,9 @@ typedef struct
 void testJean(void);
 
 void Globale(void);
-Log * chargementLog(char * nomFichier);
+Log * chargementLog(char * nomFichier, int * nbLog);
+int existeUtilisateur(char * utilisateur, int * indice, Log * tLog, int nbLog);
+int mdpValide(char * mdp, int indice, Log * tLog);
 //void menuVisiteur(VilleIut *villeIut, int nbVilles);
 void menuVisiteur(Log * tLog);
 int afficherMenuVisiteur(void);
