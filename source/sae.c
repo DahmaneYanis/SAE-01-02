@@ -259,7 +259,7 @@ int modifiePlacesDept(VilleIut *villeIut, int nbVilles, char *ville, char *nomDe
         if (strcmp(villeIut[i].nom, ville) == 0)
         {
             // Ville trouvée, recherche du département
-            MaillonDept *dept = villeIut[i].ldept;
+            MaillonDept *dept = villeIut[i].lDept;
             while (dept != NULL && strcmp(dept->nomDept, nomDept) != 0)
             {
                 dept = dept->suiv;
@@ -295,7 +295,7 @@ void afficheIUTDept(VilleIut *villeIut, int nbVilles, char *nomDept)
     for (i = 0; i < nbVilles; i++)
     {
         // Parcours de la liste chaînée de départements de la ville
-        MaillonDept *dept = villeIut[i].ldept;
+        MaillonDept *dept = villeIut[i].lDept;
         while (dept != NULL)
         {
             if (strcmp(dept->nomDept, nomDept) == 0)
