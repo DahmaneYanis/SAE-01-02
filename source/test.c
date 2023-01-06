@@ -11,7 +11,6 @@ void testJean(void)
     VilleIut *tIut[50] ;
 
     nbvilles=  chargIutDon(tIut, 50, "../donnees/iut.don");
-
     //tIut =  (VilleIut **)malloc(sizeof(VilleIut *)*nbvilles);
     // strcpy(tIut[0]->nom, "John");
     // strcpy(tIut[0]->ldept->nomDept, "Info");
@@ -21,4 +20,5 @@ void testJean(void)
 
 
     afficheVillesIUT(tIut, nbvilles);
+    sauvegarderFichierIutDon(tIut, nbvilles, "result.don");
 }

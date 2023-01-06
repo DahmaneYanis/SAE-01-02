@@ -37,7 +37,7 @@ int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[])
             i = i + 1;
         }
         if(trouve==1)
-            ajouterDept(tVilleIut[indice]->lDept, nomDept, resp, nbP);
+            tVilleIut[indice]->lDept = ajouterDept(tVilleIut[indice]->lDept, nomDept, resp, nbP);
         fscanf(flot, "%s", nom);
         lireDep(flot, nomDept, &nbP, resp);
     }
@@ -75,3 +75,27 @@ int appartientIut(VilleIut *tVilleIut[], int nb, char nom[], int *trouve)
     return i;
 }
 
+void sauvegarderFichierIutDon(VilleIut *tVilleIut[], int nbVille, char nomFich[])
+{
+    FILE *flot;
+    int i=0;
+
+    flot = fopen(nomFich, "w");
+    if(flot==NULL)
+    {
+        printf("Probleme lors de l'ouverture du fichier\n");
+        exit(1);
+    }
+    while(i<nbVille)
+    {
+        printf("%d\n", i);
+        while(tVilleIut[i]->lDept != NULL)
+        {    
+            printf("%s %s %d %s", tVilleIut[i]->nom, tVilleIut[i]->lDept->nomDept, tVilleIut[i]->lDept->nbP, tVilleIut[i]->lDept->resp);
+            fprintf(flot, "%s %s %d %s", tVilleIut[i]->nom, tVilleIut[i]->lDept->nomDept, tVilleIut[i]->lDept->nbP, tVilleIut[i]->lDept->resp);
+            tVilleIut[i]->lDept = tVilleIut[i]->lDept->suiv;
+        }
+        i = i + 1;
+    }
+    fclose(flot);
+}
