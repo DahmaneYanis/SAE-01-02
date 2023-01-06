@@ -1,5 +1,7 @@
 #include "../header/sae.h"
 
+
+
 int main(void)
 {
 
@@ -7,7 +9,11 @@ int main(void)
 	color
 	#endif
 
-	Globale();
+	//Globale();
+
+	testJean();
+
+	return 0;
 
 	//system("color 01");
 

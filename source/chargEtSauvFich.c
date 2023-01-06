@@ -1,4 +1,4 @@
-#include "sae.h"
+#include "../header/sae.h"
 
 int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[])
 {
