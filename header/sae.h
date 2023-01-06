@@ -69,8 +69,8 @@ typedef struct maillonDept
     //Mise a jour du maillon pour correspondre à la partie 3 : 
     int moyMin;
     int admisMax;
-    ListeCandidats ladmis;
-    ListeCandidats lattente;
+    ListeCandidats lAdmis;
+    ListeCandidats lAttente;
 
     struct maillonDept *suiv;
 }MaillonDept, *ListeDept;
@@ -79,7 +79,7 @@ typedef struct maillonDept
 typedef struct 
 {
     char nom[30];
-    ListeDept ldept;
+    ListeDept lDept;
 }VilleIut;
 
 /*
