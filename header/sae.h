@@ -127,4 +127,5 @@ void afficherListe(ListeDept ldept);
 int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[]);
 void lireDep(FILE *flot, char nomDept[], int *nbP, char resp[]);
 int appartientIut(VilleIut *tVilleIut[], int nb, char nom[], int *trouve);
+void sauvegarderFichierIutDon(VilleIut *tVilleIut[], int nbVille, char nomFich[]);
 
