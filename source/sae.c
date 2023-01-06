@@ -195,7 +195,7 @@ void seConnecterTest(void)
 
     char mdp[30], utilisateur[30];
 
-    int indice, existe, nbLog;
+    int indice, existe, nbLog, valide;
 
     nbLog = 0;
     tLog = chargementLog("../donnees/log.don", &nbLog); //TEMP
@@ -205,13 +205,10 @@ void seConnecterTest(void)
     saisieNomUtilisateur(utilisateur); // Récupération du nom d'utilisateur
 
     existe = existeUtilisateur(utilisateur, &indice, tLog, nbLog);
-
-    if (existe)
-        printf("True\n");
-    else
-        printf("False\n");
-
+    
     saisieMdp(mdp); // Récupération du mot de passe
+    
+    valide = mdpValide(mdp, indice, tLog);
 }
 
 /**
@@ -237,6 +234,20 @@ int existeUtilisateur(char * utilisateur, int * indice, Log * tLog, int nbLog)
     return 0;
 }
 
+/**
+ * @brief Valide si le mot de passe donné correspond au mot de passe enregistré dans la structure de log.
+ * 
+ * @param mdp [CHAINE DE CARACTERES] Le mot de passe à valider.
+ * @param indice L'indice de la structure de log à utiliser pour la vérification.
+ * @param tLog [TABLEAU] Le tableau de structures de log.
+ * 
+ * @return int 1 --> le mot de passe correspond | 0 --> le mot de passe ne correspond pas
+ */
+int mdpValide(char * mdp, int indice, Log * tLog)
+{
+    if (strcmp(tLog[indice].mdp, mdp) == 0) return 1;
+    else return 0;
+}
 /**
  * @brief Affichage de la bannière de connexion.
  */
