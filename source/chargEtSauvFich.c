@@ -32,12 +32,12 @@ int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[])
                 exit(1);
             }
             strcpy(tVilleIut[i]->nom, nom);
-            tVilleIut[i]->ldept = listenouv();
-            ajouterDept(tVilleIut[i]->ldept, nomDept, resp, nbP);
+            tVilleIut[i]->lDept = listenouv();
+            ajouterDept(tVilleIut[i]->lDept, nomDept, resp, nbP);
             i = i + 1;
         }
         if(trouve==1)
-            ajouterDept(tVilleIut[indice]->ldept, nomDept, resp, nbP);
+            ajouterDept(tVilleIut[indice]->lDept, nomDept, resp, nbP);
         fscanf(flot, "%s", nom);
         lireDep(flot, nomDept, &nbP, resp);
     }
