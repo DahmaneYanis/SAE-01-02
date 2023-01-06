@@ -309,20 +309,21 @@ void afficheIUTDept(VilleIut *villeIut, int nbVilles, char *nomDept)
     }
 }
 
+
 /**
- * Affiche les villes qui ont des IUT.
- *
- * @param villeIut tableau de pointeurs sur les structures VilleIut
- * @param nbVilles nombre de villes dans le tableau villeIut
- */
-void afficheVillesIUT(VilleIut *villeIut, int nbVilles)
+
+Affiche les villes qui ont des IUT.
+@param villeIut tableau de pointeurs sur les structures VilleIut
+@param nbVilles nombre de villes dans le tableau villeIut
+*/
+void afficheVillesIUT(VilleIut **villeIut, int nbVilles)
 {
-    int i;
-    for (i = 0; i < nbVilles; i++)
-    {
-        // Affichage du nom de la ville
-        printf("%s\n", villeIut[i].nom);
-    }
+int i;
+for (i = 0; i < nbVilles; i++)
+{
+// Affichage du nom de la ville
+printf("%s\n", villeIut[i]->nom);
+}
 }
 
 /**

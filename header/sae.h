@@ -88,6 +88,8 @@ typedef struct
 ------------------------------------------------------------------------
 */
 // sae.c
+void testJean(void);
+
 void Globale(void);
 Log * chargementLog(char * nomFichier);
 //void menuVisiteur(VilleIut *villeIut, int nbVilles);
@@ -101,7 +103,7 @@ void seConnecterTest(void);
 
 int modifiePlacesDept(VilleIut *villeIut, int nbVilles, char *ville, char *nomDept, int nbP);
 void afficheIUTDept(VilleIut *villeIut, int nbVilles, char *nomDept);
-void afficheVillesIUT(VilleIut *villeIut, int nbVilles);
+void afficheVillesIUT(VilleIut **villeIut, int nbVilles);
 void menuAdmin(VilleIut *villeIut, int nbVilles);
 
 void afficherCandidat(Candidat candidat);
@@ -125,3 +127,4 @@ void afficherListe(ListeDept ldept);
 int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[]);
 void lireDep(FILE *flot, char nomDept[], int *nbP, char resp[]);
 int appartientIut(VilleIut *tVilleIut[], int nb, char nom[], int *trouve);
+
