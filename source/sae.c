@@ -15,13 +15,17 @@
 void Globale(void)
 {
     Log * tLog;
+    VilleIut *tIut[50] ;
+
+    int nbVilles;
     int nbLog;
 
     //Chargement des fichiers
     tLog = chargementLog("../donnees/log.don", &nbLog);
+    nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
 
     //Appel du menu visiteur
-    menuVisiteur(tLog);
+    menuVisiteur(tLog, nbLog, tIut, nbVilles);
 
     //Sauvegarde dans les fichiers
 }
@@ -71,7 +75,8 @@ Log * chargementLog(char * nomFichier, int * nbLog)
             nbLogMax+= 5;
         }
 
-        fscanf(fichier, "%s %s", tLog[i].utilisateur, tLog[i].mdp);
+        fscanf(fichier, "%s %s %s", tLog[i].utilisateur, tLog[i].mdp, tLog[i].status);
+        printf("%s\n", tLog[i].status);
         i++;
     }
 
@@ -79,13 +84,21 @@ Log * chargementLog(char * nomFichier, int * nbLog)
     return tLog;
 }
 
+/*void test(VilleIut * tIut[], int nbVilles)
+{
+    for (int i = 0 ; i <nbVilles ; i++)
+    {
+        printf("%s\n", tIut[i]->nom);
+    }
+}*/
+
 /**
  * @brief Cette fonction affiche le menu des options disponibles pour un visiteur
  * et demande à l'utilisateur de faire son choix en appelant la fonction
  * choixMenuVisiteur. Selon le choix de l'utilisateur, la fonction appelle la fonction correspondante
  * ou met fin à l'exécution de la fonction.
 */
-void menuVisiteur(Log * tLog)
+void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
 //void menuVisiteur(VilleIut *villeIut, int nbVilles)
 {
     int choix;
@@ -100,8 +113,9 @@ void menuVisiteur(Log * tLog)
         switch(choix)
         {
             case 1:
-                //afficheVillesIUT(villeIut, 0);
-                printf("Affiche les villes qui ont des IUT. (En attente de la fonction de chargement)\n");
+                //test(tIut, nbVilles);
+                //afficheVillesIUT(tIut, nbVilles);
+                printf("Affiche les Villes contenant des IUT (En attente d'une fonction de chargement fonctionnelle)\n");
                 break;
             case 2:
                 printf("Affiche le nombre de place dans un departement (En attente de Guillaume)\n");
@@ -113,7 +127,7 @@ void menuVisiteur(Log * tLog)
                 printf("Affiche les IUT possedant un departement donne (En attente de Jean)\n");
                 break;
             case 5 :
-                seConnecterTest();
+                seConnecter(tLog, nbLog);
                 clean
                 break;
             case 0 :
@@ -205,10 +219,44 @@ void seConnecterTest(void)
     saisieNomUtilisateur(utilisateur); // Récupération du nom d'utilisateur
 
     existe = existeUtilisateur(utilisateur, &indice, tLog, nbLog);
-    
+
     saisieMdp(mdp); // Récupération du mot de passe
     
     valide = mdpValide(mdp, indice, tLog);
+}
+
+
+void seConnecter(Log * tLog, int nbLog)
+{
+    char mdp[30], utilisateur[30];
+    int existe, indice, valide;
+
+    banniereConnection(); // Affichage
+    saisieNomUtilisateur(utilisateur); // Récupération du nom d'utilisateur
+    
+    existe = existeUtilisateur(utilisateur, &indice, tLog, nbLog);
+    if(!existe)
+    {
+        printf("Utilisateur inexistant !\nAppuyez sur [entrée] pour continuer...");
+        scanf("%*c");
+        return;
+    }
+
+    saisieMdp(mdp);
+
+    valide = mdpValide(mdp, indice, tLog);
+    
+    if(valide)
+    {
+        printf("Connection valide en tant que %s\n", tLog[indice].status);
+        printf("En attente de la fonction chargement\n");
+        scanf("%*c");
+    }
+    else
+    {
+        printf("Mot de passe invalide\nAppuyez sur [entrée] pour continuer...");
+        scanf("%*c");
+    }
 }
 
 /**
@@ -399,7 +447,7 @@ void menuAdmin(VilleIut *villeIut, int nbVilles)
         printf("\nVotre choix: ");
 
         // Saisie du choix de l'utilisateur
-        scanf("%d", &choix);
+        scanf("%d%*c", &choix);
 
         // Traitement du choix de l'utilisateur
         switch (choix)

@@ -58,6 +58,7 @@ typedef struct log
 {
     char utilisateur[30];
     char mdp[30];
+    char status[15];
 }Log;
 
 typedef struct maillonDept
@@ -90,17 +91,19 @@ typedef struct
 // sae.c
 void testJean(void);
 
+
 void Globale(void);
 Log * chargementLog(char * nomFichier, int * nbLog);
 int existeUtilisateur(char * utilisateur, int * indice, Log * tLog, int nbLog);
 int mdpValide(char * mdp, int indice, Log * tLog);
 //void menuVisiteur(VilleIut *villeIut, int nbVilles);
-void menuVisiteur(Log * tLog);
+void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles);
 int afficherMenuVisiteur(void);
 int choixMenuVisiteur(void);
 void banniereConnection(void);
 void saisieNomUtilisateur(char * utilisateur);
 void saisieMdp(char * mdp);
+void seConnecter(Log * tLog, int nbLog);
 void seConnecterTest(void);
 
 int modifiePlacesDept(VilleIut *villeIut, int nbVilles, char *ville, char *nomDept, int nbP);
