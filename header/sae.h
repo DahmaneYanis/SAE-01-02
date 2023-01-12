@@ -85,7 +85,6 @@ typedef struct maillonDeptV2
 
 } MaillonDeptV2, * ListeDeptV2;
 
-// Utilise pour le tableau de pointeurs sur cette structure (pour Guillaume)
 typedef struct 
 {
     char nom[30];
@@ -121,6 +120,7 @@ void seConnecterTest(void);
 int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomDept, int nbP);
 void afficheIUTDept(VilleIut* *villeIut, int nbVilles, char *nomDept);
 void afficheVillesIUT(VilleIut **villeIut, int nbVilles);
+void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[]);
 void menuAdmin(VilleIut **villeIut, int nbVilles);
 
 void afficherCandidat(Candidat candidat);
