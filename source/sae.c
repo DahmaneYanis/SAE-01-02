@@ -436,6 +436,37 @@ void afficheVillesIUT(VilleIut **villeIut, int nbVilles)
     }   
 }
 
+
+/**
+ * @brief Affiche les IUT et le nombre de places associé pour un département donné
+ * 
+ * @param tVilleIut tableau de pointeurs sur les structures VilleIut
+ * @param nbVilles nombre de villes dans le tableau villeIut
+ * @param nomDept nom du département à rechercher
+ */
+void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[])
+{
+    int i;
+    for (i = 0; i < nbVilles; i++)
+    {
+        // Parcours de la liste chaînée de départements de la ville
+        MaillonDept *dept = tVilleIut[i] -> lDept;
+        while (dept != NULL)
+        {
+            if (strcmp(dept->nomDept, nomDept) == 0)
+            {
+                // Département trouvé, affichage de la ville et de son nombre de places
+                printf("IUT de %s avec %d places.\n", tVilleIut[i] -> nom, tVilleIut[i] -> lDept -> nbP);
+                break;
+            }
+            dept = dept->suiv;
+        }
+    }
+    
+}
+
+
+
 /**
  * Affiche et gère le menu administrateur.
  *
@@ -499,6 +530,11 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
         }
     } while (choix != 7);
 }
+
+
+
+
+
 
 /*
 ================================================
@@ -705,3 +741,5 @@ ListeCandidats insertionTeteCand( ListeCandidats nvL, ListeCandidats l )
 
     return nvL;
 }
+
+
