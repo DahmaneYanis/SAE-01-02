@@ -382,7 +382,17 @@ int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomD
     return 0;
 }
 
-
+/**
+ * @brief Modifie le nom du responsable d'un département dans un IUT
+ * 
+ * @param tVilleIut tableau de pointeurs sur les structures VilleIut
+ * @param nbVilles nombre de villes dans le tableau villeIut
+ * @param ville nom de la ville où se trouve l'IUT
+ * @param nomDept Nom du département où l'on modifie le nom du responsable 
+ * @param nvNomResp nouveau nom de responsable
+ * 
+ * @return 1 si le nom du responsable a été trouvé et modifié, 0 sinon
+ */
 int modifieChefDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[])
 {
     // Recherche de la ville et du département
