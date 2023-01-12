@@ -571,7 +571,7 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
             exit(1);
         }
 
-        MaillonDeptV2 * mV2 = ( MaillonDeptV2 ) malloc ( sizeof( MaillonDeptV2 ));
+        MaillonDeptV2 * mV2 = ( MaillonDeptV2 * ) malloc ( sizeof( MaillonDeptV2 ));
         {
             printf("\n --> Erreur d'allocation memoire...\n");
             exit(1);
