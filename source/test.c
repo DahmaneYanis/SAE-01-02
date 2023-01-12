@@ -7,18 +7,31 @@
  */
 void testJean(void)
 {
-    int nbvilles;
+    printf(" \n --> Modification du nombre de places dans un IUT :\n");
+    printf(   "     ---------------------------------------------\n\n");
+
+    Log * tLog;
     VilleIut *tIut[50] ;
 
-    nbvilles=  chargIutDon(tIut, 50, "../donnees/iut.don");
-    //tIut =  (VilleIut **)malloc(sizeof(VilleIut *)*nbvilles);
-    // strcpy(tIut[0]->nom, "John");
-    // strcpy(tIut[0]->ldept->nomDept, "Info");
-    // strcpy(tIut[0]->ldept->resp, "YAnis");
-    // tIut[0]->ldept->nbP = 12;
-    // tIut[0]->ldept->suiv = NULL;
+    int nbVilles;
+    int nbLog;
+
+    //Chargement des fichiers
+    tLog = chargementLog("../donnees/log.don", &nbLog);
+    nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
 
 
-    afficheVillesIUT(tIut, nbvilles);
-    sauvegarderFichierIutDon(tIut, nbvilles, "result.don");
+    int e = 0;
+    for ( int i = 0; i < nbVilles ; i ++)
+    {
+        printf(" Ville ( IUT ) : %10s \n -------------------\n ", tIut[i] -> nom);
+
+        while ( tIut[e] -> lDept != NULL )
+        {
+           printf(" Departement ( %10s ) : %10s | places : %5d \n", 
+           tIut[e] -> lDept -> nomDept, tIut[e] -> lDept -> nbP); 
+
+           tIut[e] -> lDept = tIut[e] -> lDept -> suiv;
+        }
+    }
 }

@@ -14,6 +14,7 @@
  */
 void Globale(void)
 {
+    printf(" \n ---> lancement de la fonction globale.... \n\n");
     Log * tLog;
     VilleIut *tIut[50] ;
 
@@ -114,8 +115,8 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
         {
             case 1:
                 //test(tIut, nbVilles);
-                //afficheVillesIUT(tIut, nbVilles);
-                printf("Affiche les Villes contenant des IUT (En attente d'une fonction de chargement fonctionnelle)\n");
+                afficheVillesIUT(tIut, nbVilles);
+                //printf("Affiche les Villes contenant des IUT (En attente d'une fonction de chargement fonctionnelle)\n");
                 break;
             case 2:
                 printf("Affiche le nombre de place dans un departement (En attente de Guillaume)\n");
@@ -296,6 +297,7 @@ int mdpValide(char * mdp, int indice, Log * tLog)
     if (strcmp(tLog[indice].mdp, mdp) == 0) return 1;
     else return 0;
 }
+
 /**
  * @brief Affichage de la bannière de connexion.
  */
@@ -381,7 +383,7 @@ int modifiePlacesDept(VilleIut *villeIut, int nbVilles, char *ville, char *nomDe
 }
 
 /**
- * Affiche les IUT possédant un département spécifique.
+ * @brief Affiche les IUT possédant un département spécifique.
  *
  * @param villeIut tableau de pointeurs sur les structures VilleIut
  * @param nbVilles nombre de villes dans le tableau villeIut
@@ -407,21 +409,19 @@ void afficheIUTDept(VilleIut *villeIut, int nbVilles, char *nomDept)
     }
 }
 
-
 /**
-
-Affiche les villes qui ont des IUT.
-@param villeIut tableau de pointeurs sur les structures VilleIut
-@param nbVilles nombre de villes dans le tableau villeIut
+    *@brief Affiche les villes qui ont des IUT.
+    *@param villeIut tableau de pointeurs sur les structures VilleIut
+    *@param nbVilles nombre de villes dans le tableau villeIut
 */
 void afficheVillesIUT(VilleIut **villeIut, int nbVilles)
 {
-int i;
-for (i = 0; i < nbVilles; i++)
-{
-// Affichage du nom de la ville
-printf("%s\n", villeIut[i]->nom);
-}
+    int i;
+    for (i = 0; i < nbVilles; i++)
+    {
+        // Affichage du nom de la ville
+    printf("%s\n", villeIut[i]->nom);
+    }   
 }
 
 /**

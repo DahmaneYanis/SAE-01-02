@@ -5,13 +5,12 @@
 int main(void)
 {
 
-	#ifdef _WIN32
-	color
-	#endif
+	// #ifdef _WIN32
+	// color
+	// #endif
 
-	Globale();
-
-
+	//Globale();
+	testJean();
 	return 0;
 
 	//system("color 01");

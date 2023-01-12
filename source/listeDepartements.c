@@ -60,8 +60,6 @@ ListeDept supprimerEnTete(ListeDept ldept)
     return aux;
 }
 
-
-
 /**
  * \brief Ajoute un maillon à la liste de départements, en ordre alphabétique.
  *
