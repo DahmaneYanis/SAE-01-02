@@ -382,6 +382,42 @@ int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomD
     return 0;
 }
 
+
+int modifieChefDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[])
+{
+    // Recherche de la ville et du département
+    int i;
+    for (i = 0; i < nbVilles; i++)
+    {
+        if (strcmp(tVilleIut[i] -> nom, ville) == 0)
+        {
+            // Ville trouvée, recherche du département
+            MaillonDept *dept = tVilleIut[i] -> lDept;
+
+            while ( dept != NULL && strcmp( dept -> nomDept, nomDept) != 0)
+            {
+                dept = dept ->suiv;
+            }
+            if (dept != NULL)
+            {
+                // Département trouvé, modification du nom du responsable du département
+                strcpy(dept->resp, nvNomResp);
+                return 1;
+            }
+            else
+            {
+                // Département non trouvé
+                return 0;
+            }
+        }
+    }
+
+    // Ville non trouvée
+    return 0;
+}
+
+
+
 /**
  * @brief Affiche les IUT possédant un département spécifique.
  *
