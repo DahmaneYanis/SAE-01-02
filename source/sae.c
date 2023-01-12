@@ -608,6 +608,13 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
 // Partie 4 
 // ==============================================================================
 
+/**
+ * @brief Affiche une liste de candidats après l'avoir triée par ordre alphabétique 
+ * 
+ * @param lcand liste de candidats à trier et afficher 
+ * @param type type de liste à afficher ( en attente ou admis )
+ * @param nomDept nom du departement dont est issu la liste
+ */
 void affichageListesDept( ListeCandidats lcand, char * type, char * nomDept )
 {
     lcand = trierListeCandidats( lcand );
@@ -622,7 +629,13 @@ void affichageListesDept( ListeCandidats lcand, char * type, char * nomDept )
         lcand = lcand -> suiv;
     }
 }
-
+/**
+ * @brief Trie par ordre alphabétique les candidats d'une liste 
+ * 
+ * @param l liste de candidats à trier.
+ * 
+ * @return  La liste triée 
+ */
 ListeCandidats trierListeCandidats( ListeCandidats l )
 {
     ListeCandidats nvL;
@@ -636,6 +649,13 @@ ListeCandidats trierListeCandidats( ListeCandidats l )
     return nvL;
 }
 
+/**
+ * @brief Permet d'insérer un nouveau Maillon de candidats dans la liste par ordre alphabétique 
+ * @param l la liste dont est issu le maillon à insérer
+ * @param nvL la nouvelle liste où est inséré le maillon
+ * 
+ * @return  La nouvelle liste avec le maillon au bon endroit
+ */
 ListeCandidats insertionCroissanteCand( ListeCandidats nvL, ListeCandidats l )
 {
     if ( l == NULL)
@@ -663,7 +683,12 @@ ListeCandidats insertionCroissanteCand( ListeCandidats nvL, ListeCandidats l )
     return nvL;
 }
         
-    
+/**
+ * @brief Insère en tête de la nouvelle liste un nouveau maillon
+ * @param l liste d'où est issu le nouveau maillon à intégrer
+ * @param nvL Liste où est insérer le nouveau Maillon 
+ * @return  La nouvelle liste avec le maillon au bon endroit  
+ */
 ListeCandidats insertionTeteCand( ListeCandidats nvL, ListeCandidats l )
 {
     MaillonCandidat * m = ( MaillonCandidat * ) malloc ( sizeof( MaillonCandidat ));
