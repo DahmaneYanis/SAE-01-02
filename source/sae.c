@@ -571,7 +571,8 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
             exit(1);
         }
 
-        MaillonDeptV2 * mV2 = ( MaillonDeptV2 ) malloc ( sizeof( MaillonDeptV2 ));
+        MaillonDeptV2 * mV2 = ( MaillonDeptV2 * ) malloc ( sizeof( MaillonDeptV2 ));
+        if ( mV2 == NULL)
         {
             printf("\n --> Erreur d'allocation memoire...\n");
             exit(1);
@@ -599,4 +600,83 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
     }
     
     return lDeptV2;
+}
+
+
+
+// ==============================================================================
+// Partie 4 
+// ==============================================================================
+
+void affichageListesDept( ListeCandidats lcand, char * type, char * nomDept )
+{
+    lcand = trierListeCandidats( lcand );
+
+    printf( " Liste des candidats %s du departement %10s  \n -------------------------------------------------------\n\n", type, nomDept);
+
+    while ( lcand != NULL)
+    {
+        printf("  | Nom : %10s | Prenom : %10s | Numero : %8s |\n", 
+        lcand -> candidat.nom, lcand -> candidat.prenom, lcand -> candidat.numero);
+
+        lcand = lcand -> suiv;
+    }
+}
+
+ListeCandidats trierListeCandidats( ListeCandidats l )
+{
+    ListeCandidats nvL;
+
+    while ( l != NULL )
+    {
+        nvL = insertionCroissanteCand( nvL, l );
+        l = l -> suiv;
+    }
+
+    return nvL;
+}
+
+ListeCandidats insertionCroissanteCand( ListeCandidats nvL, ListeCandidats l )
+{
+    if ( l == NULL)
+    {
+        nvL = insertionTeteCand( nvL,  l );
+        return nvL;
+    }
+
+    if ( strcmp( l -> candidat.nom, nvL -> candidat.nom ) < 0 )
+    {
+        nvL = insertionTeteCand( nvL, l );
+        return nvL;
+    }
+
+    if ( strcmp( l -> candidat.nom, nvL -> candidat.nom ) == 0 )
+    {
+        if ( strcmp( l -> candidat.prenom, nvL -> candidat.prenom ) < 0 )
+        {
+            nvL = insertionTeteCand( nvL, l );
+            return nvL;
+        }
+    }
+
+    nvL -> suiv = insertionCroissanteCand( nvL -> suiv, l );
+    return nvL;
+}
+        
+    
+ListeCandidats insertionTeteCand( ListeCandidats nvL, ListeCandidats l )
+{
+    MaillonCandidat * m = ( MaillonCandidat * ) malloc ( sizeof( MaillonCandidat ));
+    if ( m == NULL )
+    {
+        printf("\n -> Erreur allocation memoire...\n");
+        exit(1);
+    }
+
+    m -> candidat = l -> candidat;
+    m -> suiv = nvL;
+    nvL = m;
+    free( l );
+
+    return nvL;
 }

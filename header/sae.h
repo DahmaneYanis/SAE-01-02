@@ -126,6 +126,12 @@ void menuAdmin(VilleIut **villeIut, int nbVilles);
 void afficherCandidat(Candidat candidat);
 void afficherCandidats(Candidat *candidats, int nbCandidats);
 
+ListeDeptV2 configurationDeptV2( ListeDept ldept );
+
+void affichageListesDept( ListeCandidats lcand, char * type, char * nomDept );
+ListeCandidats trierListeCandidats( ListeCandidats l );
+ListeCandidats insertionCroissanteCand( ListeCandidats nvL, ListeCandidats l );
+ListeCandidats insertionTeteCand( ListeCandidats nvL, ListeCandidats l );
 
 // listeDeparements.c
 ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
