@@ -52,7 +52,6 @@ typedef struct maillonCandidat
     struct maillonCandidat * suiv;
 } MaillonCandidat, * ListeCandidats;
 
-
 // Structures de la partie 1 : 
 typedef struct log
 {
@@ -66,21 +65,34 @@ typedef struct maillonDept
     char nomDept[30];
     char resp[30];
     int nbP;
+    struct maillonDept *suiv;
+
+}MaillonDept, *ListeDept;
+
+
+typedef struct maillonDeptV2
+{
+    char nomDept[30];
+    char resp[30];
+    int nbP;
 
     //Mise a jour du maillon pour correspondre à la partie 3 : 
     int moyMin;
     int admisMax;
     ListeCandidats lAdmis;
     ListeCandidats lAttente;
+    struct maillonDeptV2 *suiv;
 
-    struct maillonDept *suiv;
-}MaillonDept, *ListeDept;
+} MaillonDeptV2, * ListeDeptV2;
 
 // Utilise pour le tableau de pointeurs sur cette structure (pour Guillaume)
 typedef struct 
 {
     char nom[30];
     ListeDept lDept;
+
+    // Mise à jour pour correspondre à la partie 3 
+    ListeDeptV2 lDeptV2;
 }VilleIut;
 
 /*
