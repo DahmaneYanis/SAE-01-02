@@ -226,7 +226,6 @@ void seConnecterTest(void)
     valide = mdpValide(mdp, indice, tLog);
 }
 
-
 void seConnecter(Log * tLog, int nbLog)
 {
     char mdp[30], utilisateur[30];
@@ -350,19 +349,20 @@ void saisieMdp(char * mdp)
  *
  * @return 1 si le département a été trouvé et modifié, 0 sinon
  */
-int modifiePlacesDept(VilleIut *villeIut, int nbVilles, char *ville, char *nomDept, int nbP)
+int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomDept, int nbP)
 {
     // Recherche de la ville et du département
     int i;
     for (i = 0; i < nbVilles; i++)
     {
-        if (strcmp(villeIut[i].nom, ville) == 0)
+        if (strcmp(villeIut[i] -> nom, ville) == 0)
         {
             // Ville trouvée, recherche du département
-            MaillonDept *dept = villeIut[i].lDept;
-            while (dept != NULL && strcmp(dept->nomDept, nomDept) != 0)
+            MaillonDept *dept = villeIut[i] -> lDept;
+
+            while ( dept != NULL && strcmp( dept -> nomDept, nomDept) != 0)
             {
-                dept = dept->suiv;
+                dept = dept ->suiv;
             }
             if (dept != NULL)
             {
@@ -389,19 +389,19 @@ int modifiePlacesDept(VilleIut *villeIut, int nbVilles, char *ville, char *nomDe
  * @param nbVilles nombre de villes dans le tableau villeIut
  * @param nomDept nom du département à rechercher
  */
-void afficheIUTDept(VilleIut *villeIut, int nbVilles, char *nomDept)
+void afficheIUTDept(VilleIut **villeIut, int nbVilles, char *nomDept)
 {
     int i;
     for (i = 0; i < nbVilles; i++)
     {
         // Parcours de la liste chaînée de départements de la ville
-        MaillonDept *dept = villeIut[i].lDept;
+        MaillonDept *dept = villeIut[i] -> lDept;
         while (dept != NULL)
         {
             if (strcmp(dept->nomDept, nomDept) == 0)
             {
                 // Département trouvé, affichage de la ville
-                printf("IUT de %s\n", villeIut[i].nom);
+                printf("IUT de %s\n", villeIut[i] -> nom);
                 break;
             }
             dept = dept->suiv;
@@ -410,17 +410,29 @@ void afficheIUTDept(VilleIut *villeIut, int nbVilles, char *nomDept)
 }
 
 /**
-    *@brief Affiche les villes qui ont des IUT.
-    *@param villeIut tableau de pointeurs sur les structures VilleIut
-    *@param nbVilles nombre de villes dans le tableau villeIut
+    * @brief Affiche les villes qui ont des IUT.
+    * @param villeIut tableau de pointeurs sur les structures VilleIut
+    * @param nbVilles nombre de villes dans le tableau villeIut
 */
 void afficheVillesIUT(VilleIut **villeIut, int nbVilles)
 {
-    int i;
-    for (i = 0; i < nbVilles; i++)
+
+    // ajout de test temporaire 
+    // MaillonDept * temp = ( MaillonDept *) malloc ( sizeof( MaillonDept));
+    // if ( temp == NULL)
+    // {
+    //     printf(" Erreur allocation memoire ( Jean ) \n");
+    //     return;
+    // }
+
+    // villeIut[0] -> lDept = temp;
+
+    // strcpy( villeIut[0] -> lDept -> nomDept, " kawasaky ");
+
+    for (int i = 0; i < nbVilles; i++)
     {
         // Affichage du nom de la ville
-    printf("%s\n", villeIut[i]->nom);
+    printf("%s\n", villeIut[i]-> nom);
     }   
 }
 
@@ -430,7 +442,7 @@ void afficheVillesIUT(VilleIut **villeIut, int nbVilles)
  * @param villeIut tableau de pointeurs sur les structures VilleIut
  * @param nbVilles nombre de villes dans le tableau villeIut
  */
-void menuAdmin(VilleIut *villeIut, int nbVilles)
+void menuAdmin(VilleIut **villeIut, int nbVilles)
 {
     int choix;
     do

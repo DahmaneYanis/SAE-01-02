@@ -106,10 +106,10 @@ void saisieMdp(char * mdp);
 void seConnecter(Log * tLog, int nbLog);
 void seConnecterTest(void);
 
-int modifiePlacesDept(VilleIut *villeIut, int nbVilles, char *ville, char *nomDept, int nbP);
-void afficheIUTDept(VilleIut *villeIut, int nbVilles, char *nomDept);
+int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomDept, int nbP);
+void afficheIUTDept(VilleIut* *villeIut, int nbVilles, char *nomDept);
 void afficheVillesIUT(VilleIut **villeIut, int nbVilles);
-void menuAdmin(VilleIut *villeIut, int nbVilles);
+void menuAdmin(VilleIut **villeIut, int nbVilles);
 
 void afficherCandidat(Candidat candidat);
 void afficherCandidats(Candidat *candidats, int nbCandidats);
