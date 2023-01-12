@@ -118,6 +118,7 @@ void seConnecter(Log * tLog, int nbLog);
 void seConnecterTest(void);
 
 int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomDept, int nbP);
+int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[]);
 void afficheIUTDept(VilleIut* *villeIut, int nbVilles, char *nomDept);
 void afficheVillesIUT(VilleIut **villeIut, int nbVilles);
 void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[]);
