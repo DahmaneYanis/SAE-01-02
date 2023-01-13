@@ -514,7 +514,7 @@ int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
     afficheVillesIUT(villeIut, nbVille);
     printf("Veuillez saisir le nom de l'iut que vous voulez afficher.\n");
     scanf("%s", nom);
-    res = existeIut(villeiut, nbVille, nom);
+    res = existeVille(villeiut, nbVille, nom);
     if (res == -1)
     {
         printf("Cet IUT n'existe pas\n");
