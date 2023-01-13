@@ -85,13 +85,13 @@ Log * chargementLog(char * nomFichier, int * nbLog)
     return tLog;
 }
 
-/*void test(VilleIut * tIut[], int nbVilles)
+void test(VilleIut * tIut[], int nbVilles)
 {
     for (int i = 0 ; i <nbVilles ; i++)
     {
         printf("%s\n", tIut[i]->nom);
     }
-}*/
+}
 
 /**
  * @brief Cette fonction affiche le menu des options disponibles pour un visiteur
@@ -139,6 +139,85 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
 }
 
 /**
+ * @brief Cette fonction affiche le menu des options disponibles pour un candidat
+ * et demande à l'utilisateur de faire son choix en appelant la fonction
+ * choixMenuCandidat. Selon le choix de l'utilisateur, la fonction appelle la fonction correspondante
+ * ou met fin à l'exécution de la fonction.
+*/
+void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
+{
+    int choix;
+    int actif = 1;
+    
+    clean
+
+    while(actif)
+    {
+        choix = choixMenuCandidat();
+        clean
+        switch(choix)
+        {
+            case 1:
+                //afficher une candidature
+                break;
+            case 2:
+                //Creer une candidature
+                break;
+            case 3 :
+                //Modifier une candidature
+                break;
+            case 4 :
+                //Supprimer une candidature
+                break;
+            case 0 :
+                actif = 0;
+                break;
+        }
+    }
+}
+
+/**
+
+@brief affiche le menu des candidats et renvoie le choix de l'utilisateur
+
+@return int : le choix de l'utilisateur
+*/
+int choixMenuCandidat(void)
+{
+    int choix;
+
+    choix = afficherMenuCandidat();
+    while (choix < 0 || choix > 4)
+    {
+        clean
+        printf("\nChoix incorrect.\n\n");
+        choix = afficherMenuCandidat();
+    }
+    return choix;
+}
+
+/**
+
+@brief affiche le menu pour les visiteurs et renvoie le choix de l'utilisateur
+
+@return int : le choix de l'utilisateur
+*/
+int afficherMenuCandidat(void)
+{
+    int choix;
+
+    printf("============================================================\n\t\t\tMENU CANDIDAT\n============================================================\n\n");
+    printf("\t1. Creer une candidature\n");
+    printf("\t2. Modifier une candidature\n");
+    printf("\t3. Supprimer une candidature\n");
+    printf("\t4. Gestion des candidatures\n");
+    printf("\t0. Quitter\n");
+    printf("\nChoix : ");
+    scanf("%d%*c", &choix);
+    return choix; 
+}
+
+/**
  * @brief Affiche le menu des options disponibles pour un visiteur.
  * 
  * Cette fonction affiche à l'écran un menu proposant plusieurs options 
@@ -157,7 +236,8 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
  * 
  * @return Le choix de l'utilisateur, sous forme d'un entier
  */
-int afficherMenuVisiteur(void) {
+int afficherMenuVisiteur(void)
+{
     int choix;
 
     printf("============================================================\n\t\t\tMENU VISITEUR\n============================================================\n\n");
@@ -426,6 +506,12 @@ int modifieChefDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
     return 0;
 }
 
+/*void afficherDeptIutDonne(VilleIut **villeIut, int nbVille)
+{
+    afficheVillesIUT();
+    printf()
+}*/
+
 /**
  * @brief Affiche les IUT possédant un département spécifique.
  *
@@ -435,7 +521,13 @@ int modifieChefDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
  */
 void afficheIUTDept(VilleIut **villeIut, int nbVilles, char *nomDept)
 {
-    int i;
+    clean;
+    printf("==========================================================================\n");
+    printf("           Affiche les IUT possédant un departement specifique \n");
+    printf("==========================================================================\n");
+
+
+    int i, e = 0 ;
     for (i = 0; i < nbVilles; i++)
     {
         // Parcours de la liste chaînée de départements de la ville
@@ -445,12 +537,16 @@ void afficheIUTDept(VilleIut **villeIut, int nbVilles, char *nomDept)
             if (strcmp(dept->nomDept, nomDept) == 0)
             {
                 // Département trouvé, affichage de la ville
-                printf("IUT de %s\n", villeIut[i] -> nom);
-                break;
+                printf(" -> IUT de %s\n", villeIut[i] -> nom);
+                e = 1;
             }
+
             dept = dept->suiv;
         }
     }
+    if ( e == 0 ) printf(" \n ---> Departement inexistant...\n");
+
+    printf("\n\n\n");
 }
 
 /**
@@ -460,24 +556,17 @@ void afficheIUTDept(VilleIut **villeIut, int nbVilles, char *nomDept)
 */
 void afficheVillesIUT(VilleIut **villeIut, int nbVilles)
 {
-
-    // ajout de test temporaire 
-    // MaillonDept * temp = ( MaillonDept *) malloc ( sizeof( MaillonDept));
-    // if ( temp == NULL)
-    // {
-    //     printf(" Erreur allocation memoire ( Jean ) \n");
-    //     return;
-    // }
-
-    // villeIut[0] -> lDept = temp;
-
-    // strcpy( villeIut[0] -> lDept -> nomDept, " kawasaky ");
+    clean
+    printf("==============================================================\n");
+    printf("                 Villes possedant un IUT  \n ");
+    printf("==============================================================\n");
 
     for (int i = 0; i < nbVilles; i++)
     {
         // Affichage du nom de la ville
-    printf("%s\n", villeIut[i]-> nom);
-    }   
+    printf(" -> %s\n", villeIut[i]-> nom);
+    }  
+    printf(" \n\n\n");
 }
 
 /**
