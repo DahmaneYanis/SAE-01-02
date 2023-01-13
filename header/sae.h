@@ -170,3 +170,7 @@ VilleIut * lireIut (FILE * fichier);
 VilleIut ** chargeIutDon(char nomFichier[], int * nbIut, int * nbMax);
 VilleIut ** initialiseTabIut(void);
 void tailleSupTabIut(VilleIut ** tIut, int *nbMax);
+void fusionIut(VilleIut ** tIut, int * nbIut);
+int existe(char * nom, VilleIut ** tIut, int nbIut, int iDepart, int * indice);
+void fusion(VilleIut ** tIut, int nbIut, int i, int j);
+void supprimerIut(VilleIut ** tIut, int nbIut, int j);
