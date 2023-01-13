@@ -506,7 +506,7 @@ int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
     return 0;
 }
 
-/*void afficherDeptIutDonne(VilleIut **villeIut, int nbVille)
+void afficherDeptIutDonne(VilleIut **villeIut, int nbVille)
 {
     int res;
     char *nom;
@@ -607,7 +607,7 @@ void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[])
     }
 }
 
-/*int existeVille( VilleIut * tIut[], char ville[], int nbvilles )
+int existeVille( VilleIut * tIut[], char ville[], int nbvilles )
 {
     int i = 0;
 
@@ -617,7 +617,7 @@ void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[])
         if ( strcmp( tIut[i] -> nom, ville ) == 0 ) return i; // ville trouvée...
     }
     return -1;
-}*/
+}
 
 /**
  * Affiche et gère le menu administrateur.
