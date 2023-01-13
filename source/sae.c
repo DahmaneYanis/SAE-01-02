@@ -23,7 +23,7 @@ void Globale(void)
 
     //Chargement des fichiers
     tLog = chargementLog("../donnees/log.don", &nbLog);
-    nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
+    //nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
 
     //Appel du menu visiteur
     menuVisiteur(tLog, nbLog, tIut, nbVilles);
@@ -153,27 +153,21 @@ void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
 
     while(actif)
     {
-        choix = choixMenuVisiteur();
+        choix = choixMenuCandidat();
         clean
         switch(choix)
         {
             case 1:
-                //test(tIut, nbVilles);
-                afficheVillesIUT(tIut, nbVilles);
-                //printf("Affiche les Villes contenant des IUT (En attente d'une fonction de chargement fonctionnelle)\n");
+                //affiche les candidatures
                 break;
             case 2:
-                printf("Affiche le nombre de place dans un departement (En attente de Guillaume)\n");
+                //Creer une candidature
                 break;
             case 3 :
-                printf("Affiche les departements d'un IUT donne (En attente de Loris)\n");
+                //Modifier une candidature
                 break;
             case 4 :
-                printf("Affiche les IUT possedant un departement donne (En attente de Jean)\n");
-                break;
-            case 5 :
-                seConnecter(tLog, nbLog);
-                clean
+                //Supprimer une candidature
                 break;
             case 0 :
                 actif = 0;
@@ -479,7 +473,7 @@ int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomD
  * 
  * @return 1 si le nom du responsable a été trouvé et modifié, 0 sinon
  */
-int modifieChefDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[])
+int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[])
 {
     // Recherche de la ville et du département
     int i;
@@ -512,7 +506,22 @@ int modifieChefDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
     return 0;
 }
 
+void afficherDeptIutDonne(VilleIut **villeIut, int nbVille)
+{
+    int res;
+    char *nom;
 
+    afficheVillesIUT(villeIut, nbVille);
+    printf("Veuillez saisir le nom de l'iut que vous voulez afficher.\n");
+    scanf("%s", nom);
+    res = existeVille(villeIut, nom, nbVille);
+    if (res == -1)
+    {
+        printf("Cet IUT n'existe pas\n");
+        return ;
+    }
+    afficherListe(villeIut[res]->lDept);
+}
 
 /**
  * @brief Affiche les IUT possédant un département spécifique.
@@ -571,7 +580,6 @@ void afficheVillesIUT(VilleIut **villeIut, int nbVilles)
     printf(" \n\n\n");
 }
 
-
 /**
  * @brief Affiche les IUT et le nombre de places associé pour un département donné
  * 
@@ -597,9 +605,19 @@ void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[])
             dept = dept->suiv;
         }
     }
-    
 }
 
+int existeVille( VilleIut * tIut[], char ville[], int nbvilles )
+{
+    int i = 0;
+
+    //recherche de la ville 
+    for( i = 0; i < nbvilles; i ++ )
+    {
+        if ( strcmp( tIut[i] -> nom, ville ) == 0 ) return i; // ville trouvée...
+    }
+    return -1;
+}
 
 
 /**
@@ -668,9 +686,6 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
 
 
 
-
-
-
 /*
 ================================================
                     Partie 2
@@ -681,7 +696,7 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
  * @brief Affiche les informations d'un candidat
  * @param candidat Le candidat à afficher
  */
-void afficherCandidat(Candidat candidat)
+/* void afficherCandidat(Candidat candidat)
 {
     printf("Numéro du candidat : %d\n", candidat.numero);
     printf("Nom : %s\n", candidat.nom);
@@ -696,7 +711,7 @@ void afficherCandidat(Candidat candidat)
         printf("  Décision du département : %d\n", candidat.choix[i].decisionDepartement);
         printf("  Validation : %d\n", candidat.choix[i].validationCandidat);
     }
-}
+} */
 
 /**
  * @brief Affiche la liste des candidats
@@ -704,7 +719,7 @@ void afficherCandidat(Candidat candidat)
  * @param candidats Le tableau de candidats à afficher
  * @param nbCandidats Le nombre de candidats dans le tableau
  */
-void afficherCandidats(Candidat *candidats, int nbCandidats)
+/*void afficherCandidats(Candidat *candidats, int nbCandidats)
 {
     for (int i = 0; i < nbCandidats; i++)
     {
@@ -769,10 +784,11 @@ int creerCandid(Candidat tCand[], int nbCandidats)
 }
 
 
-
-// ===============================================================================
-// PARTIE 3 
-//===============================================================================
+/*
+================================================
+                    Partie 3
+================================================
+*/
 
 /**
  * \brief Permet de convertir la liste de departement des VilleIut de la partie 1
@@ -829,11 +845,11 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
     return lDeptV2;
 }
 
-
-
-// ==============================================================================
-// Partie 4 
-// ==============================================================================
+/*
+================================================
+                    Partie 4
+================================================
+*/
 
 /**
  * @brief Affiche une liste de candidats après l'avoir triée par ordre alphabétique 
@@ -932,5 +948,3 @@ ListeCandidats insertionTeteCand( ListeCandidats nvL, ListeCandidats l )
 
     return nvL;
 }
-
-

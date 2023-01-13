@@ -26,13 +26,15 @@ void testColor(void);
 */
 
 //Proposition structure de candidat & choix pour la partie 2 ( jean ) : 
-typedef struct
+typedef struct choix
 {
     char ville[50];
     char departement[50];
     int decisionDepartement;
     int validationCandidat;
-}Choix;
+    struct choix *suiv;
+
+}Choix, *lChoix;
 
 typedef struct
 {
@@ -41,7 +43,7 @@ typedef struct
     char prenom[50];
     float notes[4];
     int nbChoix;
-    Choix *choix;
+    lChoix lchoix;
 }Candidat;
 
 //Proposition de structure de candidature pour la Partie 3 ( jean ) :
@@ -122,9 +124,11 @@ void seConnecterTest(void);
 
 int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomDept, int nbP);
 int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[]);
+void afficherDeptIutDonne(VilleIut **villeIut, int nbVille);
 void afficheIUTDept(VilleIut* *villeIut, int nbVilles, char *nomDept);
 void afficheVillesIUT(VilleIut **villeIut, int nbVilles);
 void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[]);
+int existeVille( VilleIut * tIut[], char ville[], int nbvilles );
 void menuAdmin(VilleIut **villeIut, int nbVilles);
 
 void afficherCandidat(Candidat candidat);
@@ -152,8 +156,18 @@ void afficherListe(ListeDept ldept);
 
 
 // chargEtSauvFich.c
-int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[]);
-void lireDep(FILE *flot, char nomDept[], int *nbP, char resp[]);
-int appartientIut(VilleIut *tVilleIut[], int nb, char nom[], int *trouve);
-void sauvegarderFichierIutDon(VilleIut *tVilleIut[], int nbVille, char nomFich[]);
+//int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[]);
+//void lireDep(FILE *flot, char nomDept[], int *nbP, char resp[]);
+//int appartientIut(VilleIut *tVilleIut[], int nb, char nom[], int *trouve);
+//void sauvegarderFichierIutDon(VilleIut *tVilleIut[], int nbVille, char nomFich[]);
 
+void testCharge(void);
+void lectureDep(ListeDept ldept, FILE * fichier);
+ListeDept initialiseDep(void);
+ListeDept lireDep(FILE * fichier);
+void lectureIut(VilleIut * iut, FILE * fichier);
+VilleIut * initialiseIut(void);
+VilleIut * lireIut (FILE * fichier);
+VilleIut ** chargeIutDon(char nomFichier[], int * nbIut, int * nbMax);
+VilleIut ** initialiseTabIut(void);
+void tailleSupTabIut(VilleIut ** tIut, int *nbMax);
