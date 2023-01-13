@@ -27,6 +27,8 @@ VilleIut ** chargeIutDon(char nomFichier[], int * nbIut, int * nbMax)
 
     *nbMax = 5;
 
+
+
     i = 0;
     while (!feof(fichier))
     {
@@ -42,6 +44,10 @@ VilleIut ** chargeIutDon(char nomFichier[], int * nbIut, int * nbMax)
     }
 
     *nbIut = i-1;
+    fclose(fichier);
+
+    fusionIut(tIut, nbIut);
+
     return tIut;
 }
 
@@ -169,6 +175,7 @@ void lectureDep(ListeDept ldept, FILE * fichier)
     fscanf(fichier, "%s %d ", ldept->nomDept, &ldept->nbP);
     fgets(ldept->resp, 30, fichier);
     ldept->resp[strlen(ldept->resp)-1] = '\0';
+    ldept->suiv = NULL;
 }
 
 /**
@@ -178,117 +185,89 @@ void testCharge(void)
 {
     int nbIut, nbMax;
     VilleIut ** tIut = chargeIutDon("../donnees/iut.don", &nbIut, &nbMax);
+    fusionIut(tIut, &nbIut);
 
     for (int i = 0; i < nbIut; i++)
     {
-        printf("[ %s | %s | %d | %s ]\n", tIut[i]->nom, tIut[i]->lDept->nomDept, tIut[i]->lDept->nbP, tIut[i]->lDept->resp);
+        printf("\nVille : %s\n", tIut[i]->nom);
+        afficherListe(tIut[i]->lDept);
     }
 }
 
-
-
-/*int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[])
+/**
+ * @brief Fusionne la liste de département de toutes les villes du même nom de tIut
+ * 
+ * @param tIut Tableau de pointeur de VilleIut
+ * @param nbIut [Taille Logique]
+ */
+void fusionIut(VilleIut ** tIut, int *nbIut)
 {
-    FILE *flot;
-    int i=0, nbP, trouve, indice;
-    char nom[30], nomDept[30], resp[30];
+    int indice;
 
-    flot = fopen(nomFich, "r");
-    if(flot==NULL)
+    for (int i = 0; i < *nbIut; i++)
     {
-        printf("Probleme d'ouverture du fichier\n");
-        exit(1);
-    }
-    fscanf(flot, "%s", nom);
-    lireDep(flot, nomDept, &nbP, resp);
-    while(!feof(flot))
-    {
-        if(i==nbMax)
+        if(existe(tIut[i]->nom, tIut, *nbIut, i, &indice))
         {
-            printf("Tableau plein\n");
-            return -1;
+            fusion(tIut, *nbIut, i, indice);
+            (*nbIut)--;
+            i--;
         }
-        indice = appartientIut(tVilleIut, i, nom, &trouve);
-        if(trouve==0)
+    }
+}
+
+/**
+ * @brief Verifie l'existance d'une VilleIut dans le tableau de pointeur de VilleIut
+ * 
+ * @param nom [CHAINE DE CARACTERES]
+ * @param tIut Tableau de pointeur de VilleIut
+ * @param nbIut [Taille Logique]
+ * @param iDepart Indice à partir du quel rechercher
+ * @param indice Indice de la valeur si trouvée
+ * @return int 1 -> Trouvé | 0 -> Inexistante
+ */
+int existe(char * nom, VilleIut ** tIut, int nbIut, int iDepart, int * indice)
+{
+    for (int i = iDepart+1; i < nbIut; i++)
+    {
+        if (strcmp(nom, tIut[i]->nom) == 0)
         {
-            tVilleIut[i] = (VilleIut*)malloc(sizeof(VilleIut));
-            if(tVilleIut[i]==NULL)
-            {
-                printf("Probleme malloc\n");
-                fclose(flot);
-                exit(1);
-            }
-            strcpy(tVilleIut[i]->nom, nom);
-            tVilleIut[i]->lDept = listenouv();
-            ajouterDept(tVilleIut[i]->lDept, nomDept, resp, nbP);
-            i = i + 1;
+            *indice = i;
+            return 1;
         }
-        if(trouve==1)
-            tVilleIut[indice]->lDept = ajouterDept(tVilleIut[indice]->lDept, nomDept, resp, nbP);
-        fscanf(flot, "%s", nom);
-        lireDep(flot, nomDept, &nbP, resp);
     }
-    return i;
+
+    return 0;
 }
 
-void lireDep(FILE *flot, char nomDept[], int *nbP, char resp[])
+/**
+ * @brief Fusionne la liste de département de deux VilleIut du même nom
+ * 
+ * @param tIut Tableau de pointeur de VilleIut
+ * @param nbIut [Taille Logique]
+ * @param i Indice liste d'accueil
+ * @param j Indice ville à supprimer
+ */
+void fusion(VilleIut ** tIut, int nbIut, int i, int j)
 {
-    fscanf(flot,"%s%d\t", nomDept, nbP);
-    fgets(resp, 30, flot);
-    
-    #ifdef _WIN32
-    resp[strlen(resp) - 1] = '\0';
-    #endif
+    ListeDept aux;
+    aux = tIut[i]->lDept;
+    tIut[i]->lDept = tIut[j]->lDept;
+    tIut[i]->lDept->suiv = aux;
 
-    #ifdef __linux__
-    resp[strlen(resp) - 2] = '\0';
-    #endif
+    supprimerIut(tIut, nbIut, j);
 }
 
-int appartientIut(VilleIut *tVilleIut[], int nb, char nom[], int *trouve)
+/**
+ * @brief Supprime une ville du tableau de pointeur de VilleIut
+ * 
+ * @param tIut Tableau de pointeur de VilleIut
+ * @param nbIut [Taille Logique]
+ * @param j Indice ville à supprimer
+ */
+void supprimerIut(VilleIut ** tIut, int nbIut, int j)
 {
-    int i = 0;
-
-    while(i < nb)
+    for (int i = j ; i < nbIut-1 ; i++)
     {
-        if(strcmp(tVilleIut[i]->nom, nom) == 0)
-        {
-            *trouve = 1;
-            return i;
-        }
-        i = i + 1;
+        tIut[i] = tIut[i+1];
     }
-    *trouve = 0;
-    return i;
 }
-
-void sauvegarderFichierIutDon(VilleIut *tVilleIut[], int nbVille, char nomFich[])
-{
-    FILE *flot;
-    int i=0;
-
-    flot = fopen(nomFich, "w");
-    if(flot==NULL)
-    {
-        printf("Probleme lors de l'ouverture du fichier\n");
-        exit(1);
-    }
-    while(i<nbVille)
-    {
-        printf("%d\n", i);
-        while(tVilleIut[i]->lDept != NULL)
-        {    
-            printf("%s %s %d %s", tVilleIut[i]->nom, tVilleIut[i]->lDept->nomDept, tVilleIut[i]->lDept->nbP, tVilleIut[i]->lDept->resp);
-            fprintf(flot, "%s %s %d %s", tVilleIut[i]->nom, tVilleIut[i]->lDept->nomDept, tVilleIut[i]->lDept->nbP, tVilleIut[i]->lDept->resp);
-            tVilleIut[i]->lDept = tVilleIut[i]->lDept->suiv;
-        }
-        i = i + 1;
-    }
-    fclose(flot);
-}
-
-*/
-
-/*
-
-*/

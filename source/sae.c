@@ -14,21 +14,25 @@
  */
 void Globale(void)
 {
-    printf(" \n ---> lancement de la fonction globale.... \n\n");
+    //printf(" \n ---> lancement de la fonction globale.... \n\n");
     Log * tLog;
-    VilleIut *tIut[50] ;
+    VilleIut ** tIut;
 
     int nbVilles;
     int nbLog;
+    int nbIut, nbIutMax;
 
     //Chargement des fichiers
     tLog = chargementLog("../donnees/log.don", &nbLog);
+    tIut = chargeIutDon("../donnees/iut.don", &nbIut, &nbIutMax);
+
     //nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
 
     //Appel du menu visiteur
-    menuVisiteur(tLog, nbLog, tIut, nbVilles);
+    menuVisiteur(tLog, nbLog, tIut, nbIut);
 
     //Sauvegarde dans les fichiers
+
 }
 
 /**
@@ -77,10 +81,8 @@ Log * chargementLog(char * nomFichier, int * nbLog)
         }
 
         fscanf(fichier, "%s %s %s", tLog[i].utilisateur, tLog[i].mdp, tLog[i].status);
-        printf("%s\n", tLog[i].status);
         i++;
     }
-
     *nbLog = i;
     return tLog;
 }
@@ -99,7 +101,7 @@ void test(VilleIut * tIut[], int nbVilles)
  * choixMenuVisiteur. Selon le choix de l'utilisateur, la fonction appelle la fonction correspondante
  * ou met fin à l'exécution de la fonction.
 */
-void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
+void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
 //void menuVisiteur(VilleIut *villeIut, int nbVilles)
 {
     int choix;
@@ -114,15 +116,14 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
         switch(choix)
         {
             case 1:
-                //test(tIut, nbVilles);
-                afficheVillesIUT(tIut, nbVilles);
-                //printf("Affiche les Villes contenant des IUT (En attente d'une fonction de chargement fonctionnelle)\n");
+                afficheVillesIUT(tIut, nbIut);
                 break;
             case 2:
                 printf("Affiche le nombre de place dans un departement (En attente de Guillaume)\n");
                 break;
             case 3 :
-                afficherDeptIutDonne(tIut, nbVilles);
+                printf("Afficher departement d'un Iut\n");
+                //afficherDeptIutDonne(tIut, nbIut);
                 break;
             case 4 :
                 printf("Affiche les IUT possedant un departement donne (En attente de Jean)\n");
@@ -581,8 +582,12 @@ void afficheVillesIUT(VilleIut *tiut[], int nbVilles)
     {
         // Affichage du nom de la ville
     printf(" -> %s\n", tiut[i]-> nom);
-    }  
-    printf(" \n\n\n");
+    }
+
+    printf("\nAppuyez sur entree pour continuer...\n");
+    scanf("%*c");
+
+    clean
 }
 
 /**
@@ -786,6 +791,44 @@ int creerCandidat(Candidat *tCand[], int nbCandidats)
     return nbCandidats + 1;
 }
 
+/**
+ * @brief Supprime un choix de la liste de choix d'un candidat
+ * 
+ * @param lchoix la liste de choix à modifier 
+ * @param nbchoix le nombre de choix dans la liste de choix
+ *
+ * @return la liste avec le choix en moins 
+ */
+lChoix supprimerCandidature( lChoix l, int * nbchoix)
+{
+    if ( l == NULL )
+    {
+        printf(" \n --> Le candidat ne possede aucun choix...\n\n");
+        return l;
+    }
+
+    printf("\n Voici les choix du candidat : \n");
+    printf(  " -----------------------------\n\n");
+    int rep = 0, c = 0;
+
+    for( int i = 0; i < *nbchoix; i ++ )
+    {
+        printf(" %d.) Ville : %10s ; Departement : %10s \n",i + 1, l -> ville, l -> departement);
+    }
+
+    printf(" \n\n --> Quel choix supprimer ? : ");
+    scanf("%d%*c", &rep);
+
+    while ( c != rep - 1 )
+    {
+        l = l -> suiv;
+        c = c + 1;
+    }
+
+    l = supprimerEnTeteC( l );
+    *nbchoix = *nbchoix - 1;
+    return l;
+}
 
 /**
  * @brief Permet de créer une candidature à un candidat
@@ -869,108 +912,4 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
     }
     
     return lDeptV2;
-}
-
-/*
-================================================
-                    Partie 4
-================================================
-*/
-
-/**
- * @brief Affiche une liste de candidats après l'avoir triée par ordre alphabétique 
- * 
- * @param lcand liste de candidats à trier et afficher 
- * @param type type de liste à afficher ( en attente ou admis )
- * @param nomDept nom du departement dont est issu la liste
- */
-void affichageListesDept( ListeCandidats lcand, char * type, char * nomDept )
-{
-    lcand = trierListeCandidats( lcand );
-
-    printf( " Liste des candidats %s du departement %10s  \n -------------------------------------------------------\n\n", type, nomDept);
-
-    while ( lcand != NULL)
-    {
-        printf("  | Nom : %10s | Prenom : %10s | Numero : %8s |\n", 
-        lcand -> candidat.nom, lcand -> candidat.prenom, lcand -> candidat.numero);
-
-        lcand = lcand -> suiv;
-    }
-}
-/**
- * @brief Trie par ordre alphabétique les candidats d'une liste 
- * 
- * @param l liste de candidats à trier.
- * 
- * @return  La liste triée 
- */
-ListeCandidats trierListeCandidats( ListeCandidats l )
-{
-    ListeCandidats nvL;
-
-    while ( l != NULL )
-    {
-        nvL = insertionCroissanteCand( nvL, l );
-        l = l -> suiv;
-    }
-
-    return nvL;
-}
-
-/**
- * @brief Permet d'insérer un nouveau Maillon de candidats dans la liste par ordre alphabétique 
- * @param l la liste dont est issu le maillon à insérer
- * @param nvL la nouvelle liste où est inséré le maillon
- * 
- * @return  La nouvelle liste avec le maillon au bon endroit
- */
-ListeCandidats insertionCroissanteCand( ListeCandidats nvL, ListeCandidats l )
-{
-    if ( l == NULL)
-    {
-        nvL = insertionTeteCand( nvL,  l );
-        return nvL;
-    }
-
-    if ( strcmp( l -> candidat.nom, nvL -> candidat.nom ) < 0 )
-    {
-        nvL = insertionTeteCand( nvL, l );
-        return nvL;
-    }
-
-    if ( strcmp( l -> candidat.nom, nvL -> candidat.nom ) == 0 )
-    {
-        if ( strcmp( l -> candidat.prenom, nvL -> candidat.prenom ) < 0 )
-        {
-            nvL = insertionTeteCand( nvL, l );
-            return nvL;
-        }
-    }
-
-    nvL -> suiv = insertionCroissanteCand( nvL -> suiv, l );
-    return nvL;
-}
-        
-/**
- * @brief Insère en tête de la nouvelle liste un nouveau maillon
- * @param l liste d'où est issu le nouveau maillon à intégrer
- * @param nvL Liste où est insérer le nouveau Maillon 
- * @return  La nouvelle liste avec le maillon au bon endroit  
- */
-ListeCandidats insertionTeteCand( ListeCandidats nvL, ListeCandidats l )
-{
-    MaillonCandidat * m = ( MaillonCandidat * ) malloc ( sizeof( MaillonCandidat ));
-    if ( m == NULL )
-    {
-        printf("\n -> Erreur allocation memoire...\n");
-        exit(1);
-    }
-
-    m -> candidat = l -> candidat;
-    m -> suiv = nvL;
-    nvL = m;
-    free( l );
-
-    return nvL;
 }
