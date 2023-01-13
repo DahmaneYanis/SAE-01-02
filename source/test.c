@@ -40,11 +40,12 @@
 
 void guillaume(void)
 {
-    Candidat tCandid[50];
-    int nbCandidats=2;
+    Candidat *tCandid[50];
+    int nbCandidats=0;
 
-    //nbCandidats = creerCandid(tCandid, nbCandidats);
-    printf("\n%d", nbCandidats);
+    nbCandidats = creerCandidat(tCandid, nbCandidats);
+    printf("\n%d\n", nbCandidats);
+    afficherCandidats(tCandid, nbCandidats);
 }
 
 

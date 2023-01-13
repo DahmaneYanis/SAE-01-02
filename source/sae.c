@@ -732,64 +732,57 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
 void afficherCandidats(Candidat **candidats, int nbCandidats)
 {
     for (int i = 0; i < nbCandidats; i++)
+    {
         printf("\nCandidat numero %8d | Nom : %10s | Prenom : %10s \n", candidats[i] -> numero,
          candidats[i] -> nom, candidats[i] -> prenom);
+    }
+}
+
+/**
+ * @brief Permet de créer un candidat  
+ * 
+ * @param tCand Tableau de pointeur sur une structure de candidat
+ * @param nbCandidats nombre de candidats créés
+ * 
+ * @return Retourne le nombre de candidats 
+ */
+int creerCandidat(Candidat *tCand[], int nbCandidats)
+{
+    int i=0;
+    Candidat *c;
+ 
+    c = (Candidat *) malloc (sizeof(Candidat));
+    if(c==NULL)
+    {
+        printf("Probleme malloc\n");
+        exit(1);
+    }
+    c->numero = nbCandidats+1;
+    printf("Le numero du candidat entrain d'etre cree est : %d\n", c->numero);
+    printf("Nom du candidat (peut contenir des espaces): ");
+    fgets(c->nom, 50, stdin);
+    c->nom[strlen(c->nom) - 1] = '\0';
+    printf("Prenom du candidat (peut contenir des espaces): ");
+    fgets(c->prenom, 50, stdin);
+    c->prenom[strlen(c->prenom) - 1] = '\0';
+    i=0;
+    while(i<4)
+    {
+        printf("Rentrez la note numero %d : ", i+1);
+        scanf("%f", &c->notes[i]);
+        while(c->notes[i] < 0 || c->notes[i] > 20)
+        {
+            printf("Erreur, la note doit etre comprise entre 0 et 20.\nRessaisir la note numero %d : ", i+1);
+            scanf("%f", &c->notes[i]);
+        }
+        i = i + 1;
+    }
+    c->lchoix = listenouvC();
+    tCand[nbCandidats] = c;    
+    return nbCandidats + 1;
 }
 
 
-// int creerCandid(Candidat tCand[], int nbCandidats)
-// {
-//     int i=0;
-//     Candidat c;
-
-//     printf("Rentrez le numéro du candidat :");
-//     scanf("%d%*c",&c.numero);
-//     while(i<nbCandidats)
-//     {
-//         if(c.numero==tCand[i].numero)
-//         {
-//             printf("Ce numéro existe déjà, veuillez en rentrer un nouveau :");
-//             scanf("%d%*c",&c.numero);
-//             i=0;
-//         }
-//         i = i + 1;
-//     }
-//     printf("Nom du candidat (peut contenir des espaces): ");
-//     fgets(c.nom, 50, stdin);
-//     c.nom[strlen(c.nom) - 1] = '\0';
-//     printf("Prénom du candidat (peut contenir des espaces): ");
-//     fgets(c.prenom, 50, stdin);
-//     c.prenom[strlen(c.prenom) - 1] = '\0';
-//     i=0;
-//     while(i<4)
-//     {
-//         printf("Rentrez une note : ");
-//         scanf("%f", &c.notes[i]);
-//         printf("%f", c.notes[i]);
-//         i = i + 1;
-//     }
-//     printf("Nombre de choix de candidatures : ");
-//     scanf("%d%*c", &c.nbChoix);
-//     c.nbChoix = (Choix *) malloc (c.nbChoix*sizeof(Choix));
-//     if(c.nbChoix==NULL)
-//     {
-//         printf("Problème malloc\n");
-//         exit(1);
-//     }
-//     i=0;
-//     while(i<c.nbChoix)
-//     {
-//         printf("Rentrez la ville souhaitée : ");
-//         scanf("%s%*c", c.choix[i].ville);
-//         printf("Rentrez le département souhaité : ");
-//         scanf("%s%*c", c.choix[i].departement);
-//         c.choix[i].decisionDepartement = 0;
-//         c.choix[i].validationCandidat = 0;
-//         i = i + 1;
-//     }
-//     printf("%d %s %s %f %d %s %s %d", c.numero, c.nom, c.prenom, c.notes[1], c.nbChoix, c.choix[0].ville, c.choix[0].departement, c.choix[0].decisionDepartement, c.choix[0].validationCandidat);
-//     return nbCandidats + 1;
-// }
 
 
 /*

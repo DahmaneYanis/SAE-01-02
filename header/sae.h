@@ -133,7 +133,7 @@ void menuAdmin(VilleIut *tiut[], int nbVilles);
 
 void afficherUnCandidat(Candidat candidat);
 void afficherCandidats(Candidat **candidats, int nbCandidats);
-int creerCandid(Candidat tCand[], int nbCandidats);
+int creerCandidat(Candidat *tCand[], int nbCandidats);
 
 ListeDeptV2 configurationDeptV2( ListeDept ldept );
 
