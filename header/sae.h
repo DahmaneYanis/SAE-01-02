@@ -122,14 +122,14 @@ void saisieMdp(char * mdp);
 void seConnecter(Log * tLog, int nbLog);
 void seConnecterTest(void);
 
-int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomDept, int nbP);
-int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[]);
-void afficherDeptIutDonne(VilleIut **villeIut, int nbVille);
-void afficheIUTDept(VilleIut* *villeIut, int nbVilles, char *nomDept);
-void afficheVillesIUT(VilleIut **villeIut, int nbVilles);
-void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[]);
-int existeVille( VilleIut * tIut[], char ville[], int nbvilles );
-void menuAdmin(VilleIut **villeIut, int nbVilles);
+int modifiePlacesDept(VilleIut *tiut[], int nbVilles, char *ville, char *nomDept, int nbP);
+int modifieRespDept(VilleIut *tiut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[]);
+void afficherDeptIutDonne(VilleIut *tiut[], int nbVilles);
+void afficheIUTDept(VilleIut *tiut[], int nbVilles, char *nomDept);
+void afficheVillesIUT(VilleIut *tiut[], int nbVilles);
+void afficheNbPlacesDep(VilleIut *tiut[], int nbVilles, char nomDept[]);
+int existeVille( VilleIut *tiut[], char ville[], int nbvilles );
+void menuAdmin(VilleIut *tiut[], int nbVilles);
 
 void afficherCandidat(Candidat candidat);
 void afficherCandidats(Candidat *candidats, int nbCandidats);
