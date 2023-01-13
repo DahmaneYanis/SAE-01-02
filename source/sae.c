@@ -23,7 +23,7 @@ void Globale(void)
 
     //Chargement des fichiers
     tLog = chargementLog("../donnees/log.don", &nbLog);
-    nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
+    //nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
 
     //Appel du menu visiteur
     menuVisiteur(tLog, nbLog, tIut, nbVilles);
@@ -426,8 +426,6 @@ int modifieChefDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
     return 0;
 }
 
-
-
 /**
  * @brief Affiche les IUT possédant un département spécifique.
  *
@@ -482,7 +480,6 @@ void afficheVillesIUT(VilleIut **villeIut, int nbVilles)
     }   
 }
 
-
 /**
  * @brief Affiche les IUT et le nombre de places associé pour un département donné
  * 
@@ -510,8 +507,6 @@ void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[])
     }
     
 }
-
-
 
 /**
  * Affiche et gère le menu administrateur.
@@ -577,11 +572,6 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
     } while (choix != 7);
 }
 
-
-
-
-
-
 /*
 ================================================
                     Partie 2
@@ -623,7 +613,6 @@ void afficherCandidats(Candidat *candidats, int nbCandidats)
         afficherCandidat(candidats[i]);
     }
 }
-
 
 // ===============================================================================
 // PARTIE 3 
@@ -683,8 +672,6 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
     
     return lDeptV2;
 }
-
-
 
 // ==============================================================================
 // Partie 4 
@@ -787,5 +774,3 @@ ListeCandidats insertionTeteCand( ListeCandidats nvL, ListeCandidats l )
 
     return nvL;
 }
-
-

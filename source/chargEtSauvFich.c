@@ -1,6 +1,193 @@
 #include "../header/sae.h"
 
-int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[])
+/**
+ * @brief charge les données d'un fichier dans un tableau de struct VilleIut
+ * @param nomFichier nom du fichier contenant les données
+ * @param nbIut pointeur vers un entier qui contiendra le nombre d'IUT lus
+ * @param nbMax pointeur vers un entier qui contiendra la taille maximale du tableau
+ * @return le tableau de struct VilleIut rempli avec les données du fichier
+ */
+VilleIut ** chargeIutDon(char nomFichier[], int * nbIut, int * nbMax)
+{
+    FILE * fichier;
+    VilleIut ** tIut;
+    int i = 0;
+
+    fichier = fopen(nomFichier, "r");
+
+    if (fichier == NULL) 
+    {
+        printf("Error: Ouverture du fichier %s impossible\n", nomFichier);
+        exit(1);
+    }
+
+    // Si tout s'est bien passé dans l'ouverture de fichier
+
+    tIut = initialiseTabIut();
+
+    *nbMax = 5;
+
+    i = 0;
+    while (!feof(fichier))
+    {
+        // Taille max atteinte ?
+        if (i+1 == *nbMax)
+        {
+            tailleSupTabIut(tIut, nbMax); // Augmentation de la taille avec un realloc
+        }
+
+        tIut[i] = lireIut(fichier); // Lecture d'un IUT
+        
+        i++;
+    }
+
+    *nbIut = i-1;
+    return tIut;
+}
+
+/**
+ * @brief initialise un tableau de struct VilleIut
+ * @return le tableau initialisé
+ */
+VilleIut ** initialiseTabIut(void)
+{
+    VilleIut ** tIut = (VilleIut **) malloc(sizeof(VilleIut *)*5);
+    
+    if (tIut == NULL)
+    {
+        printf("Error: Probleme d'allocation dynamique du tableau\n");
+        exit(1);
+    }
+
+    return tIut;
+}
+
+/**
+ * @brief augmente la taille d'un tableau de struct VilleIut
+ * @param tIut le tableau à augmenter
+ * @param nbMax pointeur vers un entier qui contiendra la nouvelle taille maximale du tableau
+ */
+void tailleSupTabIut(VilleIut ** tIut, int *nbMax)
+{
+    VilleIut **aux;
+
+    *nbMax+=5;
+    aux = (VilleIut **) realloc(tIut, *nbMax);
+    if (aux == NULL)
+    {
+        printf("Error : Probleme de realloc\n");
+        exit(1);
+    }
+
+    tIut = aux;
+}
+
+/**
+ * @brief lit les données d'un IUT dans un fichier et les stocke dans un struct VilleIut
+ * @param fichier pointeur vers le fichier contenant les données de l'IUT
+ * @return un struct VilleIut rempli avec les données lues
+ */
+VilleIut * lireIut (FILE * fichier)
+{
+    VilleIut * iut;
+
+    iut = initialiseIut();
+
+    lectureIut(iut, fichier);
+
+    return iut;
+}
+
+/**
+ * @brief Initialise un struct VilleIut
+ * @return le struct VilleIut initialisé
+ */
+VilleIut * initialiseIut(void)
+{
+    VilleIut * iut;
+
+    iut = (VilleIut *)malloc(sizeof(VilleIut));
+    if (iut == NULL)
+    {
+        printf("Error : Probleme d'allocation dynamique de l'IUT\n");
+        exit(1);
+    }
+
+    return iut;
+}
+
+/**
+ * @brief lit les données d'un IUT dans un fichier et les stocke dans un struct VilleIut
+ * @param iut pointeur vers le struct VilleIut où stocker les données
+ * @param fichier pointeur vers le fichier contenant les données de l'IUT
+ */
+void lectureIut(VilleIut * iut, FILE * fichier)
+{
+    fscanf(fichier, "%s", iut->nom);
+
+    iut->lDept = lireDep(fichier);
+}
+
+/**
+ * @brief lit les données d'un département dans un fichier et les stocke dans une liste chaînée
+ * @param fichier pointeur vers le fichier contenant les données du département
+ * @return une liste chaînée contenant les données du département
+ */
+ListeDept lireDep(FILE * fichier)
+{
+    ListeDept ldept;
+
+    ldept = initialiseDep();
+
+    lectureDep(ldept, fichier);
+}
+
+/**
+ * @brief Initialise une liste chaînée de départements
+ * @return la liste chaînée initialisée
+ */
+ListeDept initialiseDep(void)
+{
+    ListeDept ldept = (MaillonDept *) malloc(sizeof(MaillonDept));
+    if (ldept == NULL)
+    {
+        printf("Erreur : Erreur de malloc ldept\n");
+        exit(1);
+    }
+
+    return ldept;
+}
+
+/**
+ * @brief lit les données d'un département dans un fichier et les stocke dans une liste chaînée
+ * @param ldept pointeur vers la liste chaînée où stocker les données
+ * @param fichier pointeur vers le fichier contenant les données du département
+ */
+void lectureDep(ListeDept ldept, FILE * fichier)
+{
+    // Lecture des données du département 
+    fscanf(fichier, "%s %d ", ldept->nomDept, &ldept->nbP);
+    fgets(ldept->resp, 30, fichier);
+    ldept->resp[strlen(ldept->resp)-1] = '\0';
+}
+
+/**
+ * @brief teste la fonction chargeIutDon
+ */
+void testCharge(void)
+{
+    int nbIut, nbMax;
+    VilleIut ** tIut = chargeIutDon("../donnees/iut.don", &nbIut, &nbMax);
+
+    for (int i = 0; i < nbIut; i++)
+    {
+        printf("[ %s | %s | %d | %s ]\n", tIut[i]->nom, tIut[i]->lDept->nomDept, tIut[i]->lDept->nbP, tIut[i]->lDept->resp);
+    }
+}
+
+
+
+/*int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[])
 {
     FILE *flot;
     int i=0, nbP, trouve, indice;
@@ -99,3 +286,9 @@ void sauvegarderFichierIutDon(VilleIut *tVilleIut[], int nbVille, char nomFich[]
     }
     fclose(flot);
 }
+
+*/
+
+/*
+
+*/
