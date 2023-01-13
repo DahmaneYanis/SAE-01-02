@@ -131,8 +131,8 @@ void afficheNbPlacesDep(VilleIut *tiut[], int nbVilles, char nomDept[]);
 int existeVille( VilleIut *tiut[], char ville[], int nbvilles );
 void menuAdmin(VilleIut *tiut[], int nbVilles);
 
-void afficherCandidat(Candidat candidat);
-void afficherCandidats(Candidat *candidats, int nbCandidats);
+void afficherUnCandidat(Candidat candidat);
+void afficherCandidats(Candidat **candidats, int nbCandidats);
 int creerCandid(Candidat tCand[], int nbCandidats);
 
 ListeDeptV2 configurationDeptV2( ListeDept ldept );

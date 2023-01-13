@@ -701,22 +701,27 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
  * @brief Affiche les informations d'un candidat
  * @param candidat Le candidat à afficher
  */
-/* void afficherCandidat(Candidat candidat)
+ void afficherUnCandidat(Candidat candidat)
 {
-    printf("Numéro du candidat : %d\n", candidat.numero);
-    printf("Nom : %s\n", candidat.nom);
-    printf("Prénom : %s\n", candidat.prenom);
-    printf("Notes : %.2f %.2f %.2f %.2f\n", candidat.notes[0], candidat.notes[1], candidat.notes[2], candidat.notes[3]);
-    printf("Nombre de choix : %d\n", candidat.nbChoix);
-    for (int i = 0; i < candidat.nbChoix; i++)
+    int c = 1;
+    printf("Candidat numero  %7d ", candidat.numero);
+    printf(" | Nom : %10s | ", candidat.nom);
+    printf(" Prenom : %10s | ", candidat.prenom);
+    printf(" | Notes : %2f %2f %2f %2f | ", candidat.notes[0], candidat.notes[1], candidat.notes[2], candidat.notes[3]);
+    printf(" Nombre de choix : %d\n\n", candidat.nbChoix);
+
+    printf(" \n Choix du candidat :\n");
+    printf(   " -------------------\n\n");
+
+    while ( candidat.lchoix != NULL )
     {
-        printf("Choix %d :\n", i + 1);
-        printf("  Ville : %s\n", candidat.choix[i].ville);
-        printf("  Département : %s\n", candidat.choix[i].departement);
-        printf("  Décision du département : %d\n", candidat.choix[i].decisionDepartement);
-        printf("  Validation : %d\n", candidat.choix[i].validationCandidat);
+        printf(" %d.) Iut : %10s ; departement : %10s ; decision Departement : %d ; validation candidat : %d\n",
+               candidat.lchoix -> ville, candidat.lchoix -> departement, candidat.lchoix -> decisionDepartement, 
+               candidat.lchoix -> validationCandidat);
     }
-} */
+
+    printf(" \n\n");
+} 
 
 /**
  * @brief Affiche la liste des candidats
@@ -724,68 +729,67 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
  * @param candidats Le tableau de candidats à afficher
  * @param nbCandidats Le nombre de candidats dans le tableau
  */
-/*void afficherCandidats(Candidat *candidats, int nbCandidats)
+void afficherCandidats(Candidat **candidats, int nbCandidats)
 {
     for (int i = 0; i < nbCandidats; i++)
-    {
-        printf("\nCandidat %d :\n", i + 1);
-        afficherCandidat(candidats[i]);
-    }
+        printf("\nCandidat numero %8d | Nom : %10s | Prenom : %10s \n", candidats[i] -> numero,
+         candidats[i] -> nom, candidats[i] -> prenom);
 }
 
-int creerCandid(Candidat tCand[], int nbCandidats)
-{
-    int i=0;
-    Candidat c;
 
-    printf("Rentrez le numéro du candidat :");
-    scanf("%d%*c",&c.numero);
-    while(i<nbCandidats)
-    {
-        if(c.numero==tCand[i].numero)
-        {
-            printf("Ce numéro existe déjà, veuillez en rentrer un nouveau :");
-            scanf("%d%*c",&c.numero);
-            i=0;
-        }
-        i = i + 1;
-    }
-    printf("Nom du candidat (peut contenir des espaces): ");
-    fgets(c.nom, 50, stdin);
-    c.nom[strlen(c.nom) - 1] = '\0';
-    printf("Prénom du candidat (peut contenir des espaces): ");
-    fgets(c.prenom, 50, stdin);
-    c.prenom[strlen(c.prenom) - 1] = '\0';
-    i=0;
-    while(i<4)
-    {
-        printf("Rentrez une note : ");
-        scanf("%f", &c.notes[i]);
-        printf("%f", c.notes[i]);
-        i = i + 1;
-    }
-    printf("Nombre de choix de candidatures : ");
-    scanf("%d%*c", &c.nbChoix);
-    c.nbChoix = (Choix *) malloc (c.nbChoix*sizeof(Choix));
-    if(c.nbChoix==NULL)
-    {
-        printf("Problème malloc\n");
-        exit(1);
-    }
-    i=0;
-    while(i<c.nbChoix)
-    {
-        printf("Rentrez la ville souhaitée : ");
-        scanf("%s%*c", c.choix[i].ville);
-        printf("Rentrez le département souhaité : ");
-        scanf("%s%*c", c.choix[i].departement);
-        c.choix[i].decisionDepartement = 0;
-        c.choix[i].validationCandidat = 0;
-        i = i + 1;
-    }
-    printf("%d %s %s %f %d %s %s %d", c.numero, c.nom, c.prenom, c.notes[1], c.nbChoix, c.choix[0].ville, c.choix[0].departement, c.choix[0].decisionDepartement, c.choix[0].validationCandidat);
-    return nbCandidats + 1;
-}
+// int creerCandid(Candidat tCand[], int nbCandidats)
+// {
+//     int i=0;
+//     Candidat c;
+
+//     printf("Rentrez le numéro du candidat :");
+//     scanf("%d%*c",&c.numero);
+//     while(i<nbCandidats)
+//     {
+//         if(c.numero==tCand[i].numero)
+//         {
+//             printf("Ce numéro existe déjà, veuillez en rentrer un nouveau :");
+//             scanf("%d%*c",&c.numero);
+//             i=0;
+//         }
+//         i = i + 1;
+//     }
+//     printf("Nom du candidat (peut contenir des espaces): ");
+//     fgets(c.nom, 50, stdin);
+//     c.nom[strlen(c.nom) - 1] = '\0';
+//     printf("Prénom du candidat (peut contenir des espaces): ");
+//     fgets(c.prenom, 50, stdin);
+//     c.prenom[strlen(c.prenom) - 1] = '\0';
+//     i=0;
+//     while(i<4)
+//     {
+//         printf("Rentrez une note : ");
+//         scanf("%f", &c.notes[i]);
+//         printf("%f", c.notes[i]);
+//         i = i + 1;
+//     }
+//     printf("Nombre de choix de candidatures : ");
+//     scanf("%d%*c", &c.nbChoix);
+//     c.nbChoix = (Choix *) malloc (c.nbChoix*sizeof(Choix));
+//     if(c.nbChoix==NULL)
+//     {
+//         printf("Problème malloc\n");
+//         exit(1);
+//     }
+//     i=0;
+//     while(i<c.nbChoix)
+//     {
+//         printf("Rentrez la ville souhaitée : ");
+//         scanf("%s%*c", c.choix[i].ville);
+//         printf("Rentrez le département souhaité : ");
+//         scanf("%s%*c", c.choix[i].departement);
+//         c.choix[i].decisionDepartement = 0;
+//         c.choix[i].validationCandidat = 0;
+//         i = i + 1;
+//     }
+//     printf("%d %s %s %f %d %s %s %d", c.numero, c.nom, c.prenom, c.notes[1], c.nbChoix, c.choix[0].ville, c.choix[0].departement, c.choix[0].decisionDepartement, c.choix[0].validationCandidat);
+//     return nbCandidats + 1;
+// }
 
 
 /*
