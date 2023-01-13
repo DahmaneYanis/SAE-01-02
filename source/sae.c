@@ -754,7 +754,7 @@ int creerCandidat(Candidat *tCand[], int nbCandidats)
         scanf("%f", &c->notes[i]);
         i = i + 1;
     }
-    c->lchoix = listenouv();
+    c->lchoix = listenouvC();
     c = (Candidat *) malloc (sizeof(Candidat));
     tCand[nbCandidats] = c;    
     return nbCandidats + 1;
