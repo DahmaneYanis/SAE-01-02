@@ -152,6 +152,11 @@ bool vide(ListeDept ldept);
 int longueur(ListeDept ldept);
 void afficherListe(ListeDept ldept);
 
+// Choix.c
+lChoix ajouterEnteteC( lChoix lchoix, char ville[], char departement[], int decision, int validation);
+lChoix supprimerEnTeteC( lChoix lchoix );
+lChoix listenouvC();
+
 // iut.c
 
 
