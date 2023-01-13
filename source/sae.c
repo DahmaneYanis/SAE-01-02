@@ -14,21 +14,25 @@
  */
 void Globale(void)
 {
-    printf(" \n ---> lancement de la fonction globale.... \n\n");
+    //printf(" \n ---> lancement de la fonction globale.... \n\n");
     Log * tLog;
-    VilleIut *tIut[50] ;
+    VilleIut ** tIut;
 
     int nbVilles;
     int nbLog;
+    int nbIut, nbIutMax;
 
     //Chargement des fichiers
     tLog = chargementLog("../donnees/log.don", &nbLog);
+    tIut = chargeIutDon("../donnees/iut.don", &nbIut, &nbIutMax);
+
     //nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
 
     //Appel du menu visiteur
-    menuVisiteur(tLog, nbLog, tIut, nbVilles);
+    menuVisiteur(tLog, nbLog, tIut, nbIut);
 
     //Sauvegarde dans les fichiers
+
 }
 
 /**
@@ -99,7 +103,7 @@ void test(VilleIut * tIut[], int nbVilles)
  * choixMenuVisiteur. Selon le choix de l'utilisateur, la fonction appelle la fonction correspondante
  * ou met fin à l'exécution de la fonction.
 */
-void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
+void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
 //void menuVisiteur(VilleIut *villeIut, int nbVilles)
 {
     int choix;
@@ -115,14 +119,15 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
         {
             case 1:
                 //test(tIut, nbVilles);
-                afficheVillesIUT(tIut, nbVilles);
+                afficheVillesIUT(tIut, nbIut);
                 //printf("Affiche les Villes contenant des IUT (En attente d'une fonction de chargement fonctionnelle)\n");
                 break;
             case 2:
                 printf("Affiche le nombre de place dans un departement (En attente de Guillaume)\n");
                 break;
             case 3 :
-                afficherDeptIutDonne(tIut, nbVilles);
+                printf("Afficher departement d'un Iut\n");
+                //afficherDeptIutDonne(tIut, nbIut);
                 break;
             case 4 :
                 printf("Affiche les IUT possedant un departement donne (En attente de Jean)\n");
@@ -581,8 +586,12 @@ void afficheVillesIUT(VilleIut *tiut[], int nbVilles)
     {
         // Affichage du nom de la ville
     printf(" -> %s\n", tiut[i]-> nom);
-    }  
-    printf(" \n\n\n");
+    }
+
+    printf("\nAppuyez sur entree pour continuer...\n");
+    scanf("%*c");
+
+    clean
 }
 
 /**

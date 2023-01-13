@@ -43,6 +43,8 @@ VilleIut ** chargeIutDon(char nomFichier[], int * nbIut, int * nbMax)
 
     *nbIut = i-1;
     fclose(fichier);
+
+    fusionIut(tIut, nbIut);
     return tIut;
 }
 
