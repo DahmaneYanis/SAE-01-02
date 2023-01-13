@@ -23,7 +23,7 @@ void Globale(void)
 
     //Chargement des fichiers
     tLog = chargementLog("../donnees/log.don", &nbLog);
-    nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
+    //nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
 
     //Appel du menu visiteur
     menuVisiteur(tLog, nbLog, tIut, nbVilles);
@@ -580,7 +580,6 @@ void afficheVillesIUT(VilleIut **villeIut, int nbVilles)
     printf(" \n\n\n");
 }
 
-
 /**
  * @brief Affiche les IUT et le nombre de places associé pour un département donné
  * 
@@ -606,10 +605,19 @@ void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[])
             dept = dept->suiv;
         }
     }
-    
 }
 
+int existeVille( VilleIut * tIut[], char ville[], int nbvilles )
+{
+    int i = 0;
 
+    //recherche de la ville 
+    for( e = 0; i < nbvilles; i ++ )
+    {
+        if ( strcmp( tIut[i] -> nom, ville ) == 0 ) return i; // ville trouvée...
+    }
+    return -1;
+}
 
 /**
  * Affiche et gère le menu administrateur.
@@ -722,10 +730,11 @@ void afficherCandidats(Candidat *candidats, int nbCandidats)
     }
 }
 
-
-// ===============================================================================
-// PARTIE 3 
-//===============================================================================
+/*
+================================================
+                    Partie 3
+================================================
+*/
 
 /**
  * \brief Permet de convertir la liste de departement des VilleIut de la partie 1
@@ -782,11 +791,11 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
     return lDeptV2;
 }
 
-
-
-// ==============================================================================
-// Partie 4 
-// ==============================================================================
+/*
+================================================
+                    Partie 4
+================================================
+*/
 
 /**
  * @brief Affiche une liste de candidats après l'avoir triée par ordre alphabétique 
