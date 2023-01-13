@@ -17,8 +17,9 @@ void Globale(void)
     //printf(" \n ---> lancement de la fonction globale.... \n\n");
     Log * tLog;
     VilleIut ** tIut;
+    Candidat *tCand[50];
 
-    int nbVilles;
+    int nbCand = 0;
     int nbLog;
     int nbIut, nbIutMax;
 
@@ -29,10 +30,11 @@ void Globale(void)
     //nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
 
     //Appel du menu visiteur
-    menuVisiteur(tLog, nbLog, tIut, nbIut);
+    //menuVisiteur(tLog, nbLog, tIut, nbIut);
 
-    //Sauvegarde dans les fichiers
-
+    //TEST menu candidat en attendant la conexion et tout la
+    nbCand = creerCandidat(tCand, nbCand);
+    menuCandidat(tLog, nbLog, tIut, nbIut, tCand[0]); //Sauvegarde dans les fichiers
 }
 
 /**
@@ -145,11 +147,12 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
  * choixMenuCandidat. Selon le choix de l'utilisateur, la fonction appelle la fonction correspondante
  * ou met fin à l'exécution de la fonction.
 */
-void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
+void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles, Candidat *c)
 {
     int choix;
     int actif = 1;
-    
+    int decision = 0, validation = 0;
+    char ville[30], dep[30];
     clean
 
     while(actif)
@@ -159,13 +162,22 @@ void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
         switch(choix)
         {
             case 1:
-                //affiche les candidatures
+                afficherUnCandidat(*c);
+                getchar();
+                clean
                 break;
             case 2:
-                //Creer une candidature
+                afficheVillesIUT(tIut, nbVilles - 1);
+                saisirCandidature(ville, dep, tIut, nbVilles);
+                c->lchoix = creerCandidature(c->lchoix, ville, dep, decision, validation, &c->nbChoix);
+                c->nbChoix += 1;
+                printf("%s\n", c->lchoix->ville);
+                printf("Operation validee\n");
+                getchar();
+                clean
                 break;
             case 3 :
-                //Modifier une candidature
+                c->lchoix = supprimerCandidature(c->lchoix, &c->nbChoix);
                 break;
             case 4 :
                 //Supprimer une candidature
@@ -174,6 +186,42 @@ void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
                 actif = 0;
                 break;
         }
+    }
+}
+
+/**
+
+    @brief Cette fonction permet à l'utilisateur de saisir les informations sur une candidature. Il doit d'abord saisir le nom de la ville,
+    puis le nom du département correspondant. Si les informations saisies ne sont pas valides, l'utilisateur est invité à les resaisir.
+    @param ville Nom de la ville saisie
+    @param dep Nom du département saisi
+    @param tiut Liste des villes et départements
+    @param nbVille Nombre de villes dans la liste
+    @return void
+*/
+void saisirCandidature(char ville[], char dep[], VilleIut *tiut[], int nbVille)
+{
+    int pos, res;
+
+    printf("Veuillez saisir le nom de la ville\n");
+    scanf("%s", ville);
+    pos = existeVille(tiut, ville, nbVille);
+    while ( pos == -1)
+    {
+        printf("Veuillez saisir le nom de la ville\n");
+        scanf("%s", ville);
+        pos = existeVille(tiut, ville, nbVille);
+    }
+    afficherListe(tiut[pos]->lDept);
+    printf("Veuilllez saisir le nom de departement\n");
+    scanf("%s", dep);
+    res = existeDept(tiut[pos]->lDept, dep);
+    while (res == 0)
+    {
+        afficherListe(tiut[pos]->lDept);
+        printf("Veuilllez saisir le nom de departement\n");
+        scanf("%s", dep);
+        res = existeDept(tiut[pos]->lDept, dep);
     }
 }
 
@@ -208,8 +256,8 @@ int afficherMenuCandidat(void)
     int choix;
 
     printf("============================================================\n\t\t\tMENU CANDIDAT\n============================================================\n\n");
-    printf("\t1. Creer une candidature\n");
-    printf("\t2. Modifier une candidature\n");
+    printf("\t1. Afficher son profil\n");
+    printf("\t2. Ajouter une candidature\n");
     printf("\t3. Supprimer une candidature\n");
     printf("\t0. Quitter\n");
     printf("\nChoix : ");
@@ -583,11 +631,6 @@ void afficheVillesIUT(VilleIut *tiut[], int nbVilles)
         // Affichage du nom de la ville
     printf(" -> %s\n", tiut[i]-> nom);
     }
-
-    printf("\nAppuyez sur entree pour continuer...\n");
-    scanf("%*c");
-
-    clean
 }
 
 /**
@@ -799,7 +842,7 @@ int creerCandidat(Candidat *tCand[], int nbCandidats)
  *
  * @return la liste avec le choix en moins 
  */
-lChoix supprimerCandidature( lChoix l, int nbchoix )
+lChoix supprimerCandidature( lChoix l, int *nbchoix)
 {
     lChoix temp = l;
 
@@ -813,7 +856,7 @@ lChoix supprimerCandidature( lChoix l, int nbchoix )
     printf(  " -----------------------------\n\n");
     int rep = 0, c = 0;
 
-    for( int i = 0; i < nbchoix; i ++ )
+    for( int i = 0; i < *nbchoix; i ++ )
     {
         printf(" %d.) Ville : %10s ; Departement : %10s \n",i + 1, l -> ville, l -> departement);
         l = l -> suiv;
@@ -822,7 +865,7 @@ lChoix supprimerCandidature( lChoix l, int nbchoix )
     printf(" \n\n --> Quel choix supprimer ? : ");
     scanf("%d%*c", &rep);
     temp = supprmRecru( temp, rep );
-
+    *nbchoix -= 1;
     return temp;
 }
 
@@ -849,7 +892,7 @@ lChoix supprmRecru( lChoix l, int rep )
  * @param validation 0 par defaut
  * @return Liste mis à jour
  */
-lChoix creerCandidature(lChoix choixCandid, char ville[], char departement[], int decision, int validation)
+lChoix creerCandidature(lChoix choixCandid, char ville[], char departement[], int decision, int validation, int *nbchoix)
 {
     if(choixCandid == NULL)
         return ajouterEnTeteC(choixCandid, ville, departement, decision, validation);
@@ -857,7 +900,8 @@ lChoix creerCandidature(lChoix choixCandid, char ville[], char departement[], in
         return ajouterEnTeteC(choixCandid, ville, departement, decision, validation);
     if(strcmp(ville, choixCandid->ville) == 0 && strcmp(departement, choixCandid->departement) < 0)
         return ajouterEnTeteC(choixCandid, ville, departement, decision, validation);
-    choixCandid->suiv = creerCandidature(choixCandid->suiv, ville, departement, 0, 0);
+    choixCandid->suiv = creerCandidature(choixCandid->suiv, ville, departement, 0, 0, nbchoix);
+    *nbchoix += 1;
     return choixCandid;
 }
 
