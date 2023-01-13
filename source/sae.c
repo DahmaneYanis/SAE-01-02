@@ -799,7 +799,7 @@ int creerCandidat(Candidat *tCand[], int nbCandidats)
  *
  * @return la liste avec le choix en moins 
  */
-lChoix supprimerCandidature( lChoix l, int nbchoix)
+lChoix supprimerCandidature( lChoix l, int nbchoix )
 {
     lChoix temp = l;
 
@@ -821,15 +821,22 @@ lChoix supprimerCandidature( lChoix l, int nbchoix)
 
     printf(" \n\n --> Quel choix supprimer ? : ");
     scanf("%d%*c", &rep);
+    temp = supprmRecru( temp, rep );
 
-    while ( c != rep - 1 )
-    {
-        temp = temp -> suiv;
-        c = c + 1;
-    }
-
-    temp = supprimerEnTeteC( temp );
     return temp;
+}
+
+lChoix supprmRecru( lChoix l, int rep )
+{
+    if ( rep == 1 )
+    {
+        l = supprimerEnTeteC( l );
+        return l;
+    }
+    
+    l -> suiv = supprmRecru( l -> suiv, rep -1 );
+    
+    return l;
 }
 
 /**

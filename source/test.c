@@ -45,21 +45,34 @@ void guillaume(void)
     char ville[50], departement[50];
 
     nbCandidats = creerCandidat(tCandid, nbCandidats);
+
     printf("Nom de la ville : ");
     scanf("%s%*c", ville);
+
     printf("Nom du departement : ");
     scanf("%s%*c", departement);
+
     tCandid[0]->lchoix = creerCandidature(tCandid[0]->lchoix, ville, departement, 0, 0);
     tCandid[0]->nbChoix +=1 ;
+
     printf("Nom de la ville : ");
     scanf("%s%*c", ville);
+
     printf("Nom du departement : ");
     scanf("%s%*c", departement);
+
     tCandid[0]->lchoix = creerCandidature(tCandid[0]->lchoix, ville, departement, 0, 0);
     tCandid[0]->nbChoix +=1 ;
+
     afficherUnCandidat(*tCandid[0]);
-    supprimerCandidature(tCandid[0]->lchoix, tCandid[0]->nbChoix);
+
+    tCandid[0] -> lchoix = supprimerCandidature(tCandid[0]->lchoix, tCandid[0]->nbChoix);
     tCandid[0]->nbChoix-=1;
+
+    //tCandid[0] -> lchoix = supprmRecru ( tCandid[0] -> lchoix, 1);
+
+    printf(" ( temporaire( 4 )... --> %s \n\n", tCandid[0] -> lchoix -> ville);
+
     afficherUnCandidat(*tCandid[0]);
 }
 

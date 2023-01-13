@@ -135,6 +135,7 @@ void afficherUnCandidat(Candidat candidat);
 void afficherCandidats(Candidat **candidats, int nbCandidats);
 int creerCandidat(Candidat *tCand[], int nbCandidats);
 lChoix supprimerCandidature( lChoix l, int nbchoix);
+lChoix supprmRecru( lChoix l, int rep );
 lChoix creerCandidature(lChoix choixCandid, char ville[50], char departement[50], int decision, int validation);
 
 ListeDeptV2 configurationDeptV2( ListeDept ldept );

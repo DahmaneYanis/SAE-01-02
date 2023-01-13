@@ -127,7 +127,7 @@ bool vide(ListeDept ldept)
 int longueur(ListeDept ldept)
 {
     int i = 0;
-    while (ldept)
+   while (ldept)
     {
         ldept = ldept->suiv;
         i++;
