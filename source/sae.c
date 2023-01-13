@@ -30,7 +30,8 @@ void Globale(void)
     //nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
 
     //Appel du menu visiteur
-    menuVisiteur(tLog, nbLog, tIut, nbIut);
+    //menuVisiteur(tLog, nbLog, tIut, nbIut);
+    afficherDeptIutDonne(tIut, nbIut);
 
     //TEST menu candidat en attendant la conexion et tout la
     //nbCand = creerCandidat(tCand, nbCand);
@@ -566,7 +567,7 @@ int modifieRespDept(VilleIut *tiut[], int nbVilles, char ville[], char nomDept[]
 void afficherDeptIutDonne(VilleIut *tiut[], int nbVille)
 {
     int res;
-    char *nom;
+    char nom[30];
 
     afficheVillesIUT(tiut, nbVille);
     printf("Veuillez saisir le nom de l'iut que vous voulez afficher.\n");
