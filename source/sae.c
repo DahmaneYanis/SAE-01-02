@@ -624,6 +624,7 @@ int existeVille(VilleIut *tIut[], char ville[], int nbvilles )
     return -1;
 }
 
+
 /**
  * Affiche et gère le menu administrateur.
  *
@@ -687,9 +688,6 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
         }
     } while (choix != 7);
 }
-
-
-
 
 
 
