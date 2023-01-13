@@ -506,7 +506,7 @@ int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
     return 0;
 }
 
-void afficherDeptIutDonne(VilleIut **villeIut, int nbVille)
+/*void afficherDeptIutDonne(VilleIut **villeIut, int nbVille)
 {
     int res;
     char *nom;
@@ -521,7 +521,7 @@ void afficherDeptIutDonne(VilleIut **villeIut, int nbVille)
         return ;
     }
     afficherListe(villeiut[res]->lDept);
-}
+}*/
 
 /**
  * @brief Affiche les IUT possédant un département spécifique.
