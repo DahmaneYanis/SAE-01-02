@@ -83,7 +83,7 @@ typedef struct maillonDeptV2
     int admisMax;
     ListeCandidats lAdmis;
     ListeCandidats lAttente;
-    struct maillonDeptV2 *suiv;
+    struct maillonDeptV2 * suiv;
 
 } MaillonDeptV2, * ListeDeptV2;
 
@@ -188,3 +188,13 @@ void affichageListesDept( ListeCandidats lcand, char * type, char * nomDept );
 ListeCandidats trierListeCandidats( ListeCandidats l );
 ListeCandidats insertionCroissanteCand( ListeCandidats nvL, ListeCandidats l );
 ListeCandidats insertionTeteCand( ListeCandidats nvL, ListeCandidats l );
+
+void menuPartie4( Candidat ** tCand, VilleIut **tIut, int nbvilles, int nbcand );
+int menuResponsableDeptPartie4( char ville[], char departement[], VilleIut ** tIut, int nbvilles );
+void miseAJourListesDepartements( VilleIut ** tIut , int nbvilles );
+ListeCandidats ajouterEnQueue( ListeCandidats ladmis, ListeCandidats lattentes, VilleIut ** tIut, int pos );
+ListeCandidats supprimerEnTeteCandidat( ListeCandidats l );
+int menuCandidatPartie4( Candidat **tCand, VilleIut **tIut,  int numero, int nbvilles, int nbcand );
+int compterNombreValidations( Candidat c, VilleIut ** tIut, int nbvilles );
+Candidat validationCandidat( Candidat c, VilleIut ** tIut, int nbvilles );
+
