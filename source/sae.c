@@ -30,11 +30,11 @@ void Globale(void)
     //nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
 
     //Appel du menu visiteur
-    //menuVisiteur(tLog, nbLog, tIut, nbIut);
+    menuVisiteur(tLog, nbLog, tIut, nbIut);
 
     //TEST menu candidat en attendant la conexion et tout la
-    nbCand = creerCandidat(tCand, nbCand);
-    menuCandidat(tLog, nbLog, tIut, nbIut, tCand[0]); //Sauvegarde dans les fichiers
+    //nbCand = creerCandidat(tCand, nbCand);
+    //menuCandidat(tLog, nbLog, tIut, nbIut, tCand[0]); //Sauvegarde dans les fichiers
 }
 
 /**
@@ -119,6 +119,9 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
         {
             case 1:
                 afficheVillesIUT(tIut, nbIut);
+                printf("\nAppuyez sur entree pour continuer...");
+                scanf("%*c");   
+                clean             
                 break;
             case 2:
                 printf("Affiche le nombre de place dans un departement (En attente de Guillaume)\n");

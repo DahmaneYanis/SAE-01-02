@@ -10,7 +10,7 @@
 */
 
 #ifdef _WIN32
-#define clean   system("clear");
+#define clean   system("cls");
 #define color   system("color 70");
 void testColor(void);
 #endif
