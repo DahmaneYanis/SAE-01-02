@@ -68,11 +68,7 @@ void guillaume(void)
 
     tCandid[0] -> lchoix = supprimerCandidature(tCandid[0]->lchoix, tCandid[0]->nbChoix);
     tCandid[0]->nbChoix-=1;
-
-    //tCandid[0] -> lchoix = supprmRecru ( tCandid[0] -> lchoix, 1);
-
-    printf(" ( temporaire( 4 )... --> %s \n\n", tCandid[0] -> lchoix -> ville);
-
+    
     afficherUnCandidat(*tCandid[0]);
 }
 
