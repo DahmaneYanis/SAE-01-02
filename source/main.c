@@ -5,9 +5,9 @@
 int main(void)
 {
 
-	// #ifdef _WIN32
-	// color
-	// #endif
+	#ifdef _WIN32
+	color
+	#endif
 	//guillaume();
 	//testCharge();
 	Globale();
