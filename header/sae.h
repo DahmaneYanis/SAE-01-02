@@ -109,6 +109,9 @@ int existeUtilisateur(char * utilisateur, int * indice, Log * tLog, int nbLog);
 int mdpValide(char * mdp, int indice, Log * tLog);
 //void menuVisiteur(VilleIut *villeIut, int nbVilles);
 void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles);
+void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles);
+int choixMenuCandidat(void);
+int afficherMenuCandidat(void);
 int afficherMenuVisiteur(void);
 int choixMenuVisiteur(void);
 void banniereConnection(void);
@@ -149,8 +152,18 @@ void afficherListe(ListeDept ldept);
 
 
 // chargEtSauvFich.c
-int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[]);
-void lireDep(FILE *flot, char nomDept[], int *nbP, char resp[]);
-int appartientIut(VilleIut *tVilleIut[], int nb, char nom[], int *trouve);
-void sauvegarderFichierIutDon(VilleIut *tVilleIut[], int nbVille, char nomFich[]);
+//int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[]);
+//void lireDep(FILE *flot, char nomDept[], int *nbP, char resp[]);
+//int appartientIut(VilleIut *tVilleIut[], int nb, char nom[], int *trouve);
+//void sauvegarderFichierIutDon(VilleIut *tVilleIut[], int nbVille, char nomFich[]);
 
+void testCharge(void);
+void lectureDep(ListeDept ldept, FILE * fichier);
+ListeDept initialiseDep(void);
+ListeDept lireDep(FILE * fichier);
+void lectureIut(VilleIut * iut, FILE * fichier);
+VilleIut * initialiseIut(void);
+VilleIut * lireIut (FILE * fichier);
+VilleIut ** chargeIutDon(char nomFichier[], int * nbIut, int * nbMax);
+VilleIut ** initialiseTabIut(void);
+void tailleSupTabIut(VilleIut ** tIut, int *nbMax);
