@@ -101,7 +101,7 @@ typedef struct
 */
 // sae.c
 void testJean(void);
-
+void guillaume(void);
 
 void Globale(void);
 Log * chargementLog(char * nomFichier, int * nbLog);
@@ -129,6 +129,7 @@ void menuAdmin(VilleIut **villeIut, int nbVilles);
 
 void afficherCandidat(Candidat candidat);
 void afficherCandidats(Candidat *candidats, int nbCandidats);
+int creerCandid(Candidat tCand[], int nbCandidats);
 
 ListeDeptV2 configurationDeptV2( ListeDept ldept );
 
