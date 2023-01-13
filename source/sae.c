@@ -732,8 +732,10 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
 void afficherCandidats(Candidat **candidats, int nbCandidats)
 {
     for (int i = 0; i < nbCandidats; i++)
+    {
         printf("\nCandidat numero %8d | Nom : %10s | Prenom : %10s \n", candidats[i] -> numero,
          candidats[i] -> nom, candidats[i] -> prenom);
+    }
 }
 
 
@@ -748,7 +750,7 @@ int creerCandidat(Candidat *tCand[], int nbCandidats)
         printf("Probleme malloc\n");
         exit(1);
     }
-    c->numero = nbCandidats;
+    c->numero = nbCandidats+1;
     printf("Le numero du candidat entrain d'etre cree est : %d\n", c->numero);
     printf("Nom du candidat (peut contenir des espaces): ");
     fgets(c->nom, 50, stdin);
