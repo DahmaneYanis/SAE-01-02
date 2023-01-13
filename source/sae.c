@@ -594,7 +594,6 @@ void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[])
             dept = dept->suiv;
         }
     }
-    
 }
 
 /**
@@ -703,9 +702,11 @@ void afficherCandidats(Candidat *candidats, int nbCandidats)
     }
 }
 
-// ===============================================================================
-// PARTIE 3 
-//===============================================================================
+/*
+================================================
+                    Partie 3
+================================================
+*/
 
 /**
  * \brief Permet de convertir la liste de departement des VilleIut de la partie 1
@@ -762,9 +763,11 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
     return lDeptV2;
 }
 
-// ==============================================================================
-// Partie 4 
-// ==============================================================================
+/*
+================================================
+                    Partie 4
+================================================
+*/
 
 /**
  * @brief Affiche une liste de candidats après l'avoir triée par ordre alphabétique 

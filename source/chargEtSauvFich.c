@@ -1,11 +1,11 @@
 #include "../header/sae.h"
 
 /**
- * @brief charge les données d'un fichier dans un tableau de struct VilleIut
- * @param nomFichier nom du fichier contenant les données
- * @param nbIut pointeur vers un entier qui contiendra le nombre d'IUT lus
- * @param nbMax pointeur vers un entier qui contiendra la taille maximale du tableau
- * @return le tableau de struct VilleIut rempli avec les données du fichier
+ * @brief Charge les données d'un fichier dans un tableau de pointeur de VilleIut
+ * @param nomFichier [CHAINE DE CARACTERES] Nom du fichier contenant les données
+ * @param nbIut [POINTEUR - Taille Logique] Nombre d'IUT
+ * @param nbMax [POINTEUR - Taille Physique Dynamique] 
+ * @return Tableau de pointeur de VilleIut rempli avec les données du fichier
  */
 VilleIut ** chargeIutDon(char nomFichier[], int * nbIut, int * nbMax)
 {
