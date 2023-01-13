@@ -131,9 +131,15 @@ void afficheNbPlacesDep(VilleIut *tiut[], int nbVilles, char nomDept[]);
 int existeVille( VilleIut *tiut[], char ville[], int nbvilles );
 void menuAdmin(VilleIut *tiut[], int nbVilles);
 
+<<<<<<< HEAD
 void afficherCandidat(Candidat candidat);
 void afficherCandidats(Candidat *candidats, int nbCandidats);
 int creerCandidat(Candidat *tCand[], int nbCandidats);
+=======
+void afficherUnCandidat(Candidat candidat);
+void afficherCandidats(Candidat **candidats, int nbCandidats);
+int creerCandid(Candidat tCand[], int nbCandidats);
+>>>>>>> bcdeb24491974b30c7e1ad6913f0e3fa2c3be9c3
 
 ListeDeptV2 configurationDeptV2( ListeDept ldept );
 
