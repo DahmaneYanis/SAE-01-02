@@ -43,7 +43,7 @@ typedef struct
     char prenom[50];
     float notes[4];
     int nbChoix;
-    Choix *choix;
+    lChoix lchoix;
 }Candidat;
 
 //Proposition de structure de candidature pour la Partie 3 ( jean ) :
@@ -103,7 +103,7 @@ typedef struct
 */
 // sae.c
 void testJean(void);
-
+void guillaume(void);
 
 void Globale(void);
 Log * chargementLog(char * nomFichier, int * nbLog);
@@ -122,17 +122,18 @@ void saisieMdp(char * mdp);
 void seConnecter(Log * tLog, int nbLog);
 void seConnecterTest(void);
 
-int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomDept, int nbP);
-int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[]);
-void afficherDeptIutDonne(VilleIut **villeIut, int nbVille);
-void afficheIUTDept(VilleIut* *villeIut, int nbVilles, char *nomDept);
-void afficheVillesIUT(VilleIut **villeIut, int nbVilles);
-void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[]);
-int existeVille( VilleIut * tIut[], char ville[], int nbvilles );
-void menuAdmin(VilleIut **villeIut, int nbVilles);
+int modifiePlacesDept(VilleIut *tiut[], int nbVilles, char *ville, char *nomDept, int nbP);
+int modifieRespDept(VilleIut *tiut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[]);
+void afficherDeptIutDonne(VilleIut *tiut[], int nbVilles);
+void afficheIUTDept(VilleIut *tiut[], int nbVilles, char *nomDept);
+void afficheVillesIUT(VilleIut *tiut[], int nbVilles);
+void afficheNbPlacesDep(VilleIut *tiut[], int nbVilles, char nomDept[]);
+int existeVille( VilleIut *tiut[], char ville[], int nbvilles );
+void menuAdmin(VilleIut *tiut[], int nbVilles);
 
-void afficherCandidat(Candidat candidat);
-void afficherCandidats(Candidat *candidats, int nbCandidats);
+void afficherUnCandidat(Candidat candidat);
+void afficherCandidats(Candidat **candidats, int nbCandidats);
+int creerCandidat(Candidat *tCand[], int nbCandidats);
 
 ListeDeptV2 configurationDeptV2( ListeDept ldept );
 
@@ -150,6 +151,11 @@ ListeDept listenouv();
 bool vide(ListeDept ldept);
 int longueur(ListeDept ldept);
 void afficherListe(ListeDept ldept);
+
+// Choix.c
+lChoix ajouterEnteteC( lChoix lchoix, char ville[], char departement[], int decision, int validation);
+lChoix supprimerEnTeteC( lChoix lchoix );
+lChoix listenouvC();
 
 // iut.c
 
@@ -174,3 +180,8 @@ void fusionIut(VilleIut ** tIut, int * nbIut);
 int existe(char * nom, VilleIut ** tIut, int nbIut, int iDepart, int * indice);
 void fusion(VilleIut ** tIut, int nbIut, int i, int j);
 void supprimerIut(VilleIut ** tIut, int nbIut, int j);
+
+
+// candidat.c
+
+Candidat *modifierCandidat(Candidat *c);

@@ -122,7 +122,7 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
                 printf("Affiche le nombre de place dans un departement (En attente de Guillaume)\n");
                 break;
             case 3 :
-                printf("Affiche les departements d'un IUT donne (En attente de Loris)\n");
+                afficherDeptIutDonne(tIut, nbVilles);
                 break;
             case 4 :
                 printf("Affiche les IUT possedant un departement donne (En attente de Jean)\n");
@@ -187,7 +187,7 @@ int choixMenuCandidat(void)
     int choix;
 
     choix = afficherMenuCandidat();
-    while (choix < 0 || choix > 4)
+    while (choix < 0 || choix > 3)
     {
         clean
         printf("\nChoix incorrect.\n\n");
@@ -210,7 +210,6 @@ int afficherMenuCandidat(void)
     printf("\t1. Creer une candidature\n");
     printf("\t2. Modifier une candidature\n");
     printf("\t3. Supprimer une candidature\n");
-    printf("\t4. Gestion des candidatures\n");
     printf("\t0. Quitter\n");
     printf("\nChoix : ");
     scanf("%d%*c", &choix);
@@ -429,16 +428,16 @@ void saisieMdp(char * mdp)
  *
  * @return 1 si le département a été trouvé et modifié, 0 sinon
  */
-int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomDept, int nbP)
+int modifiePlacesDept(VilleIut *tiut[], int nbVilles, char *ville, char *nomDept, int nbP)
 {
     // Recherche de la ville et du département
     int i;
     for (i = 0; i < nbVilles; i++)
     {
-        if (strcmp(villeIut[i] -> nom, ville) == 0)
+        if (strcmp(tiut[i] -> nom, ville) == 0)
         {
             // Ville trouvée, recherche du département
-            MaillonDept *dept = villeIut[i] -> lDept;
+            MaillonDept *dept = tiut[i] -> lDept;
 
             while ( dept != NULL && strcmp( dept -> nomDept, nomDept) != 0)
             {
@@ -473,16 +472,16 @@ int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomD
  * 
  * @return 1 si le nom du responsable a été trouvé et modifié, 0 sinon
  */
-int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[])
+int modifieRespDept(VilleIut *tiut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[])
 {
     // Recherche de la ville et du département
     int i;
     for (i = 0; i < nbVilles; i++)
     {
-        if (strcmp(tVilleIut[i] -> nom, ville) == 0)
+        if (strcmp(tiut[i] -> nom, ville) == 0)
         {
             // Ville trouvée, recherche du département
-            MaillonDept *dept = tVilleIut[i] -> lDept;
+            MaillonDept *dept = tiut[i] -> lDept;
 
             while ( dept != NULL && strcmp( dept -> nomDept, nomDept) != 0)
             {
@@ -506,31 +505,37 @@ int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
     return 0;
 }
 
-/*void afficherDeptIutDonne(VilleIut **villeIut, int nbVille)
+/**
+*@brief Affiche les départements d'un IUT donné
+*@param tiut tableau des villes d'IUT
+*@param nbVille nombre de villes d'IUT dans le tableau
+*@return void
+*/
+void afficherDeptIutDonne(VilleIut *tiut[], int nbVille)
 {
     int res;
     char *nom;
 
-    afficheVillesIUT(villeIut, nbVille);
+    afficheVillesIUT(tiut, nbVille);
     printf("Veuillez saisir le nom de l'iut que vous voulez afficher.\n");
     scanf("%s", nom);
-    res = existeVille(villeiut, nbVille, nom);
+    res = existeVille(tiut, nom, nbVille);
     if (res == -1)
     {
         printf("Cet IUT n'existe pas\n");
         return ;
     }
-    afficherListe(villeiut[res]->lDept);
-}*/
+    afficherListe(tiut[res]->lDept);
+}
 
 /**
  * @brief Affiche les IUT possédant un département spécifique.
  *
- * @param villeIut tableau de pointeurs sur les structures VilleIut
+ * @param tiut tableau de pointeurs sur les structures VilleIut
  * @param nbVilles nombre de villes dans le tableau villeIut
  * @param nomDept nom du département à rechercher
  */
-void afficheIUTDept(VilleIut **villeIut, int nbVilles, char *nomDept)
+void afficheIUTDept(VilleIut *tiut[], int nbVilles, char *nomDept)
 {
     clean;
     printf("==========================================================================\n");
@@ -542,13 +547,13 @@ void afficheIUTDept(VilleIut **villeIut, int nbVilles, char *nomDept)
     for (i = 0; i < nbVilles; i++)
     {
         // Parcours de la liste chaînée de départements de la ville
-        MaillonDept *dept = villeIut[i] -> lDept;
+        MaillonDept *dept = tiut[i] -> lDept;
         while (dept != NULL)
         {
             if (strcmp(dept->nomDept, nomDept) == 0)
             {
                 // Département trouvé, affichage de la ville
-                printf(" -> IUT de %s\n", villeIut[i] -> nom);
+                printf(" -> IUT de %s\n", tiut[i] -> nom);
                 e = 1;
             }
 
@@ -565,7 +570,7 @@ void afficheIUTDept(VilleIut **villeIut, int nbVilles, char *nomDept)
     * @param villeIut tableau de pointeurs sur les structures VilleIut
     * @param nbVilles nombre de villes dans le tableau villeIut
 */
-void afficheVillesIUT(VilleIut **villeIut, int nbVilles)
+void afficheVillesIUT(VilleIut *tiut[], int nbVilles)
 {
     clean
     printf("==============================================================\n");
@@ -575,7 +580,7 @@ void afficheVillesIUT(VilleIut **villeIut, int nbVilles)
     for (int i = 0; i < nbVilles; i++)
     {
         // Affichage du nom de la ville
-    printf(" -> %s\n", villeIut[i]-> nom);
+    printf(" -> %s\n", tiut[i]-> nom);
     }  
     printf(" \n\n\n");
 }
@@ -587,19 +592,19 @@ void afficheVillesIUT(VilleIut **villeIut, int nbVilles)
  * @param nbVilles nombre de villes dans le tableau villeIut
  * @param nomDept nom du département à rechercher
  */
-void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[])
+void afficheNbPlacesDep(VilleIut *tiut[], int nbVilles, char nomDept[])
 {
     int i;
     for (i = 0; i < nbVilles; i++)
     {
         // Parcours de la liste chaînée de départements de la ville
-        MaillonDept *dept = tVilleIut[i] -> lDept;
+        MaillonDept *dept = tiut[i] -> lDept;
         while (dept != NULL)
         {
             if (strcmp(dept->nomDept, nomDept) == 0)
             {
                 // Département trouvé, affichage de la ville et de son nombre de places
-                printf("IUT de %s avec %d places.\n", tVilleIut[i] -> nom, tVilleIut[i] -> lDept -> nbP);
+                printf("IUT de %s avec %d places.\n", tiut[i] -> nom, tiut[i] -> lDept -> nbP);
                 break;
             }
             dept = dept->suiv;
@@ -607,17 +612,18 @@ void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[])
     }
 }
 
-/*int existeVille( VilleIut * tIut[], char ville[], int nbvilles )
+int existeVille(VilleIut *tIut[], char ville[], int nbvilles )
 {
     int i = 0;
 
     //recherche de la ville 
-    for( e = 0; i < nbvilles; i ++ )
+    for( i = 0; i < nbvilles; i ++ )
     {
         if ( strcmp( tIut[i] -> nom, ville ) == 0 ) return i; // ville trouvée...
     }
     return -1;
-}*/
+}
+
 
 /**
  * Affiche et gère le menu administrateur.
@@ -685,9 +691,6 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
 
 
 
-
-
-
 /*
 ================================================
                     Partie 2
@@ -698,22 +701,27 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
  * @brief Affiche les informations d'un candidat
  * @param candidat Le candidat à afficher
  */
-void afficherCandidat(Candidat candidat)
+ void afficherUnCandidat(Candidat candidat)
 {
-    printf("Numéro du candidat : %d\n", candidat.numero);
-    printf("Nom : %s\n", candidat.nom);
-    printf("Prénom : %s\n", candidat.prenom);
-    printf("Notes : %.2f %.2f %.2f %.2f\n", candidat.notes[0], candidat.notes[1], candidat.notes[2], candidat.notes[3]);
-    printf("Nombre de choix : %d\n", candidat.nbChoix);
-    for (int i = 0; i < candidat.nbChoix; i++)
+    int c = 1;
+    printf("Candidat numero  %7d ", candidat.numero);
+    printf(" | Nom : %10s | ", candidat.nom);
+    printf(" Prenom : %10s | ", candidat.prenom);
+    printf(" | Notes : %2f %2f %2f %2f | ", candidat.notes[0], candidat.notes[1], candidat.notes[2], candidat.notes[3]);
+    printf(" Nombre de choix : %d\n\n", candidat.nbChoix);
+
+    printf(" \n Choix du candidat :\n");
+    printf(   " -------------------\n\n");
+
+    while ( candidat.lchoix != NULL )
     {
-        printf("Choix %d :\n", i + 1);
-        printf("  Ville : %s\n", candidat.choix[i].ville);
-        printf("  Département : %s\n", candidat.choix[i].departement);
-        printf("  Décision du département : %d\n", candidat.choix[i].decisionDepartement);
-        printf("  Validation : %d\n", candidat.choix[i].validationCandidat);
+        printf(" %d.) Iut : %10s ; departement : %10s ; decision Departement : %d ; validation candidat : %d\n",
+               candidat.lchoix -> ville, candidat.lchoix -> departement, candidat.lchoix -> decisionDepartement, 
+               candidat.lchoix -> validationCandidat);
     }
-}
+
+    printf(" \n\n");
+} 
 
 /**
  * @brief Affiche la liste des candidats
@@ -721,14 +729,99 @@ void afficherCandidat(Candidat candidat)
  * @param candidats Le tableau de candidats à afficher
  * @param nbCandidats Le nombre de candidats dans le tableau
  */
-void afficherCandidats(Candidat *candidats, int nbCandidats)
+void afficherCandidats(Candidat **candidats, int nbCandidats)
 {
     for (int i = 0; i < nbCandidats; i++)
     {
-        printf("\nCandidat %d :\n", i + 1);
-        afficherCandidat(candidats[i]);
+        printf("\nCandidat numero %8d | Nom : %10s | Prenom : %10s \n", candidats[i] -> numero,
+         candidats[i] -> nom, candidats[i] -> prenom);
     }
 }
+
+/**
+ * @brief Permet de créer un candidat  
+ * 
+ * @param tCand Tableau de pointeur sur une structure de candidat
+ * @param nbCandidats nombre de candidats créés
+ * 
+ * @return Retourne le nombre de candidats 
+ */
+int creerCandidat(Candidat *tCand[], int nbCandidats)
+{
+    int i=0;
+    Candidat *c;
+ 
+    c = (Candidat *) malloc (sizeof(Candidat));
+    if(c==NULL)
+    {
+        printf("Probleme malloc\n");
+        exit(1);
+    }
+    c->numero = nbCandidats+1;
+    printf("Le numero du candidat entrain d'etre cree est : %d\n", c->numero);
+    printf("Nom du candidat (peut contenir des espaces): ");
+    fgets(c->nom, 50, stdin);
+    c->nom[strlen(c->nom) - 1] = '\0';
+    printf("Prenom du candidat (peut contenir des espaces): ");
+    fgets(c->prenom, 50, stdin);
+    c->prenom[strlen(c->prenom) - 1] = '\0';
+    i=0;
+    while(i<4)
+    {
+        printf("Rentrez la note numero %d : ", i+1);
+        scanf("%f", &c->notes[i]);
+        while(c->notes[i] < 0 || c->notes[i] > 20)
+        {
+            printf("Erreur, la note doit etre comprise entre 0 et 20.\nRessaisir la note numero %d : ", i+1);
+            scanf("%f", &c->notes[i]);
+        }
+        i = i + 1;
+    }
+    c->lchoix = listenouvC();
+    tCand[nbCandidats] = c;    
+    return nbCandidats + 1;
+}
+
+/**
+ * @brief Supprime un choix de la liste de choix d'un candidat
+ * 
+ * @param lchoix la liste de choix à modifier 
+ * @param nbchoix le nombre de choix dans la liste de choix
+ *
+ * @return la liste avec le choix en moins 
+ */
+lChoix supprimerCandidature( lChoix l, int * nbchoix)
+{
+    if ( l == NULL )
+    {
+        printf(" \n --> Le candidat ne possede aucun choix...\n\n");
+        return l;
+    }
+
+    printf("\n Voici les choix du candidat : \n");
+    printf(  " -----------------------------\n\n");
+    int rep = 0, c = 0;
+
+    for( int i = 0; i < *nbchoix; i ++ )
+    {
+        printf(" %d.) Ville : %10s ; Departement : %10s \n",i + 1, l -> ville, l -> departement);
+    }
+
+    printf(" \n\n --> Quel choix supprimer ? : ");
+    scanf("%d%*c", &rep);
+
+    while ( c != rep - 1 )
+    {
+        l = l -> suiv;
+        c = c + 1;
+    }
+
+    l = supprimerEnTeteC( l );
+    *nbchoix = *nbchoix - 1;
+    return l;
+}
+
+
 
 /*
 ================================================

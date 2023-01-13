@@ -35,3 +35,20 @@
 //         }
 //     }
 // }
+
+
+
+void guillaume(void)
+{
+    Candidat *tCandid[50];
+    int nbCandidats=0;
+
+    nbCandidats = creerCandidat(tCandid, nbCandidats);
+    printf("\n%d\n", nbCandidats);
+    afficherCandidats(tCandid, nbCandidats);
+}
+
+
+
+
+
