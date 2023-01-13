@@ -26,13 +26,15 @@ void testColor(void);
 */
 
 //Proposition structure de candidat & choix pour la partie 2 ( jean ) : 
-typedef struct
+typedef struct choix
 {
     char ville[50];
     char departement[50];
     int decisionDepartement;
     int validationCandidat;
-}Choix;
+    struct choix *suiv;
+
+}Choix, *lChoix;
 
 typedef struct
 {
@@ -122,6 +124,7 @@ void seConnecterTest(void);
 
 int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomDept, int nbP);
 int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[]);
+void afficherDeptIutDonne(VilleIut **villeIut, int nbVille);
 void afficheIUTDept(VilleIut* *villeIut, int nbVilles, char *nomDept);
 void afficheVillesIUT(VilleIut **villeIut, int nbVilles);
 void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[]);

@@ -158,7 +158,7 @@ void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
         switch(choix)
         {
             case 1:
-                //afficher une candidature
+                //affiche les candidatures
                 break;
             case 2:
                 //Creer une candidature
@@ -473,7 +473,7 @@ int modifiePlacesDept(VilleIut **villeIut, int nbVilles, char *ville, char *nomD
  * 
  * @return 1 si le nom du responsable a été trouvé et modifié, 0 sinon
  */
-int modifieChefDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[])
+int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[])
 {
     // Recherche de la ville et du département
     int i;
@@ -506,10 +506,21 @@ int modifieChefDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
     return 0;
 }
 
-void afficherDeptIutDonne(VilelIut **villeIut, int nbVille)
+void afficherDeptIutDonne(VilleIut **villeIut, int nbVille)
 {
-    afficheVillesIUT();
-    printf()
+    int res;
+    char *nom;
+
+    afficheVillesIUT(villeIut, nbVille);
+    printf("Veuillez saisir le nom de l'iut que vous voulez afficher.\n");
+    scanf("%s", nom);
+    res = existeIut(villeiut, nbVille, nom);
+    if (res == -1)
+    {
+        printf("Cet IUT n'existe pas\n");
+        return ;
+    }
+    afficherListe(villeiut[res]->lDept);
 }
 
 /**
@@ -874,5 +885,3 @@ ListeCandidats insertionTeteCand( ListeCandidats nvL, ListeCandidats l )
 
     return nvL;
 }
-
-
