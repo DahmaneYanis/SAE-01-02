@@ -706,8 +706,8 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
     int c = 1;
     printf("Candidat numero  %7d ", candidat.numero);
     printf(" | Nom : %10s | ", candidat.nom);
-    printf(" Prenom : %10s ", candidat.prenom);
-    printf(" | Notes : %.2f %.2f %.2f %.2f | ", candidat.notes[0], candidat.notes[1], candidat.notes[2], candidat.notes[3]);
+    printf(" Prenom : %10s | ", candidat.prenom);
+    printf(" | Notes : %2f %2f %2f %2f | ", candidat.notes[0], candidat.notes[1], candidat.notes[2], candidat.notes[3]);
     printf(" Nombre de choix : %d\n\n", candidat.nbChoix);
 
     printf(" \n Choix du candidat :\n");
@@ -715,12 +715,9 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
 
     while ( candidat.lchoix != NULL )
     {
-        printf(" %d.) Iut : %10s ; departement : %10s ; decision Departement : %d ; validation candidat : %d\n",c,
+        printf(" %d.) Iut : %10s ; departement : %10s ; decision Departement : %d ; validation candidat : %d\n",
                candidat.lchoix -> ville, candidat.lchoix -> departement, candidat.lchoix -> decisionDepartement, 
                candidat.lchoix -> validationCandidat);
-        
-        candidat.lchoix=candidat.lchoix->suiv;
-        c=c+1;
     }
 
     printf(" \n\n");
@@ -780,33 +777,24 @@ int creerCandidat(Candidat *tCand[], int nbCandidats)
         }
         i = i + 1;
     }
-    c->nbChoix = 0;
     c->lchoix = listenouvC();
     tCand[nbCandidats] = c;    
     return nbCandidats + 1;
 }
 
-
-/**
- * @brief Permet de créer une candidature à un candidat
- * 
- * @param choixCandid Liste de candidature
- * @param ville nom de la ville de la candidature
- * @param departement nom du departement de la candidature
- * @param decision 0 par defaut
- * @param validation 0 par defaut
- * @return Liste mis à jour
- */
-lChoix creerCandidature(lChoix choixCandid, char ville[], char departement[], int decision, int validation)
+lChoix creerCandidature(lChoix choixCandid, int *nbChoix)
 {
-    if(choixCandid == NULL)
+    char ville[50], departement[50];
+    int decision, validation;
+
+    printf("Nom de la ville : ");
+    scanf("%s%*c", choixCandid->ville);
+    printf("Nom du département : ");
+    decision = 0;
+    validation = 0;
+    if(choixCandid==NULL)
         return ajouterEnTeteC(choixCandid, ville, departement, decision, validation);
-    if(strcmp(ville, choixCandid->ville) < 0) 
-        return ajouterEnTeteC(choixCandid, ville, departement, decision, validation);
-    if(strcmp(ville, choixCandid->ville) == 0 && strcmp(departement, choixCandid->departement) < 0)
-        return ajouterEnTeteC(choixCandid, ville, departement, decision, validation);
-    choixCandid->suiv = creerCandidature(choixCandid->suiv, ville, departement, 0, 0);
-    return choixCandid;
+    if(choixCandid)
 }
 
 

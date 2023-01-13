@@ -134,6 +134,7 @@ void menuAdmin(VilleIut *tiut[], int nbVilles);
 void afficherUnCandidat(Candidat candidat);
 void afficherCandidats(Candidat **candidats, int nbCandidats);
 int creerCandidat(Candidat *tCand[], int nbCandidats);
+lChoix creerCandidature(lChoix choixCandid, char ville[50], char departement[50], int decision, int validation);
 
 ListeDeptV2 configurationDeptV2( ListeDept ldept );
 
@@ -153,9 +154,9 @@ int longueur(ListeDept ldept);
 void afficherListe(ListeDept ldept);
 
 // Choix.c
-lChoix ajouterEnteteC( lChoix lchoix, char ville[], char departement[], int decision, int validation);
+lChoix ajouterEnTeteC( lChoix lchoix, char ville[], char departement[], int decision, int validation);
 lChoix supprimerEnTeteC( lChoix lchoix );
-lChoix listenouvC();
+lChoix listenouvC(void);
 
 // iut.c
 

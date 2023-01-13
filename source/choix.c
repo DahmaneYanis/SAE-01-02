@@ -11,7 +11,7 @@
  
  * @return La liste avec le nouveau maillon
  */
-lChoix ajouterEnteteC( lChoix lchoix, char ville[], char departement[], int decision, int validation)
+lChoix ajouterEnTeteC( lChoix lchoix, char ville[], char departement[], int decision, int validation)
 {
     Choix * c = ( Choix * ) malloc ( sizeof ( Choix ));
     if ( c == NULL )
