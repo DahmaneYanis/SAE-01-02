@@ -739,6 +739,12 @@ int creerCandidat(Candidat *tCand[], int nbCandidats)
     int i=0;
     Candidat *c;
  
+    c = (Candidat *) malloc (sizeof(Candidat));
+    if(c==NULL)
+    {
+        printf("Probleme malloc\n");
+        exit(1);
+    }
     c->numero = nbCandidats;
     printf("Le numero du candidat entrain d'etre cree est : %d\n", c->numero);
     printf("Nom du candidat (peut contenir des espaces): ");
@@ -750,12 +756,16 @@ int creerCandidat(Candidat *tCand[], int nbCandidats)
     i=0;
     while(i<4)
     {
-        printf("Rentrez une note : ");
+        printf("Rentrez la note numero %d : ", i+1);
         scanf("%f", &c->notes[i]);
+        while(c->notes[i] < 0 || c->notes[i] > 20)
+        {
+            printf("Erreur, la note doit etre comprise entre 0 et 20.\nRessaisir la note numero %d : ", i+1);
+            scanf("%f", &c->notes[i]);
+        }
         i = i + 1;
     }
     c->lchoix = listenouvC();
-    c = (Candidat *) malloc (sizeof(Candidat));
     tCand[nbCandidats] = c;    
     return nbCandidats + 1;
 }
