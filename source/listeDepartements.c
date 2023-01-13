@@ -99,7 +99,7 @@ ListeDept ajouterDept(ListeDept ldept, char nomDept[], char resp[], int nbP)
  * 
  * @return La nouvelle liste de départements vide. 
  */
-ListeDept listenouv()
+ListeDept listenouv(void)
 {
     ListeDept l;
 

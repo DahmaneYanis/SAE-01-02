@@ -732,58 +732,31 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
         afficherCandidat(candidats[i]);
     }
 }
+*/
 
-int creerCandid(Candidat tCand[], int nbCandidats)
+int creerCandidat(Candidat *tCand[], int nbCandidats)
 {
     int i=0;
-    Candidat c;
-
-    printf("Rentrez le numéro du candidat :");
-    scanf("%d%*c",&c.numero);
-    while(i<nbCandidats)
-    {
-        if(c.numero==tCand[i].numero)
-        {
-            printf("Ce numéro existe déjà, veuillez en rentrer un nouveau :");
-            scanf("%d%*c",&c.numero);
-            i=0;
-        }
-        i = i + 1;
-    }
+    Candidat *c;
+ 
+    c->numero = nbCandidats;
+    printf("Le numero du candidat entrain d'etre cree est : %d\n", c->numero);
     printf("Nom du candidat (peut contenir des espaces): ");
-    fgets(c.nom, 50, stdin);
-    c.nom[strlen(c.nom) - 1] = '\0';
-    printf("Prénom du candidat (peut contenir des espaces): ");
-    fgets(c.prenom, 50, stdin);
-    c.prenom[strlen(c.prenom) - 1] = '\0';
+    fgets(c->nom, 50, stdin);
+    c->nom[strlen(c->nom) - 1] = '\0';
+    printf("Prenom du candidat (peut contenir des espaces): ");
+    fgets(c->prenom, 50, stdin);
+    c->prenom[strlen(c->prenom) - 1] = '\0';
     i=0;
     while(i<4)
     {
         printf("Rentrez une note : ");
-        scanf("%f", &c.notes[i]);
-        printf("%f", c.notes[i]);
+        scanf("%f", &c->notes[i]);
         i = i + 1;
     }
-    printf("Nombre de choix de candidatures : ");
-    scanf("%d%*c", &c.nbChoix);
-    c.nbChoix = (Choix *) malloc (c.nbChoix*sizeof(Choix));
-    if(c.nbChoix==NULL)
-    {
-        printf("Problème malloc\n");
-        exit(1);
-    }
-    i=0;
-    while(i<c.nbChoix)
-    {
-        printf("Rentrez la ville souhaitée : ");
-        scanf("%s%*c", c.choix[i].ville);
-        printf("Rentrez le département souhaité : ");
-        scanf("%s%*c", c.choix[i].departement);
-        c.choix[i].decisionDepartement = 0;
-        c.choix[i].validationCandidat = 0;
-        i = i + 1;
-    }
-    printf("%d %s %s %f %d %s %s %d", c.numero, c.nom, c.prenom, c.notes[1], c.nbChoix, c.choix[0].ville, c.choix[0].departement, c.choix[0].decisionDepartement, c.choix[0].validationCandidat);
+    c->lchoix = listenouv();
+    c = (Candidat *) malloc (sizeof(Candidat));
+    tCand[nbCandidats] = c;    
     return nbCandidats + 1;
 }
 

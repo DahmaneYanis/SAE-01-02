@@ -8,8 +8,8 @@ int main(void)
 	// #ifdef _WIN32
 	// color
 	// #endif
-
-	testCharge();
+	guillaume();
+	//testCharge();
 	//Globale();
 	//testJean();
 	return 0;
