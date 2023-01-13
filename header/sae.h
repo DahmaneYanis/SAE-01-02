@@ -137,10 +137,6 @@ int creerCandidat(Candidat *tCand[], int nbCandidats);
 
 ListeDeptV2 configurationDeptV2( ListeDept ldept );
 
-void affichageListesDept( ListeCandidats lcand, char * type, char * nomDept );
-ListeCandidats trierListeCandidats( ListeCandidats l );
-ListeCandidats insertionCroissanteCand( ListeCandidats nvL, ListeCandidats l );
-ListeCandidats insertionTeteCand( ListeCandidats nvL, ListeCandidats l );
 
 // listeDeparements.c
 ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
@@ -181,3 +177,7 @@ void tailleSupTabIut(VilleIut ** tIut, int *nbMax);
 // candidat.c
 
 Candidat *modifierCandidat(Candidat *c);
+void affichageListesDept( ListeCandidats lcand, char * type, char * nomDept );
+ListeCandidats trierListeCandidats( ListeCandidats l );
+ListeCandidats insertionCroissanteCand( ListeCandidats nvL, ListeCandidats l );
+ListeCandidats insertionTeteCand( ListeCandidats nvL, ListeCandidats l );
