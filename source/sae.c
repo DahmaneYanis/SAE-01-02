@@ -153,23 +153,21 @@ void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
 
     while(actif)
     {
-        choix = choixMenuVisiteur();
+        choix = choixMenuCandidat();
         clean
         switch(choix)
         {
             case 1:
-                //test(tIut, nbVilles);
-                afficheVillesIUT(tIut, nbVilles);
-                //printf("Affiche les Villes contenant des IUT (En attente d'une fonction de chargement fonctionnelle)\n");
+                //afficher une candidature
                 break;
             case 2:
-                printf("Affiche le nombre de place dans un departement (En attente de Guillaume)\n");
+                //Creer une candidature
                 break;
             case 3 :
-                printf("Affiche les departements d'un IUT donne (En attente de Loris)\n");
+                //Modifier une candidature
                 break;
             case 4 :
-                printf("Affiche les IUT possedant un departement donne (En attente de Jean)\n");
+                //Supprimer une candidature
                 break;
             case 5 :
                 seConnecter(tLog, nbLog);
@@ -512,7 +510,11 @@ int modifieChefDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
     return 0;
 }
 
-
+void afficherDeptIutDonne(VilelIut **villeIut, int nbVille)
+{
+    afficheVillesIUT();
+    printf()
+}
 
 /**
  * @brief Affiche les IUT possédant un département spécifique.
