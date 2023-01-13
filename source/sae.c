@@ -728,7 +728,6 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
     }
 }
 
-
 int creerCandid(Candidat tCand[], int nbCandidats)
 {
     int i=0;
@@ -756,14 +755,14 @@ int creerCandid(Candidat tCand[], int nbCandidats)
     while(i<4)
     {
         printf("Rentrez une note : ");
-        scanf("%f", c.notes[i]);
+        scanf("%f", &c.notes[i]);
         printf("%f", c.notes[i]);
         i = i + 1;
     }
     printf("Nombre de choix de candidatures : ");
     scanf("%d%*c", &c.nbChoix);
-    c.choix = (Choix *) malloc (c.nbChoix*sizeof(Choix));
-    if(c.choix==NULL)
+    c.nbChoix = (Choix *) malloc (c.nbChoix*sizeof(Choix));
+    if(c.nbChoix==NULL)
     {
         printf("Problème malloc\n");
         exit(1);
