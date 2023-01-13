@@ -9,7 +9,8 @@ int main(void)
 	// color
 	// #endif
 
-	Globale();
+	//Globale();
+	guillaume();
 	//testJean();
 	return 0;
 
