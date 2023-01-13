@@ -514,13 +514,13 @@ void afficherDeptIutDonne(VilleIut **villeIut, int nbVille)
     afficheVillesIUT(villeIut, nbVille);
     printf("Veuillez saisir le nom de l'iut que vous voulez afficher.\n");
     scanf("%s", nom);
-    res = existeVille(villeiut, nbVille, nom);
+    res = existeVille(villeIut, nom, nbVille);
     if (res == -1)
     {
         printf("Cet IUT n'existe pas\n");
         return ;
     }
-    afficherListe(villeiut[res]->lDept);
+    afficherListe(villeIut[res]->lDept);
 }
 
 /**
@@ -612,7 +612,7 @@ int existeVille( VilleIut * tIut[], char ville[], int nbvilles )
     int i = 0;
 
     //recherche de la ville 
-    for( e = 0; i < nbvilles; i ++ )
+    for( i = 0; i < nbvilles; i ++ )
     {
         if ( strcmp( tIut[i] -> nom, ville ) == 0 ) return i; // ville trouvée...
     }
