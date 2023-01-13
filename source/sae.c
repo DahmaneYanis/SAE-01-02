@@ -81,10 +81,8 @@ Log * chargementLog(char * nomFichier, int * nbLog)
         }
 
         fscanf(fichier, "%s %s %s", tLog[i].utilisateur, tLog[i].mdp, tLog[i].status);
-        printf("%s\n", tLog[i].status);
         i++;
     }
-
     *nbLog = i;
     return tLog;
 }

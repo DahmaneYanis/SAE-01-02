@@ -27,6 +27,8 @@ VilleIut ** chargeIutDon(char nomFichier[], int * nbIut, int * nbMax)
 
     *nbMax = 5;
 
+
+
     i = 0;
     while (!feof(fichier))
     {
@@ -45,6 +47,7 @@ VilleIut ** chargeIutDon(char nomFichier[], int * nbIut, int * nbMax)
     fclose(fichier);
 
     fusionIut(tIut, nbIut);
+
     return tIut;
 }
 
