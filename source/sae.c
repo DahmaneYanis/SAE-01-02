@@ -970,3 +970,39 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
     
     return lDeptV2;
 }
+
+void afficheNbPlace(VillesIut ** tIut, int nbIut)
+{
+    char ville[30];
+    char dep[30];
+    int i, res;
+    MaillonDept *aux;
+
+    printf("Veuillez saisir un Iut\n");
+    fscanf("%s", ville);
+    i = existeVille(tIut, ville, nbIut);
+    if (i == -1)
+    {
+        printf("Veuillez saisir un Iut\n");
+        fscanf("%s", ville);
+        i = existeVille(tIut, ville, nbIut);
+    }
+    printf("Veuillez saisir un departement\n");
+    fscanf("%s", dep);
+    res = existeDept(tIut, nbIut);
+    while (res == -1)
+    {
+        printf("Veuillez saisir un departement\n");
+        fscanf("%s", dep);
+        res = existeDept(tIut, nbIut);
+    }
+    aux = tIut[i]->ldept;
+    while (aux)
+    {
+        if (strcmp(aux, dep) == 0)
+        {
+            printf("%d", aux->nbP);
+            return ;
+        }
+    }
+}
