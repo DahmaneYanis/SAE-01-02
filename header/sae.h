@@ -125,6 +125,7 @@ int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
 void afficheIUTDept(VilleIut* *villeIut, int nbVilles, char *nomDept);
 void afficheVillesIUT(VilleIut **villeIut, int nbVilles);
 void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[]);
+int existeVille( VilleIut * tIut[], char ville[], int nbvilles );
 void menuAdmin(VilleIut **villeIut, int nbVilles);
 
 void afficherCandidat(Candidat candidat);
