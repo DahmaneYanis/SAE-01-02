@@ -58,6 +58,9 @@ void guillaume(void)
     tCandid[0]->lchoix = creerCandidature(tCandid[0]->lchoix, ville, departement, 0, 0);
     tCandid[0]->nbChoix +=1 ;
     afficherUnCandidat(*tCandid[0]);
+    supprimerCandidature(tCandid[0]->lchoix, tCandid[0]->nbChoix);
+    tCandid[0]->nbChoix-=1;
+    afficherUnCandidat(*tCandid[0]);
 }
 
 
