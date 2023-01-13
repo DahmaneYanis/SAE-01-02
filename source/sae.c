@@ -514,7 +514,18 @@ void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[])
     
 }
 
+int existeVille( VilleIut * tIut[], char ville[], int nbvilles )
+{
+    int i = 0;
+    // Recherche de la ville 
 
+    for ( i = 0; i < nbvilles, i ++ )
+    {
+        if ( strcmp( tIut[i] -> nom, ville ) == 0 ) return i;
+    }
+
+    return -1;    
+}
 
 /**
  * Affiche et gère le menu administrateur.
@@ -579,10 +590,6 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
         }
     } while (choix != 7);
 }
-
-
-
-
 
 
 /*
