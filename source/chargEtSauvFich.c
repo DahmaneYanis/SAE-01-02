@@ -46,8 +46,8 @@ VilleIut ** chargeIutDon(char nomFichier[], int * nbIut, int * nbMax)
 }
 
 /**
- * @brief initialise un tableau de struct VilleIut
- * @return le tableau initialisé
+ * @brief Initialise un tableau de pointeur de VilleIut
+ * @return Tableau de pointeur de VilleIut
  */
 VilleIut ** initialiseTabIut(void)
 {
@@ -63,7 +63,7 @@ VilleIut ** initialiseTabIut(void)
 }
 
 /**
- * @brief augmente la taille d'un tableau de struct VilleIut
+ * @brief Augmente la taille d'un tableau de struct VilleIut
  * @param tIut le tableau à augmenter
  * @param nbMax pointeur vers un entier qui contiendra la nouvelle taille maximale du tableau
  */
