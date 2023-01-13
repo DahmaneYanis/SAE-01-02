@@ -63,9 +63,9 @@ VilleIut ** initialiseTabIut(void)
 }
 
 /**
- * @brief Augmente la taille d'un tableau de struct VilleIut
- * @param tIut le tableau à augmenter
- * @param nbMax pointeur vers un entier qui contiendra la nouvelle taille maximale du tableau
+ * @brief Augmente la taille d'un tableau de pointeur de VilleIut
+ * @param tIut Tableau de pointeur de VilleIut
+ * @param nbMax [POINTEUR - Taille Physique Dynamique] Nouvelle taille max
  */
 void tailleSupTabIut(VilleIut ** tIut, int *nbMax)
 {
@@ -83,9 +83,9 @@ void tailleSupTabIut(VilleIut ** tIut, int *nbMax)
 }
 
 /**
- * @brief lit les données d'un IUT dans un fichier et les stocke dans un struct VilleIut
- * @param fichier pointeur vers le fichier contenant les données de l'IUT
- * @return un struct VilleIut rempli avec les données lues
+ * @brief Lit les données d'un IUT dans un fichier et les stocke dans une VilleIut
+ * @param fichier [FICHIER] Données de l'IUT
+ * @return une VilleIut rempli avec les données lues
  */
 VilleIut * lireIut (FILE * fichier)
 {
@@ -99,8 +99,8 @@ VilleIut * lireIut (FILE * fichier)
 }
 
 /**
- * @brief Initialise un struct VilleIut
- * @return le struct VilleIut initialisé
+ * @brief Initialise une VilleIut
+ * @return VilleIut initialisé
  */
 VilleIut * initialiseIut(void)
 {
@@ -117,9 +117,9 @@ VilleIut * initialiseIut(void)
 }
 
 /**
- * @brief lit les données d'un IUT dans un fichier et les stocke dans un struct VilleIut
- * @param iut pointeur vers le struct VilleIut où stocker les données
- * @param fichier pointeur vers le fichier contenant les données de l'IUT
+ * @brief Lit les données d'un IUT dans un fichier et les stocke dans une VilleIut
+ * @param iut [POINTEUR] Pointeur vers une VilleIut où stocker les données
+ * @param fichier [FICHIER] Données de l'IUT
  */
 void lectureIut(VilleIut * iut, FILE * fichier)
 {
@@ -129,8 +129,8 @@ void lectureIut(VilleIut * iut, FILE * fichier)
 }
 
 /**
- * @brief lit les données d'un département dans un fichier et les stocke dans une liste chaînée
- * @param fichier pointeur vers le fichier contenant les données du département
+ * @brief Lit les données d'un département dans un fichier et les stocke dans une liste chaînée
+ * @param fichier [FICHIER] Données du département
  * @return une liste chaînée contenant les données du département
  */
 ListeDept lireDep(FILE * fichier)
@@ -159,9 +159,9 @@ ListeDept initialiseDep(void)
 }
 
 /**
- * @brief lit les données d'un département dans un fichier et les stocke dans une liste chaînée
- * @param ldept pointeur vers la liste chaînée où stocker les données
- * @param fichier pointeur vers le fichier contenant les données du département
+ * @brief Lit les données d'un département dans un fichier et les stocke dans une structure de Departement
+ * @param ldept Liste chaînée où stocker les données
+ * @param fichier [FICHIER] Données du département
  */
 void lectureDep(ListeDept ldept, FILE * fichier)
 {
@@ -172,7 +172,7 @@ void lectureDep(ListeDept ldept, FILE * fichier)
 }
 
 /**
- * @brief teste la fonction chargeIutDon
+ * @brief Fonction de test de chargement
  */
 void testCharge(void)
 {
