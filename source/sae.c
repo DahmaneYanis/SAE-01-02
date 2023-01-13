@@ -118,9 +118,7 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
         switch(choix)
         {
             case 1:
-                //test(tIut, nbVilles);
                 afficheVillesIUT(tIut, nbIut);
-                //printf("Affiche les Villes contenant des IUT (En attente d'une fonction de chargement fonctionnelle)\n");
                 break;
             case 2:
                 printf("Affiche le nombre de place dans un departement (En attente de Guillaume)\n");
