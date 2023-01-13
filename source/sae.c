@@ -738,7 +738,14 @@ void afficherCandidats(Candidat **candidats, int nbCandidats)
     }
 }
 
-
+/**
+ * @brief Permet de créer un candidat  
+ * 
+ * @param tCand Tableau de pointeur sur une structure de candidat
+ * @param nbCandidats nombre de candidats créés
+ * 
+ * @return Retourne le nombre de candidats 
+ */
 int creerCandidat(Candidat *tCand[], int nbCandidats)
 {
     int i=0;
@@ -813,6 +820,8 @@ lChoix supprimerCandidature( lChoix l, int * nbchoix)
     *nbchoix = *nbchoix - 1;
     return l;
 }
+
+
 
 /*
 ================================================

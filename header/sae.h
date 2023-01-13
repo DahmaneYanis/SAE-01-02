@@ -176,3 +176,8 @@ VilleIut * lireIut (FILE * fichier);
 VilleIut ** chargeIutDon(char nomFichier[], int * nbIut, int * nbMax);
 VilleIut ** initialiseTabIut(void);
 void tailleSupTabIut(VilleIut ** tIut, int *nbMax);
+
+
+// candidat.c
+
+Candidat *modifierCandidat(Candidat *c);
