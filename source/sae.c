@@ -775,6 +775,44 @@ int creerCandidat(Candidat *tCand[], int nbCandidats)
     return nbCandidats + 1;
 }
 
+/**
+ * @brief Supprime un choix de la liste de choix d'un candidat
+ * 
+ * @param lchoix la liste de choix à modifier 
+ * @param nbchoix le nombre de choix dans la liste de choix
+ *
+ * @return la liste avec le choix en moins 
+ */
+lChoix supprimerCandidature( lChoix l, int * nbchoix)
+{
+    if ( l == NULL )
+    {
+        printf(" \n --> Le candidat ne possede aucun choix...\n\n");
+        return l;
+    }
+
+    printf("\n Voici les choix du candidat : \n");
+    printf(  " -----------------------------\n\n");
+    int rep = 0, c = 0;
+
+    for( int i = 0; i < *nbchoix; i ++ )
+    {
+        printf(" %d.) Ville : %10s ; Departement : %10s \n",i + 1, l -> ville, l -> departement);
+    }
+
+    printf(" \n\n --> Quel choix supprimer ? : ");
+    scanf("%d%*c", &rep);
+
+    while ( c != rep - 1 )
+    {
+        l = l -> suiv;
+        c = c + 1;
+    }
+
+    l = supprimerEnTeteC( l );
+    *nbchoix = *nbchoix - 1;
+    return l;
+}
 
 /*
 ================================================
