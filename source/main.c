@@ -9,7 +9,7 @@ int main(void)
 	// color
 	// #endif
 	//guillaume();
-	//testCharge();
+	testCharge();
 	//Globale();
 	//testJean();
 	return 0;
