@@ -169,6 +169,7 @@ void lectureDep(ListeDept ldept, FILE * fichier)
     fscanf(fichier, "%s %d ", ldept->nomDept, &ldept->nbP);
     fgets(ldept->resp, 30, fichier);
     ldept->resp[strlen(ldept->resp)-1] = '\0';
+    ldept->suiv = NULL;
 }
 
 /**
@@ -178,14 +179,61 @@ void testCharge(void)
 {
     int nbIut, nbMax;
     VilleIut ** tIut = chargeIutDon("../donnees/iut.don", &nbIut, &nbMax);
+    fusionIut(tIut, &nbIut);
 
     for (int i = 0; i < nbIut; i++)
     {
-        printf("[ %s | %s | %d | %s ]\n", tIut[i]->nom, tIut[i]->lDept->nomDept, tIut[i]->lDept->nbP, tIut[i]->lDept->resp);
+        printf("\nVille : %s\n", tIut[i]->nom);
+        afficherListe(tIut[i]->lDept);
     }
 }
 
+void fusionIut(VilleIut ** tIut, int *nbIut)
+{
+    int indice;
 
+    for (int i = 0; i < *nbIut; i++)
+    {
+        if(existe(tIut[i]->nom, tIut, *nbIut, i, &indice))
+        {
+            fusion(tIut, *nbIut, i, indice);
+            (*nbIut)--;
+            i--;
+        }
+    }
+}
+
+int existe(char * nom, VilleIut ** tIut, int nbIut, int iDepart, int * indice)
+{
+    for (int i = iDepart+1; i < nbIut; i++)
+    {
+        if (strcmp(nom, tIut[i]->nom) == 0)
+        {
+            *indice = i;
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+void fusion(VilleIut ** tIut, int nbIut, int i, int j)
+{
+    ListeDept aux;
+    aux = tIut[i]->lDept;
+    tIut[i]->lDept = tIut[j]->lDept;
+    tIut[i]->lDept->suiv = aux;
+
+    supprimerIut(tIut, nbIut, j);
+}
+
+void supprimerIut(VilleIut ** tIut, int nbIut, int j)
+{
+    for (int i = j ; i < nbIut-1 ; i++)
+    {
+        tIut[i] = tIut[i+1];
+    }
+}
 
 /*int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[])
 {
