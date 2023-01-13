@@ -10,7 +10,7 @@
 */
 
 #ifdef _WIN32
-#define clean   system("cls");
+#define clean   printf("\n\n\n\n\n\n");  //system("cls"); 
 #define color   system("color 70");
 void testColor(void);
 #endif
@@ -111,7 +111,9 @@ int existeUtilisateur(char * utilisateur, int * indice, Log * tLog, int nbLog);
 int mdpValide(char * mdp, int indice, Log * tLog);
 //void menuVisiteur(VilleIut *villeIut, int nbVilles);
 void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles);
-void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles);
+void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles, Candidat *c);
+void saisirCandidature(char ville[], char dep[], VilleIut *tiut[], int nbVille);
+VilleIut *saisieIut(VilleIut *tiut[], int nbVille, int *res);
 int choixMenuCandidat(void);
 int afficherMenuCandidat(void);
 int afficherMenuVisiteur(void);
@@ -134,9 +136,9 @@ void menuAdmin(VilleIut *tiut[], int nbVilles);
 void afficherUnCandidat(Candidat candidat);
 void afficherCandidats(Candidat **candidats, int nbCandidats);
 int creerCandidat(Candidat *tCand[], int nbCandidats);
-lChoix supprimerCandidature( lChoix l, int nbchoix);
+lChoix supprimerCandidature( lChoix l, int *nbchoix);
 lChoix supprmRecru( lChoix l, int rep );
-lChoix creerCandidature(lChoix choixCandid, char ville[50], char departement[50], int decision, int validation);
+lChoix creerCandidature(lChoix choixCandid, char ville[50], char departement[50], int decision, int validation, int *nbchoix);
 
 ListeDeptV2 configurationDeptV2( ListeDept ldept );
 
@@ -149,6 +151,7 @@ ListeDept ajouterDept(ListeDept ldept, char nomDept[], char resp[], int nbP);
 ListeDept listenouv();
 bool vide(ListeDept ldept);
 int longueur(ListeDept ldept);
+int existeDept(ListeDept ldept, char nom[]);
 void afficherListe(ListeDept ldept);
 
 // Choix.c

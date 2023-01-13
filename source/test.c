@@ -37,7 +37,7 @@
 // }
 
 
-
+/*
 void guillaume(void)
 {
     Candidat *tCandid[50];
@@ -72,7 +72,6 @@ void guillaume(void)
     afficherUnCandidat(*tCandid[0]);
 }
 
-
-
+*/
 
 
