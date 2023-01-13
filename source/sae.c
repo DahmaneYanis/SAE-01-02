@@ -506,7 +506,7 @@ int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
     return 0;
 }
 
-/*void afficherDeptIutDonne(VilleIut **villeIut, int nbVille)
+void afficherDeptIutDonne(VilleIut **villeIut, int nbVille)
 {
     int res;
     char *nom;
@@ -514,14 +514,14 @@ int modifieRespDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
     afficheVillesIUT(villeIut, nbVille);
     printf("Veuillez saisir le nom de l'iut que vous voulez afficher.\n");
     scanf("%s", nom);
-    res = existeVille(villeiut, nbVille, nom);
+    res = existeVille(villeIut, nom, nbVille);
     if (res == -1)
     {
         printf("Cet IUT n'existe pas\n");
         return ;
     }
-    afficherListe(villeiut[res]->lDept);
-}*/
+    afficherListe(villeIut[res]->lDept);
+}
 
 /**
  * @brief Affiche les IUT possédant un département spécifique.
@@ -607,17 +607,17 @@ void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[])
     }
 }
 
-/*int existeVille( VilleIut * tIut[], char ville[], int nbvilles )
+int existeVille( VilleIut * tIut[], char ville[], int nbvilles )
 {
     int i = 0;
 
     //recherche de la ville 
-    for( e = 0; i < nbvilles; i ++ )
+    for( i = 0; i < nbvilles; i ++ )
     {
         if ( strcmp( tIut[i] -> nom, ville ) == 0 ) return i; // ville trouvée...
     }
     return -1;
-}*/
+}
 
 
 /**
@@ -696,7 +696,7 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
  * @brief Affiche les informations d'un candidat
  * @param candidat Le candidat à afficher
  */
-void afficherCandidat(Candidat candidat)
+/* void afficherCandidat(Candidat candidat)
 {
     printf("Numéro du candidat : %d\n", candidat.numero);
     printf("Nom : %s\n", candidat.nom);
@@ -711,7 +711,7 @@ void afficherCandidat(Candidat candidat)
         printf("  Décision du département : %d\n", candidat.choix[i].decisionDepartement);
         printf("  Validation : %d\n", candidat.choix[i].validationCandidat);
     }
-}
+} */
 
 /**
  * @brief Affiche la liste des candidats
@@ -719,14 +719,14 @@ void afficherCandidat(Candidat candidat)
  * @param candidats Le tableau de candidats à afficher
  * @param nbCandidats Le nombre de candidats dans le tableau
  */
-void afficherCandidats(Candidat *candidats, int nbCandidats)
+/*void afficherCandidats(Candidat *candidats, int nbCandidats)
 {
     for (int i = 0; i < nbCandidats; i++)
     {
         printf("\nCandidat %d :\n", i + 1);
         afficherCandidat(candidats[i]);
     }
-}
+} */
 
 /*
 ================================================
