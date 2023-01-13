@@ -43,7 +43,7 @@ typedef struct
     char prenom[50];
     float notes[4];
     int nbChoix;
-    Choix *choix;
+    lChoix lchoix;
 }Candidat;
 
 //Proposition de structure de candidature pour la Partie 3 ( jean ) :

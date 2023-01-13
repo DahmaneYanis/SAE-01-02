@@ -698,7 +698,7 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
  * @brief Affiche les informations d'un candidat
  * @param candidat Le candidat à afficher
  */
-void afficherCandidat(Candidat candidat)
+/* void afficherCandidat(Candidat candidat)
 {
     printf("Numéro du candidat : %d\n", candidat.numero);
     printf("Nom : %s\n", candidat.nom);
@@ -713,7 +713,7 @@ void afficherCandidat(Candidat candidat)
         printf("  Décision du département : %d\n", candidat.choix[i].decisionDepartement);
         printf("  Validation : %d\n", candidat.choix[i].validationCandidat);
     }
-}
+} */
 
 /**
  * @brief Affiche la liste des candidats
@@ -721,14 +721,14 @@ void afficherCandidat(Candidat candidat)
  * @param candidats Le tableau de candidats à afficher
  * @param nbCandidats Le nombre de candidats dans le tableau
  */
-void afficherCandidats(Candidat *candidats, int nbCandidats)
+/*void afficherCandidats(Candidat *candidats, int nbCandidats)
 {
     for (int i = 0; i < nbCandidats; i++)
     {
         printf("\nCandidat %d :\n", i + 1);
         afficherCandidat(candidats[i]);
     }
-}
+} */
 
 /*
 ================================================
