@@ -169,10 +169,6 @@ void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
             case 4 :
                 //Supprimer une candidature
                 break;
-            case 5 :
-                seConnecter(tLog, nbLog);
-                clean
-                break;
             case 0 :
                 actif = 0;
                 break;
