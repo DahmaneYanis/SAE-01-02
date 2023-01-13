@@ -43,7 +43,7 @@ void guillaume(void)
     Candidat tCandid[50];
     int nbCandidats=2;
 
-    nbCandidats = creerCandid(tCandid, nbCandidats);
+    //nbCandidats = creerCandid(tCandid, nbCandidats);
     printf("\n%d", nbCandidats);
 }
 
