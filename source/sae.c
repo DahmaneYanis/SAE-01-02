@@ -619,6 +619,7 @@ void afficheNbPlacesDep(VilleIut *tVilleIut[], int nbVilles, char nomDept[])
     return -1;
 }*/
 
+
 /**
  * Affiche et gère le menu administrateur.
  *
@@ -682,9 +683,6 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
         }
     } while (choix != 7);
 }
-
-
-
 
 
 
