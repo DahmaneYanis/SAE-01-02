@@ -85,13 +85,13 @@ Log * chargementLog(char * nomFichier, int * nbLog)
     return tLog;
 }
 
-/*void test(VilleIut * tIut[], int nbVilles)
+void test(VilleIut * tIut[], int nbVilles)
 {
     for (int i = 0 ; i <nbVilles ; i++)
     {
         printf("%s\n", tIut[i]->nom);
     }
-}*/
+}
 
 /**
  * @brief Cette fonction affiche le menu des options disponibles pour un visiteur
@@ -139,6 +139,91 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
 }
 
 /**
+ * @brief Cette fonction affiche le menu des options disponibles pour un candidat
+ * et demande à l'utilisateur de faire son choix en appelant la fonction
+ * choixMenuCandidat. Selon le choix de l'utilisateur, la fonction appelle la fonction correspondante
+ * ou met fin à l'exécution de la fonction.
+*/
+void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
+{
+    int choix;
+    int actif = 1;
+    
+    clean
+
+    while(actif)
+    {
+        choix = choixMenuVisiteur();
+        clean
+        switch(choix)
+        {
+            case 1:
+                //test(tIut, nbVilles);
+                afficheVillesIUT(tIut, nbVilles);
+                //printf("Affiche les Villes contenant des IUT (En attente d'une fonction de chargement fonctionnelle)\n");
+                break;
+            case 2:
+                printf("Affiche le nombre de place dans un departement (En attente de Guillaume)\n");
+                break;
+            case 3 :
+                printf("Affiche les departements d'un IUT donne (En attente de Loris)\n");
+                break;
+            case 4 :
+                printf("Affiche les IUT possedant un departement donne (En attente de Jean)\n");
+                break;
+            case 5 :
+                seConnecter(tLog, nbLog);
+                clean
+                break;
+            case 0 :
+                actif = 0;
+                break;
+        }
+    }
+}
+
+/**
+
+@brief affiche le menu des candidats et renvoie le choix de l'utilisateur
+
+@return int : le choix de l'utilisateur
+*/
+int choixMenuCandidat(void)
+{
+    int choix;
+
+    choix = afficherMenuCandidat();
+    while (choix < 0 || choix > 4)
+    {
+        clean
+        printf("\nChoix incorrect.\n\n");
+        choix = afficherMenuCandidat();
+    }
+    return choix;
+}
+
+/**
+
+@brief affiche le menu pour les visiteurs et renvoie le choix de l'utilisateur
+
+@return int : le choix de l'utilisateur
+*/
+int afficherMenuCandidat(void)
+{
+    int choix;
+
+    printf("============================================================\n\t\t\tMENU CANDIDAT\n============================================================\n\n");
+    printf("\t1. Creer une candidature\n");
+    printf("\t2. Modifier une candidature\n");
+    printf("\t3. Supprimer une candidature\n");
+    printf("\t4. Gestion des candidatures\n");
+    printf("\t0. Quitter\n");
+    printf("\nChoix : ");
+    scanf("%d%*c", &choix);
+    return choix; 
+}
+
+/**
  * @brief Affiche le menu des options disponibles pour un visiteur.
  * 
  * Cette fonction affiche à l'écran un menu proposant plusieurs options 
@@ -157,7 +242,8 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles)
  * 
  * @return Le choix de l'utilisateur, sous forme d'un entier
  */
-int afficherMenuVisiteur(void) {
+int afficherMenuVisiteur(void)
+{
     int choix;
 
     printf("============================================================\n\t\t\tMENU VISITEUR\n============================================================\n\n");
