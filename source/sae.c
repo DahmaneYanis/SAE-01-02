@@ -437,7 +437,13 @@ int modifieChefDept(VilleIut *tVilleIut[], int nbVilles, char ville[], char nomD
  */
 void afficheIUTDept(VilleIut **villeIut, int nbVilles, char *nomDept)
 {
-    int i;
+    clean;
+    printf("==========================================================================\n");
+    printf("           Affiche les IUT possédant un departement specifique \n");
+    printf("==========================================================================\n");
+
+
+    int i, e = 0 ;
     for (i = 0; i < nbVilles; i++)
     {
         // Parcours de la liste chaînée de départements de la ville
@@ -447,12 +453,16 @@ void afficheIUTDept(VilleIut **villeIut, int nbVilles, char *nomDept)
             if (strcmp(dept->nomDept, nomDept) == 0)
             {
                 // Département trouvé, affichage de la ville
-                printf("IUT de %s\n", villeIut[i] -> nom);
-                break;
+                printf(" -> IUT de %s\n", villeIut[i] -> nom);
+                e = 1;
             }
+
             dept = dept->suiv;
         }
     }
+    if ( e == 0 ) printf(" \n ---> Departement inexistant...\n");
+
+    printf("\n\n\n");
 }
 
 /**
@@ -462,24 +472,17 @@ void afficheIUTDept(VilleIut **villeIut, int nbVilles, char *nomDept)
 */
 void afficheVillesIUT(VilleIut **villeIut, int nbVilles)
 {
-
-    // ajout de test temporaire 
-    // MaillonDept * temp = ( MaillonDept *) malloc ( sizeof( MaillonDept));
-    // if ( temp == NULL)
-    // {
-    //     printf(" Erreur allocation memoire ( Jean ) \n");
-    //     return;
-    // }
-
-    // villeIut[0] -> lDept = temp;
-
-    // strcpy( villeIut[0] -> lDept -> nomDept, " kawasaky ");
+    clean
+    printf("==============================================================\n");
+    printf("                 Villes possedant un IUT  \n ");
+    printf("==============================================================\n");
 
     for (int i = 0; i < nbVilles; i++)
     {
         // Affichage du nom de la ville
-    printf("%s\n", villeIut[i]-> nom);
-    }   
+    printf(" -> %s\n", villeIut[i]-> nom);
+    }  
+    printf(" \n\n\n");
 }
 
 
