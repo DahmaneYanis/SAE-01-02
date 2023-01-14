@@ -909,68 +909,6 @@ lChoix creerCandidature(lChoix choixCandid, char ville[], char departement[], in
     return choixCandid;
 }
 
-
-/*
-================================================
-                    Partie 3
-================================================
-*/
-
-/**
- * \brief Permet de convertir la liste de departement des VilleIut de la partie 1
-        dans la nouvelle version pour correspondre à la partie 3. Et la fonction 
-        définie au passage le nombre maximal d'admis pour le département et sa 
-        moyenne minimale à obtenir pour y accéder. 
- * \param ldept La liste de départements de la partie 1 pour une villeIut 
- * \return La nouvelle liste de départements adaptée à la partie 3.
- *
- */
-ListeDeptV2 configurationDeptV2( ListeDept ldept )
-{
-    ListeDeptV2 lDeptV2 = NULL;
-
-    if ( ldept == NULL ) return lDeptV2;
-
-    while ( ldept != NULL )
-    {
-        MaillonDept * aux = ( MaillonDept * ) malloc ( sizeof( MaillonDept ));
-        if ( aux == NULL )
-        {
-            printf(" \n ---> Erreur d'allocation memoire... \n");
-            exit(1);
-        }
-
-        MaillonDeptV2 * mV2 = ( MaillonDeptV2 * ) malloc ( sizeof( MaillonDeptV2 ));
-        if ( mV2 == NULL)
-        {
-            printf("\n --> Erreur d'allocation memoire...\n");
-            exit(1);
-        }
-
-        printf(" \n Quelle est la moyenne minimale a avoir pour le departement %10s  ? : ", ldept -> nomDept);
-        scanf("%d", mV2 -> moyMin);
-
-        printf(" \n Quel est le nombre maximal d'admis pour le departement %10s ", ldept -> nomDept);
-        scanf("%d", mV2 -> admisMax);
-
-        strcpy( ldept -> nomDept, mV2 -> nomDept );
-        strcpy( ldept -> resp, mV2 -> resp );
-        mV2 -> nbP = ldept -> nbP;
-
-        lDeptV2 -> lAdmis = NULL;
-        lDeptV2 -> lAttente = NULL;
-        
-        mV2 -> suiv = lDeptV2;
-        lDeptV2 = mV2;
-
-        aux = ldept;
-        ldept = ldept -> suiv;
-        free(aux);
-    }
-    
-    return lDeptV2;
-}
-
 void afficheNbPlace(VillesIut ** tIut, int nbIut)
 {
     char ville[30];
@@ -1006,3 +944,9 @@ void afficheNbPlace(VillesIut ** tIut, int nbIut)
         }
     }
 }
+
+/*
+================================================
+                    Partie 3
+================================================
+*/
