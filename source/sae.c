@@ -1116,7 +1116,7 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
     return lDeptV2;
 }
 
-void afficheNbPlace(VillesIut ** tIut, int nbIut)
+void afficheNbPlace(VilleIut ** tIut, int nbIut)
 {
     char ville[30];
     char dep[30];
@@ -1141,7 +1141,7 @@ void afficheNbPlace(VillesIut ** tIut, int nbIut)
         fscanf("%s", dep);
         res = existeDept(tIut, nbIut);
     }
-    aux = tIut[i]->ldept;
+    aux = tIut[i]->lDept;
     while (aux)
     {
         if (strcmp(aux, dep) == 0)
