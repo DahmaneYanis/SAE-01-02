@@ -383,3 +383,19 @@ lChoix initialiseChoix(void)
     return choix;
 
 }
+
+
+ListeCandidats initialiseCandidat(void)
+{
+    ListeCandidats candidat;
+
+    candidat = (ListeCandidats) malloc(sizeof(MaillonCandidat));
+    if (candidat == NULL)
+    {
+        printf("Probleme de malloc\n");
+        exit(1);
+    }
+
+    return candidat;
+
+}

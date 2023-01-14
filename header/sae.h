@@ -124,6 +124,7 @@ void saisieNomUtilisateur(char * utilisateur);
 void saisieMdp(char * mdp);
 void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut);
 void seConnecterTest(void);
+void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut);
 
 int modifiePlacesDept(VilleIut *tiut[], int nbVilles, char *ville, char *nomDept, int nbP);
 int modifieRespDept(VilleIut *tiut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[]);
@@ -181,6 +182,16 @@ void fusionIut(VilleIut ** tIut, int * nbIut);
 int existe(char * nom, VilleIut ** tIut, int nbIut, int iDepart, int * indice);
 void fusion(VilleIut ** tIut, int nbIut, int i, int j);
 void supprimerIut(VilleIut ** tIut, int nbIut, int j);
+
+void ajouteChoix(lChoix lchoix, Choix * choix);
+void testCandidat(void);
+ListeCandidats chargeCandidat(void);
+void ajouteCandidat(ListeCandidats lCand, FILE * flot);
+MaillonCandidat * lireCandidat(FILE *flot);
+void ajouteChoix(lChoix lchoix, Choix * choix);
+lChoix lireChoix(FILE *flot);
+lChoix initialiseChoix(void);
+ListeCandidats initialiseCandidat(void);
 
 
 // candidat.c
