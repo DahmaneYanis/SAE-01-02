@@ -30,7 +30,8 @@ void Globale(void)
     //nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
 
     //Appel du menu visiteur
-    menuVisiteur(tLog, nbLog, tIut, nbIut);
+    //menuVisiteur(tLog, nbLog, tIut, nbIut);
+    afficherDeptIutDonne(tIut, nbIut);
 
     //TEST menu candidat en attendant la conexion et tout la
     //nbCand = creerCandidat(tCand, nbCand);
@@ -712,7 +713,7 @@ int modifieRespDept(VilleIut *tiut[], int nbVilles, char ville[], char nomDept[]
 void afficherDeptIutDonne(VilleIut *tiut[], int nbVille)
 {
     int res;
-    char *nom;
+    char nom[30];
 
     afficheVillesIUT(tiut, nbVille);
     printf("Veuillez saisir le nom de l'iut que vous voulez afficher.\n");
@@ -1113,4 +1114,40 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
     }
     
     return lDeptV2;
+}
+
+void afficheNbPlace(VillesIut ** tIut, int nbIut)
+{
+    char ville[30];
+    char dep[30];
+    int i, res;
+    MaillonDept *aux;
+
+    printf("Veuillez saisir un Iut\n");
+    fscanf("%s", ville);
+    i = existeVille(tIut, ville, nbIut);
+    if (i == -1)
+    {
+        printf("Veuillez saisir un Iut\n");
+        fscanf("%s", ville);
+        i = existeVille(tIut, ville, nbIut);
+    }
+    printf("Veuillez saisir un departement\n");
+    fscanf("%s", dep);
+    res = existeDept(tIut, nbIut);
+    while (res == -1)
+    {
+        printf("Veuillez saisir un departement\n");
+        fscanf("%s", dep);
+        res = existeDept(tIut, nbIut);
+    }
+    aux = tIut[i]->ldept;
+    while (aux)
+    {
+        if (strcmp(aux, dep) == 0)
+        {
+            printf("%d", aux->nbP);
+            return ;
+        }
+    }
 }
