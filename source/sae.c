@@ -1055,6 +1055,9 @@ lChoix creerCandidature(lChoix choixCandid, char ville[], char departement[], in
     return choixCandid;
 }
 
+<<<<<<< HEAD
+void afficheNbPlace(VillesIut ** tIut, int nbIut)
+=======
 /*
 ================================================
                     Partie 3
@@ -1117,6 +1120,7 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
 }
 
 void afficheNbPlace(VilleIut ** tIut, int nbIut)
+>>>>>>> 74dc716789a4ef93c873181d423960647b819dcd
 {
     char ville[30];
     char dep[30];
@@ -1151,3 +1155,9 @@ void afficheNbPlace(VilleIut ** tIut, int nbIut)
         }
     }
 }
+
+/*
+================================================
+                    Partie 3
+================================================
+*/

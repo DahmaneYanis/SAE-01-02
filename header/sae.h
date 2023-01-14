@@ -79,7 +79,7 @@ typedef struct maillonDeptV2
     int nbP;
 
     //Mise a jour du maillon pour correspondre à la partie 3 : 
-    int moyMin;
+    float moyMin;
     int admisMax;
     ListeCandidats lAdmis;
     ListeCandidats lAttente;
@@ -141,8 +141,6 @@ lChoix supprimerCandidature( lChoix l, int *nbchoix);
 lChoix supprmRecru( lChoix l, int rep );
 lChoix creerCandidature(lChoix choixCandid, char ville[50], char departement[50], int decision, int validation, int *nbchoix);
 
-ListeDeptV2 configurationDeptV2( ListeDept ldept );
-
 
 // listeDeparements.c
 ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
@@ -201,4 +199,14 @@ ListeCandidats supprimerEnTeteCandidat( ListeCandidats l );
 int menuCandidatPartie4( Candidat **tCand, VilleIut **tIut,  int numero, int nbvilles, int nbcand );
 int compterNombreValidations( Candidat c, VilleIut ** tIut, int nbvilles );
 Candidat validationCandidat( Candidat c, VilleIut ** tIut, int nbvilles );
+
+
+// Partie3.c 
+
+ListeDeptV2 configurationDeptV2( ListeDept ldept, float moy );
+void menuPartie3( VilleIut ** tIut, int nbvilles );
+int menuResponsableAdmissionPartie3( VilleIut ** tIut, int nbVilles, char ville[], char departement[] );
+ListeDeptV2 miseAJourMoyenneDept( ListeDeptV2 l );
+ListeDeptV2 miseAJourNbAdmisDept( ListeDeptV2 l );
+
 
