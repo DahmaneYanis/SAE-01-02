@@ -112,6 +112,7 @@ int mdpValide(char * mdp, int indice, Log * tLog);
 //void menuVisiteur(VilleIut *villeIut, int nbVilles);
 void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles);
 void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles, Candidat *c);
+void IntermediaireMenuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles);
 void saisirCandidature(char ville[], char dep[], VilleIut *tiut[], int nbVille);
 VilleIut *saisieIut(VilleIut *tiut[], int nbVille, int *res);
 int choixMenuCandidat(void);
@@ -121,7 +122,7 @@ int choixMenuVisiteur(void);
 void banniereConnection(void);
 void saisieNomUtilisateur(char * utilisateur);
 void saisieMdp(char * mdp);
-void seConnecter(Log * tLog, int nbLog);
+void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut);
 void seConnecterTest(void);
 
 int modifiePlacesDept(VilleIut *tiut[], int nbVilles, char *ville, char *nomDept, int nbP);

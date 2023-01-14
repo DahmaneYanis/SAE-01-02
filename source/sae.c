@@ -121,21 +121,23 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
             case 1:
                 afficheVillesIUT(tIut, nbIut);
                 printf("\nAppuyez sur entree pour continuer...");
-                scanf("%*c");   
-                clean             
+                scanf("%*c");
+                clean
                 break;
             case 2:
-                printf("Affiche le nombre de place dans un departement (En attente de Guillaume)\n");
+                afficheNbPlace(tIut, nbIut);
+                printf("\nAppuyez sur entree pour continuer...");
+                scanf("%*c");
+                clean  
                 break;
             case 3 :
-                printf("Afficher departement d'un Iut\n");
-                //afficherDeptIutDonne(tIut, nbIut);
+                afficherDeptIutDonne(tIut, nbIut);
                 break;
             case 4 :
-                printf("Affiche les IUT possedant un departement donne (En attente de Jean)\n");
+                afficheIUTRecupDept(tIut, nbIut);
                 break;
             case 5 :
-                seConnecter(tLog, nbLog);
+                seConnecter(tLog, nbLog, tIut, nbIut);
                 clean
                 break;
             case 0 :
@@ -358,7 +360,15 @@ void seConnecterTest(void)
     valide = mdpValide(mdp, indice, tLog);
 }
 
-void seConnecter(Log * tLog, int nbLog)
+/**
+ * @brief Fonction de connection
+ * 
+ * @param tLog Tableau de Log
+ * @param nbLog [Taille Logique] 
+ * @param tIut Tableau de pointeur de VilleIut
+ * @param nbIut [Taille Logique] 
+ */
+void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut)
 {
     char mdp[30], utilisateur[30];
     int existe, indice, valide;
@@ -380,16 +390,152 @@ void seConnecter(Log * tLog, int nbLog)
     
     if(valide)
     {
+        clean
         printf("Connection valide en tant que %s\n", tLog[indice].status);
-        printf("En attente de la fonction chargement\n");
-        scanf("%*c");
+        
+        if(strcmp(tLog[indice].status, "admin") == 0)
+        {
+            menuAdmin(tIut, nbIut);
+        }
+        if(strcmp(tLog[indice].status, "candidat") == 0)
+        {
+            IntermediaireMenuCandidat(tLog, nbLog, tIut, nbIut);
+        }
+        if(strcmp(tLog[indice].status, "responsable") == 0)
+        {
+            menuResponsable(tLog, nbLog, tIut, nbIut);
+        }
     }
     else
     {
-        printf("Mot de passe invalide\nAppuyez sur [entrée] pour continuer...");
+        printf("Mot de passe invalide\nAppuyez sur [entree] pour continuer...");
         scanf("%*c");
     }
 }
+
+/**
+ * @brief Recupere le choix dans le menu de responsable
+ * 
+ * @return int choix valable
+ */
+int choixMenuResponsable(void)
+{
+    int choix;
+
+    choix = afficherMenuResponsable();
+
+    while (choix < 0 || choix > 11)
+    {
+        clean
+        printf("\nChoix incorrect.\n\n");
+        choix = afficherMenuResponsable();
+    }
+
+    return choix;
+}
+
+/**
+ * @brief Affichage du menu Responsable
+ * 
+ * @return int choix de l'utilisateur
+ */
+int afficherMenuResponsable(void)
+{
+    int choix;
+
+    printf("============================================================\n\t\t\tMENU RESPONSABLE\n============================================================\n\n");
+  
+    printf("\t1. Afficher les candidatures pour le departement\n");
+    printf("\t2. Traiter les candidatures\n");
+    printf("\t3. Definir les criteres d'admission\n");
+    printf("\t4. Savoir si un candidat est admis\n");
+    printf("\t5. Liste des candidats en liste d'attente\n");
+    printf("\t6. Liste des candidats admis\n");
+    printf("\t7. Sauvegarder les admissions et la liste d'attente d'Info-Clermont\n");
+    printf("\t8. Afficher toutes les villes possedant un IUT\n");
+    printf("\t9. Afficher le nombre de places dans un departement donne\n");
+    printf("\t10. Afficher les departements d'un IUT donne\n");
+    printf("\t11. Afficher les IUT possedant un departement donne\n");
+    printf("\t0. Quitter\n");
+    printf("\nChoix : ");
+
+    scanf("%d%*c", &choix);
+    return choix; 
+}
+
+void menuResponsable(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
+{
+    int choix;
+    int actif = 1;
+    
+    clean
+
+    while(actif)
+    {
+        choix = choixMenuResponsable();
+        clean
+        switch(choix)
+        {
+            case 1:
+                printf("Afficher les candidatures pour le departement\n");
+                scanf("%*c");
+                clean  
+                break;
+            case 2:
+                printf("Traiter les candidatures\n");
+                scanf("%*c");
+                clean  
+                break;
+            case 3 :
+                printf("Definir critere d'admission\n");
+                scanf("%*c");
+                clean
+                break;
+            case 4 :
+                printf("Candidat donné admis ?\n");
+                scanf("%*c");
+                clean
+                break;
+            case 5 :
+                printf("Liste candidat en liste d'attente\n");
+                scanf("%*c");
+                clean
+                break;
+            case 6 :
+                printf("Liste candidat admis\n");
+                scanf("%*c");
+                clean
+                break;
+            case 7 :
+                printf("Sauvegarder admission et lsite d'attente de clermont\n");
+                scanf("%*c");
+                clean
+                break;
+            case 8:
+                afficheVillesIUT(tIut, nbIut);
+                printf("\nAppuyez sur entree pour continuer...");
+                scanf("%*c");
+                clean
+                break;
+            case 9:
+                afficheNbPlace(tIut, nbIut);
+                printf("\nAppuyez sur entree pour continuer...");
+                scanf("%*c");
+                clean  
+                break;
+            case 10 :
+                afficherDeptIutDonne(tIut, nbIut);
+                break;
+            case 11 :
+                afficheIUTRecupDept(tIut, nbIut);
+                break;
+            case 0 :
+                actif = 0;
+                break;
+        }
+    }
+}
+
 
 /**
  * @brief Vérifie si un utilisateur existe dans le tableau de structures de log.
@@ -909,7 +1055,72 @@ lChoix creerCandidature(lChoix choixCandid, char ville[], char departement[], in
     return choixCandid;
 }
 
+<<<<<<< HEAD
 void afficheNbPlace(VillesIut ** tIut, int nbIut)
+=======
+/*
+================================================
+                    Partie 3
+================================================
+*/
+
+/**
+ * \brief Permet de convertir la liste de departement des VilleIut de la partie 1
+        dans la nouvelle version pour correspondre à la partie 3. Et la fonction 
+        définie au passage le nombre maximal d'admis pour le département et sa 
+        moyenne minimale à obtenir pour y accéder. 
+ * \param ldept La liste de départements de la partie 1 pour une villeIut 
+ * \return La nouvelle liste de départements adaptée à la partie 3.
+ *
+ */
+ListeDeptV2 configurationDeptV2( ListeDept ldept )
+{
+    ListeDeptV2 lDeptV2 = NULL;
+
+    if ( ldept == NULL ) return lDeptV2;
+
+    while ( ldept != NULL )
+    {
+        MaillonDept * aux = ( MaillonDept * ) malloc ( sizeof( MaillonDept ));
+        if ( aux == NULL )
+        {
+            printf(" \n ---> Erreur d'allocation memoire... \n");
+            exit(1);
+        }
+
+        MaillonDeptV2 * mV2 = ( MaillonDeptV2 * ) malloc ( sizeof( MaillonDeptV2 ));
+        if ( mV2 == NULL)
+        {
+            printf("\n --> Erreur d'allocation memoire...\n");
+            exit(1);
+        }
+
+        printf(" \n Quelle est la moyenne minimale a avoir pour le departement %10s  ? : ", ldept -> nomDept);
+        scanf("%d", mV2 -> moyMin);
+
+        printf(" \n Quel est le nombre maximal d'admis pour le departement %10s ", ldept -> nomDept);
+        scanf("%d", mV2 -> admisMax);
+
+        strcpy( ldept -> nomDept, mV2 -> nomDept );
+        strcpy( ldept -> resp, mV2 -> resp );
+        mV2 -> nbP = ldept -> nbP;
+
+        lDeptV2 -> lAdmis = NULL;
+        lDeptV2 -> lAttente = NULL;
+        
+        mV2 -> suiv = lDeptV2;
+        lDeptV2 = mV2;
+
+        aux = ldept;
+        ldept = ldept -> suiv;
+        free(aux);
+    }
+    
+    return lDeptV2;
+}
+
+void afficheNbPlace(VilleIut ** tIut, int nbIut)
+>>>>>>> 74dc716789a4ef93c873181d423960647b819dcd
 {
     char ville[30];
     char dep[30];
@@ -934,7 +1145,7 @@ void afficheNbPlace(VillesIut ** tIut, int nbIut)
         fscanf("%s", dep);
         res = existeDept(tIut, nbIut);
     }
-    aux = tIut[i]->ldept;
+    aux = tIut[i]->lDept;
     while (aux)
     {
         if (strcmp(aux, dep) == 0)
