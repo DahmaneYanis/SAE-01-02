@@ -271,3 +271,115 @@ void supprimerIut(VilleIut ** tIut, int nbIut, int j)
         tIut[i] = tIut[i+1];
     }
 }
+
+/*
+==============================================
+                Partie Candidat
+==============================================
+*/
+
+void testCandidat(void)
+{
+    return;
+}
+
+ListeCandidats chargeCandidat(void)
+{
+    FILE *flot;
+    ListeCandidats lCand;
+    int nbCandidat;
+
+    flot = fopen("../donnees/candidats.don", "r");
+
+    if (flot == NULL)
+    {
+        printf("Probleme d'ouverture de fichier\n");
+        exit(1);
+    }
+
+    lCand = NULL;
+    fscanf(flot, "%d", &nbCandidat);
+
+    int i = 0;
+    while (!feof(flot) && i < nbCandidat)
+    {
+        ajouteCandidat(lCand, flot);
+        i++;
+    }
+
+
+    fclose(flot);
+}
+
+void ajouteCandidat(ListeCandidats lCand, FILE * flot)
+{
+    if (lCand == NULL)
+        lCand = lireCandidat(flot);
+    else
+        ajouteCandidat(lCand->suiv, flot);
+}
+
+MaillonCandidat * lireCandidat(FILE *flot)
+{
+    MaillonCandidat * m;
+    m = initialiseCandidat();
+
+    fscanf(flot, "%d", &m->candidat.numero);
+    fgets(m->candidat.nom, 50, flot);
+    fgets(m->candidat.prenom, 50, flot);
+    m->candidat.nom[strlen(m->candidat.nom)-1] = '\0';
+    m->candidat.prenom[strlen(m->candidat.prenom)-1] = '\0';
+    
+    for (int i = 0; i < 4; i++) {
+        fscanf(flot, "%f", &m->candidat.notes[i]);
+    }
+
+    fscanf(flot, "%d", &m->candidat.nbChoix);
+
+    for (int i = 0; i < m->candidat.nbChoix-1; i++)
+    {
+        ajouteChoix(m->candidat.lchoix, lireChoix(flot));
+    }
+
+    return m;
+
+}
+
+void ajouteChoix(lChoix lchoix, Choix * choix)
+{
+    lChoix aux;
+
+    if (lchoix == NULL)
+        lchoix = choix;
+    else 
+    {
+        aux = lchoix;
+        lchoix = choix;
+        choix->suiv = aux;
+    }
+}
+
+lChoix lireChoix(FILE *flot)
+{
+    lChoix choix;
+    choix = initialiseChoix();
+
+    fscanf(flot, "%s %s %d %d", choix->ville, choix->departement, &choix->decisionDepartement, &choix->validationCandidat);
+
+    return choix;
+}
+
+lChoix initialiseChoix(void)
+{
+    lChoix choix;
+
+    choix = (lChoix) malloc(sizeof(Choix));
+    if (choix == NULL)
+    {
+        printf("Probleme de malloc\n");
+        exit(1);
+    }
+
+    return choix;
+
+}

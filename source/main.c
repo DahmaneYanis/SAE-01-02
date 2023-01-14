@@ -10,6 +10,7 @@ int main(void)
 	#endif
 	//guillaume();
 	//testCharge();
-	Globale();
+	testCandidat();
+	//Globale();
 	return 0;
 }
