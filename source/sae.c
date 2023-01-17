@@ -124,7 +124,7 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
                 clean
                 break;
             case 2:
-                //afficheNbPlace(tIut, nbIut);
+                afficheNbPlacesDep(tIut, nbIut);
                 wait
                 clean  
                 break;
@@ -134,8 +134,9 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
                 clean
                 break;
             case 4 :
-                printf("En attente de je ne sais qui\n");
-                //afficheIUTRecupDept(tIut, nbIut);
+                afficheIUTDept(tIut, nbIut);
+                wait 
+                clean
                 break;
             case 5 :
                 seConnecter(tLog, nbLog, tIut, nbIut);
@@ -712,17 +713,20 @@ void afficherDeptIutDonne(VilleIut *tiut[], int nbVille)
  *
  * @param tiut tableau de pointeurs sur les structures VilleIut
  * @param nbVilles nombre de villes dans le tableau villeIut
- * @param nomDept nom du département à rechercher
  */
-void afficheIUTDept(VilleIut *tiut[], int nbVilles, char *nomDept)
+void afficheIUTDept(VilleIut *tiut[], int nbVilles)
 {
-    clean;
+    char nomDept[50];
+    
+    clean
     printf("==========================================================================\n");
-    printf("           Affiche les IUT possédant un departement specifique \n");
+    printf("           Affiche les IUT possedant un departement specifique \n");
     printf("==========================================================================\n");
 
 
     int i, e = 0 ;
+    printf("Nom du departement : ");
+    scanf("%s", nomDept);
     for (i = 0; i < nbVilles; i++)
     {
         // Parcours de la liste chaînée de départements de la ville
@@ -742,6 +746,7 @@ void afficheIUTDept(VilleIut *tiut[], int nbVilles, char *nomDept)
     if ( e == 0 ) printf(" \n ---> Departement inexistant...\n");
 
     printf("\n\n\n");
+    wait
 }
 
 /**
@@ -759,7 +764,7 @@ void afficheVillesIUT(VilleIut *tiut[], int nbVilles)
     for (int i = 0; i < nbVilles; i++)
     {
         // Affichage du nom de la ville
-    printf(" -> %s\n", tiut[i]-> nom);
+        printf(" -> %s\n", tiut[i]-> nom);
     }
 }
 
@@ -768,11 +773,18 @@ void afficheVillesIUT(VilleIut *tiut[], int nbVilles)
  * 
  * @param tVilleIut tableau de pointeurs sur les structures VilleIut
  * @param nbVilles nombre de villes dans le tableau villeIut
- * @param nomDept nom du département à rechercher
  */
-void afficheNbPlacesDep(VilleIut *tiut[], int nbVilles, char nomDept[])
+void afficheNbPlacesDep(VilleIut *tiut[], int nbVilles)
 {
     int i;
+    char nomDept[50];
+
+    clean
+    printf("==========================================================================\n");
+    printf("           Affiche le nombre de places dans un departement donne \n");
+    printf("==========================================================================\n");
+    printf("Nom du departement : ");
+    scanf("%s", nomDept);
     for (i = 0; i < nbVilles; i++)
     {
         // Parcours de la liste chaînée de départements de la ville
@@ -782,12 +794,13 @@ void afficheNbPlacesDep(VilleIut *tiut[], int nbVilles, char nomDept[])
             if (strcmp(dept->nomDept, nomDept) == 0)
             {
                 // Département trouvé, affichage de la ville et de son nombre de places
-                printf("IUT de %s avec %d places.\n", tiut[i] -> nom, tiut[i] -> lDept -> nbP);
+                printf(" -> IUT de %s avec %d places.\n", tiut[i] -> nom, tiut[i] -> lDept -> nbP);
                 break;
             }
             dept = dept->suiv;
         }
     }
+    wait
 }
 
 int existeVille(VilleIut *tIut[], char ville[], int nbvilles )
