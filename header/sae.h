@@ -11,7 +11,6 @@
 
 #ifdef _WIN32
 #define clean   system("cls"); 
-#define color   system("color 70");
 void testColor(void);
 #endif
 
@@ -133,9 +132,9 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut);
 int saisirNbPlaceDep(void);
 int modifieRespDept(VilleIut *tiut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[]);
 void afficherDeptIutDonne(VilleIut *tiut[], int nbVilles);
-void afficheIUTDept(VilleIut *tiut[], int nbVilles, char *nomDept);
+void afficheIUTDept(VilleIut *tiut[], int nbVilles);
 void afficheVillesIUT(VilleIut *tiut[], int nbVilles);
-void afficheNbPlacesDep(VilleIut *tiut[], int nbVilles, char nomDept[]);
+void afficheNbPlacesDep(VilleIut *tiut[], int nbVilles);
 int existeVille( VilleIut *tiut[], char ville[], int nbvilles );
 void menuAdmin(VilleIut *tiut[], int nbVilles);
 int saisirVille(VilleIut *tiut[], int nbVilles, char ville[]);
