@@ -14,7 +14,6 @@
  */
 void Globale(void)
 {
-    //printf(" \n ---> lancement de la fonction globale.... \n\n");
     Log * tLog;
     VilleIut ** tIut;
     Candidat *tCand[50];
@@ -27,15 +26,11 @@ void Globale(void)
     tLog = chargementLog("../donnees/log.don", &nbLog);
     tIut = chargeIutDon("../donnees/iut.don", &nbIut, &nbIutMax);
 
-    //nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
 
     //Appel du menu visiteur
     menuVisiteur(tLog, nbLog, tIut, nbIut);
-    //afficherDeptIutDonne(tIut, nbIut);
 
-    //TEST menu candidat en attendant la conexion et tout la
-    //nbCand = creerCandidat(tCand, nbCand);
-    //menuCandidat(tLog, nbLog, tIut, nbIut, tCand[0]); //Sauvegarde dans les fichiers
+    //Sauvegarde dans les fichiers
 }
 
 /**

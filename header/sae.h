@@ -112,7 +112,6 @@ void Globale(void);
 Log * chargementLog(char * nomFichier, int * nbLog);
 int existeUtilisateur(char * utilisateur, int * indice, Log * tLog, int nbLog);
 int mdpValide(char * mdp, int indice, Log * tLog);
-//void menuVisiteur(VilleIut *villeIut, int nbVilles);
 void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles);
 void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles, Candidat *c);
 Candidat IntermediaireMenuCandidat(ListeCandidats lCand, int *trouve);
@@ -172,10 +171,6 @@ lChoix listenouvC(void);
 
 
 // chargEtSauvFich.c
-//int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[]);
-//void lireDep(FILE *flot, char nomDept[], int *nbP, char resp[]);
-//int appartientIut(VilleIut *tVilleIut[], int nb, char nom[], int *trouve);
-//void sauvegarderFichierIutDon(VilleIut *tVilleIut[], int nbVille, char nomFich[]);
 
 void testCharge(void);
 void lectureDep(ListeDept ldept, FILE * fichier);
@@ -223,7 +218,6 @@ Candidat validationCandidat( Candidat c, VilleIut ** tIut, int nbvilles );
 
 // Partie3.c 
 
-//ListeDeptV2 configurationDeptV2( ListeDept ldept, float moy );
 ListeDeptV2 configurationDeptV2( ListeDept ldept );
 
 void menuPartie3( VilleIut ** tIut, int nbvilles );
