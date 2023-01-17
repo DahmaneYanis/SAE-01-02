@@ -130,7 +130,7 @@ void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut);
 void seConnecterTest(void);
 void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut);
 
-int modifiePlacesDept(VilleIut *tiut[], int nbVilles, char *ville, char *nomDept, int nbP);
+int saisirNbPlaceDep(void);
 int modifieRespDept(VilleIut *tiut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[]);
 void afficherDeptIutDonne(VilleIut *tiut[], int nbVilles);
 void afficheIUTDept(VilleIut *tiut[], int nbVilles, char *nomDept);
@@ -139,6 +139,7 @@ void afficheNbPlacesDep(VilleIut *tiut[], int nbVilles, char nomDept[]);
 int existeVille( VilleIut *tiut[], char ville[], int nbvilles );
 void menuAdmin(VilleIut *tiut[], int nbVilles);
 int saisirVille(VilleIut *tiut[], int nbVilles, char ville[]);
+MaillonDept *saisirDep(ListeDept ldept);
 
 void afficherUnCandidat(Candidat candidat);
 void afficherCandidats(Candidat **candidats, int nbCandidats);

@@ -620,47 +620,16 @@ void saisieMdp(char * mdp)
 }
 
 /**
- * Modifie le nombre de places d'un département dans un IUT.
+ * @brief Saisie le nombe de place du departement
  *
- * @param villeIut tableau de pointeurs sur les structures VilleIut
- * @param nbVilles nombre de villes dans le tableau villeIut
- * @param ville nom de la ville où se trouve l'IUT
- * @param nomDept nom du département à modifier
- * @param nbP nouveau nombre de places
- *
- * @return 1 si le département a été trouvé et modifié, 0 sinon
+ * @return le nombre de places
  */
-int modifiePlacesDept(VilleIut *tiut[], int nbVilles, char *ville, char *nomDept, int nbP)
+int saisirNbPlaceDep(void)
 {
-    // Recherche de la ville et du département
-    int i;
-    for (i = 0; i < nbVilles; i++)
-    {
-        if (strcmp(tiut[i] -> nom, ville) == 0)
-        {
-            // Ville trouvée, recherche du département
-            MaillonDept *dept = tiut[i] -> lDept;
-
-            while ( dept != NULL && strcmp( dept -> nomDept, nomDept) != 0)
-            {
-                dept = dept ->suiv;
-            }
-            if (dept != NULL)
-            {
-                // Département trouvé, modification du nombre de places
-                dept->nbP = nbP;
-                return 1;
-            }
-            else
-            {
-                // Département non trouvé
-                return 0;
-            }
-        }
-    }
-
-    // Ville non trouvée
-    return 0;
+    int nbP;
+    printf("Veuillez saisir le nouveau nombre de places :\n");
+    scanf("%d", &nbP);
+    return nbP;
 }
 
 /**
@@ -837,7 +806,8 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
 {
     int choix;
     char ville[30];
-    int pos;
+    int pos, nbP;
+    MaillonDept *dep;
 
     do
     {
@@ -861,7 +831,9 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
         {
             case 1:
                 pos = saisirVille(villeIut, nbVilles, ville);
-              //  modifiePlacesDept(villeIut, nbVilles, ville, nomDept, nbP);
+                dep = saisirDep(villeIut[pos]->lDept);
+                nbP = saisirNbPlaceDep();
+                dep->nbP = nbP;
                 //modifiePlacesDept(villeIut, nbVilles);
                 break;
             case 2:
@@ -918,7 +890,7 @@ int saisirVille(VilleIut *tiut[], int nbVilles, char ville[])
 
 MaillonDept *saisirDep(ListeDept ldept)
 {
-    MaillonDept *m;
+    MaillonDept *m = ldept;
     char nomDep[30];
     int res;
 
@@ -926,16 +898,20 @@ MaillonDept *saisirDep(ListeDept ldept)
     printf("Veuillez saisir un departement :\n");
     scanf("%s", nomDep);
     res = existeDept(ldept, nomDep);
-    while (res == -1)
+    while (res == 0)
     {
         afficherListe(ldept);
         printf("Invalide\nVeuillez saisir un departement :\n");
         scanf("%s", nomDep);
         res = existeDept(ldept, nomDep);
     }
-    while (ldept->nomDept != nomDep)
-        ldept = ldept->suiv;
-    return ldept;
+    while (m)
+    {
+        if (strcmp(m->nomDept, nomDep) == 0)
+            return m;
+        m = m->suiv;
+    }
+    return m;
 }
 
 /*
