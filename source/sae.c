@@ -632,6 +632,13 @@ int saisirNbPlaceDep(void)
     return nbP;
 }
 
+void saisirRespDep(char resp[])
+{
+    printf("Veuillez saisir le nom du responsable\n");
+    fgets(resp, 30, stdin);
+    resp[strlen(resp) - 1] = '\0';
+}
+
 /**
  * @brief Modifie le nom du responsable d'un département dans un IUT
  * 
@@ -834,20 +841,16 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
                 dep = saisirDep(villeIut[pos]->lDept);
                 nbP = saisirNbPlaceDep();
                 dep->nbP = nbP;
-                //modifiePlacesDept(villeIut, nbVilles);
                 break;
             case 2:
                 pos = saisirVille(villeIut, nbVilles, ville);
                 nbP = saisirNouvDep(nomDep, resp);
                 ajouterDept(villeIut[pos]->lDept, nomDep, resp, nbP);
-                //creeDeptIUT(villeIut, nbVilles);
                 break;
             case 3:
                 pos = saisirVille(villeIut, nbVilles, ville);
                 dep = saisirDep(villeIut[pos]->lDept);
                 villeIut[pos]->lDept = supprimerDept(villeIut[pos]->lDept, dep->nomDept);
-                // Suppression d'un département d'un IUT
-                //supprimeDeptIUT(villeIut, nbVilles);
                 break;
             case 4:
                 // Lancement de la phase de candidature
@@ -859,6 +862,11 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
                 break;
             case 6:
                 // Modification du nom du responsable d'un département
+                pos = saisirVille(villeIut, nbVilles, ville);
+                dep = saisirDep(villeIut[pos]->lDept);
+                saisirRespDep(resp);
+                strcpy(dep->resp, resp);
+
                 //modifieRespDept(villeIut, nbVilles);
                 break;
             case 7:
@@ -885,9 +893,9 @@ int saisirNouvDep(char *nomDep, char *resp)
     int nbP;
 
     printf("Veuillez saisir le nom du nouveau departement\n");
-    scanf("%s", nomDep);
+    scanf("%s%*c", nomDep);
     printf("Veuillez saisir le nom du responsable\n");
-    scanf("%s", resp);
+    scanf("%s%*c", resp);
     printf("Veuillez saisir le nombre de places du departement\n");
     scanf("%d", &nbP);
     return nbP;
@@ -900,14 +908,14 @@ int saisirVille(VilleIut *tiut[], int nbVilles, char ville[])
 
     afficheVillesIUT(tiut, nbVilles);
     printf("Veuillez saisir la ville :\n");
-    scanf("%s", ville);
+    scanf("%s%*c", ville);
     res = existeVille(tiut, ville, nbVilles);
     while (res == -1)
     {
         clean
         afficheVillesIUT(tiut, nbVilles);
         printf("Veuillez saisir la ville :\n");
-        scanf("%s", ville);
+        scanf("%s%*c", ville);
         res = existeVille(tiut, ville, nbVilles);
     }
     return res;
@@ -921,13 +929,13 @@ MaillonDept *saisirDep(ListeDept ldept)
 
     afficherListe(ldept);
     printf("Veuillez saisir un departement :\n");
-    scanf("%s", nomDep);
+    scanf("%s%*c", nomDep);
     res = existeDept(ldept, nomDep);
     while (res == 0)
     {
         afficherListe(ldept);
         printf("Invalide\nVeuillez saisir un departement :\n");
-        scanf("%s", nomDep);
+        scanf("%s%*c", nomDep);
         res = existeDept(ldept, nomDep);
     }
     while (m)
