@@ -276,6 +276,27 @@ int afficherMenuCandidat(void)
     return choix; 
 }
 
+
+Candidat IntermediaireMenuCandidat(ListeCandidats lCand, int *trouve)
+{
+    int num;
+
+    printf("Numero du candidat : ");
+    scanf("%d%*c", &num);
+    while(lCand->suiv != NULL)
+    {
+        if(num == lCand->candidat.numero)
+        {
+            *trouve = 1;
+            return lCand->candidat;
+        }
+        lCand = lCand->suiv;
+    }
+    *trouve = 0;
+    return lCand->candidat;
+}
+
+
 /**
  * @brief Affiche le menu des options disponibles pour un visiteur.
  * 
@@ -376,7 +397,8 @@ void seConnecterTest(void)
 void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut)
 {
     char mdp[30], utilisateur[30];
-    int existe, indice, valide;
+    int existe, indice, valide, trouve;
+    Candidat c;
 
     banniereConnection(); // Affichage
     saisieNomUtilisateur(utilisateur); // Récupération du nom d'utilisateur
@@ -404,7 +426,13 @@ void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut)
         }
         if(strcmp(tLog[indice].status, "candidat") == 0)
         {
-            //IntermediaireMenuCandidat(tLog, nbLog, tIut, nbIut);
+            c = IntermediaireMenuCandidat(lCand, &trouve);
+            while(trouve != 1)
+            {
+                printf("Candidat non valide, refaire la procedure.\n");
+                c = IntermediaireMenuCandidat(lCand, &trouve);
+            }
+            menuCandidat(tLog, nbLog, tIut, nbIut, c);
         }
         if(strcmp(tLog[indice].status, "responsable") == 0)
         {

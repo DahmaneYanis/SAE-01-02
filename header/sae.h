@@ -115,7 +115,7 @@ int mdpValide(char * mdp, int indice, Log * tLog);
 //void menuVisiteur(VilleIut *villeIut, int nbVilles);
 void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles);
 void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles, Candidat *c);
-void IntermediaireMenuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles);
+Candidat IntermediaireMenuCandidat(ListeCandidats lCand, int *trouve);
 void saisirCandidature(char ville[], char dep[], VilleIut *tiut[], int nbVille);
 VilleIut *saisieIut(VilleIut *tiut[], int nbVille, int *res);
 int choixMenuCandidat(void);
