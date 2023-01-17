@@ -278,15 +278,8 @@ void supprimerIut(VilleIut ** tIut, int nbIut, int j)
 ==============================================
 */
 
-MaillonCandidat * lireCandidat(FILE * flot);
-lChoix lireChoix (FILE *flot);
-lChoix recupChoix(FILE *flot, int nbChoix);
-lChoix ajouteChoix(lChoix l, lChoix nouv);
-ListeCandidats ajouteCandidat (ListeCandidats l, MaillonCandidat * nouv);
-
-void testCandidat(void)
+ListeCandidats chargeCandidat(int * nbCandidat)
 {
-    int nbCandidat;
     MaillonCandidat * m;
 
     FILE * flot = fopen("../donnees/candidats.don", "r");
@@ -299,11 +292,11 @@ void testCandidat(void)
     if (!feof(flot))
     {
 
-        fscanf(flot, "%d%*c", &nbCandidat);
+        fscanf(flot, "%d%*c", nbCandidat);
 
         m = NULL;
         
-        for (int i = 0 ; i < nbCandidat ; i++)
+        for (int i = 0 ; i < *nbCandidat ; i++)
         {
             m = ajouteCandidat(m, lireCandidat(flot));
         }
@@ -313,8 +306,8 @@ void testCandidat(void)
     aux = m;
     lChoix auxLis;
 
-    printf("%d\n", nbCandidat);
-    for (int i = 0 ; i < nbCandidat ; i++)
+    printf("%d\n", *nbCandidat);
+    for (int i = 0 ; i < *nbCandidat ; i++)
     {
         printf("%d\n", aux->candidat.numero);
         printf("%s\n", aux->candidat.nom);
@@ -345,6 +338,8 @@ void testCandidat(void)
     }
 
     fclose(flot);
+
+    return m;
 }
 
 ListeCandidats ajouteCandidat (ListeCandidats l, MaillonCandidat * nouv)

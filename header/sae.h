@@ -113,7 +113,6 @@ void Globale(void);
 Log * chargementLog(char * nomFichier, int * nbLog);
 int existeUtilisateur(char * utilisateur, int * indice, Log * tLog, int nbLog);
 int mdpValide(char * mdp, int indice, Log * tLog);
-void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles);
 void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles, Candidat *c);
 Candidat IntermediaireMenuCandidat(ListeCandidats lCand, int *trouve);
 void saisirCandidature(char ville[], char dep[], VilleIut *tiut[], int nbVille);
@@ -125,12 +124,13 @@ int choixMenuVisiteur(void);
 void banniereConnection(void);
 void saisieNomUtilisateur(char * utilisateur);
 void saisieMdp(char * mdp);
+void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut, ListeCandidats lCand);
+
 
 int saisirNbPlaceDep(void);
 void saisirRespDep(char *resp);
-void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut);
+void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut, ListeCandidats lCand);
 void seConnecterTest(void);
-void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut);
 
 int saisirNbPlaceDep(void);
 int modifieRespDept(VilleIut *tiut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[]);
@@ -188,15 +188,12 @@ int existe(char * nom, VilleIut ** tIut, int nbIut, int iDepart, int * indice);
 void fusion(VilleIut ** tIut, int nbIut, int i, int j);
 void supprimerIut(VilleIut ** tIut, int nbIut, int j);
 
-//void ajouteChoix(lChoix lchoix, Choix * choix);
-//void testCandidat(void);
-//ListeCandidats chargeCandidat(void);
-//void ajouteCandidat(ListeCandidats lCand, FILE * flot);
-//MaillonCandidat * lireCandidat(FILE *flot);
-//void ajouteChoix(lChoix lchoix, Choix * choix);
-//lChoix lireChoix(FILE *flot);
-//lChoix initialiseChoix(void);
-//ListeCandidats initialiseCandidat(void);
+ListeCandidats chargeCandidat(int * nbCandidat);
+MaillonCandidat * lireCandidat(FILE * flot);
+lChoix lireChoix (FILE *flot);
+lChoix recupChoix(FILE *flot, int nbChoix);
+lChoix ajouteChoix(lChoix l, lChoix nouv);
+ListeCandidats ajouteCandidat (ListeCandidats l, MaillonCandidat * nouv);
 
 
 // candidat.c
@@ -236,4 +233,3 @@ int afficherMenuResponsable(void);
 
 
 //test
-void testCandidat(void);

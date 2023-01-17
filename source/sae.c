@@ -17,6 +17,7 @@ void Globale(void)
     Log * tLog;
     VilleIut ** tIut;
     Candidat *tCand[50];
+    ListeCandidats lCand;
 
     int nbCand = 0;
     int nbLog;
@@ -25,10 +26,10 @@ void Globale(void)
     //Chargement des fichiers
     tLog = chargementLog("../donnees/log.don", &nbLog);
     tIut = chargeIutDon("../donnees/iut.don", &nbIut, &nbIutMax);
-
+    lCand = chargeCandidat(&nbCand);
 
     //Appel du menu visiteur
-    menuVisiteur(tLog, nbLog, tIut, nbIut);
+    menuVisiteur(tLog, nbLog, tIut, nbIut, lCand);
 
     //Sauvegarde dans les fichiers
 }
@@ -99,7 +100,7 @@ void test(VilleIut * tIut[], int nbVilles)
  * choixMenuVisiteur. Selon le choix de l'utilisateur, la fonction appelle la fonction correspondante
  * ou met fin à l'exécution de la fonction.
 */
-void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
+void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut, ListeCandidats lCand)
 //void menuVisiteur(VilleIut *villeIut, int nbVilles)
 {
     int choix;
@@ -134,7 +135,7 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
                 clean
                 break;
             case 5 :
-                seConnecter(tLog, nbLog, tIut, nbIut);
+                seConnecter(tLog, nbLog, tIut, nbIut, lCand);
                 clean
                 break;
             case 0 :
@@ -386,7 +387,7 @@ void seConnecterTest(void)
  * @param tIut Tableau de pointeur de VilleIut
  * @param nbIut [Taille Logique] 
  */
-void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut)
+void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut, ListeCandidats lCand)
 {
     char mdp[30], utilisateur[30];
     int existe, indice, valide, trouve;
@@ -424,7 +425,7 @@ void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut)
                 printf("Candidat non valide, refaire la procedure.\n");
                 c = IntermediaireMenuCandidat(lCand, &trouve);
             }
-            menuCandidat(tLog, nbLog, tIut, nbIut, c);
+            menuCandidat(tLog, nbLog, tIut, nbIut, &c);
         }
         if(strcmp(tLog[indice].status, "responsable") == 0)
         {

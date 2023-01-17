@@ -8,6 +8,6 @@ int main(void)
 	#ifdef _WIN32
 	//color
 	#endif
-	testCandidat();
+	Globale();
 	return 0;
 }
