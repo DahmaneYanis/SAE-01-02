@@ -10,7 +10,7 @@
 */
 
 #ifdef _WIN32
-#define clean   printf("\n\n\n\n\n\n");  //system("cls"); 
+#define clean   system("cls"); 
 #define color   system("color 70");
 void testColor(void);
 #endif
@@ -19,6 +19,10 @@ void testColor(void);
 #define clean   system("clear");
 #endif
 
+#ifndef wait
+#define wait    printf("Appuyez sur entree pour continuer...") ; \
+                scanf("%*c");
+#endif
 /*
 ------------------------------------------------------------------------
                             Les structures

@@ -30,8 +30,8 @@ void Globale(void)
     //nbVilles = chargIutDon(tIut, 50, "../donnees/iut.don");
 
     //Appel du menu visiteur
-    //menuVisiteur(tLog, nbLog, tIut, nbIut);
-    afficherDeptIutDonne(tIut, nbIut);
+    menuVisiteur(tLog, nbLog, tIut, nbIut);
+    //afficherDeptIutDonne(tIut, nbIut);
 
     //TEST menu candidat en attendant la conexion et tout la
     //nbCand = creerCandidat(tCand, nbCand);
@@ -120,18 +120,18 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
         {
             case 1:
                 afficheVillesIUT(tIut, nbIut);
-                printf("\nAppuyez sur entree pour continuer...");
-                scanf("%*c");
+                wait
                 clean
                 break;
             case 2:
                 //afficheNbPlace(tIut, nbIut);
-                printf("\nAppuyez sur entree pour continuer...");
-                scanf("%*c");
+                wait
                 clean  
                 break;
             case 3 :
                 afficherDeptIutDonne(tIut, nbIut);
+                wait
+                clean
                 break;
             case 4 :
                 printf("En attente de je ne sais qui\n");
@@ -412,8 +412,7 @@ void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut)
     }
     else
     {
-        printf("Mot de passe invalide\nAppuyez sur [entree] pour continuer...");
-        scanf("%*c");
+        wait
     }
 }
 
@@ -721,11 +720,12 @@ void afficherDeptIutDonne(VilleIut *tiut[], int nbVille)
 
     afficheVillesIUT(tiut, nbVille);
     printf("Veuillez saisir le nom de l'iut que vous voulez afficher.\n");
-    scanf("%s", nom);
+    scanf("%s%*c", nom);
     res = existeVille(tiut, nom, nbVille);
     if (res == -1)
     {
         printf("Cet IUT n'existe pas\n");
+        wait
         return ;
     }
     afficherListe(tiut[res]->lDept);
@@ -839,6 +839,7 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
     do
     {
         // Affichage du menu
+        clean
         printf("\nMenu administrateur:\n");
         printf("1. Modifier le nombre de places d'un département\n");
         printf("2. Créer un département dans un IUT\n");
