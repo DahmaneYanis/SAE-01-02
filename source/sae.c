@@ -836,6 +836,9 @@ int existeVille(VilleIut *tIut[], char ville[], int nbvilles )
 void menuAdmin(VilleIut **villeIut, int nbVilles)
 {
     int choix;
+    char *ville;
+    int pos;
+
     do
     {
         // Affichage du menu
@@ -857,11 +860,14 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
         switch (choix)
         {
             case 1:
-                // Modification du nombre de places d'un département
+                ville = saisirVille(villeIut, nbVilles, &pos);
+              //  modifiePlacesDept(villeIut, nbVilles, ville, nomDept, nbP);
                 //modifiePlacesDept(villeIut, nbVilles);
                 break;
             case 2:
                 // Création d'un département dans un IUT
+                ville = saisirVille(villeIut, nbVilles, &pos);
+                villeIut[pos]->lDept = saisirEtAjouterNouvDep(villeIut[pos]->lDept);
                 //creeDeptIUT(villeIut, nbVilles);
                 break;
             case 3:
@@ -892,7 +898,41 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
     } while (choix != 7);
 }
 
+char *saisirVille(VilleIut *tiut[], int nbVilles, int *pos)
+{
+    char *ville;
+    int res;
 
+    afficheVillesIUT(tiut, nbVilles);
+    printf("Veuillez saisir la ville :\n");
+    scanf("%s", ville);
+    res = existeVille(tiut, ville, nbVilles);
+    while (res == -1)
+    {
+        clean
+        afficheVillesIUT(tiut, nbVilles);
+        printf("Veuillez saisir la ville :\n");
+        scanf("%s", ville);
+        res = existeVille(tiut, ville, nbVilles);
+    }
+    *pos = res;
+    return ville;
+}
+
+ListeDept saisirEtAjouterNouvDep(ListeDept ldept)
+{
+    char *nomDep;
+    char *nomResp;
+    int nbP;
+
+    printf("Qu'elle est le nom du nouveau departement ?\n");
+    scanf("%s", nomDep);
+    printf("Qu'elle est le nom du responsable ?\n");
+    scanf("%s", nomResp);
+    printf("Combien il y a-t il de places ?\n");
+    scanf("%d", nbP);
+    return ajouterDept(ldept, nomDep, nomResp, nbP);
+}
 
 /*
 ================================================

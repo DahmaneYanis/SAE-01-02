@@ -135,10 +135,14 @@ int longueur(ListeDept ldept)
     return i;
 }
 
-/*
-Faux
-*/
-/*int existeDept(ListeDept ldept, char nom[])
+/**
+ * @brief Renvois 1 si le departement existe dans la liste donne, 0 sinon
+ * 
+ * @param ldept la liste de departements
+ * @param nom le nom du departement recherche
+ * @return int 1 pour trouve et 0 pour non trouve
+ */
+int existeDept(ListeDept ldept, char nom[])
 {
     while (ldept)
     {
@@ -147,7 +151,7 @@ Faux
         ldept = ldept->suiv;
     }
     return 0;
-}*/
+}
 
 /**
  * @brief Affiche tous les départements d'une liste, avec leurs noms, leurs responsables et leur nombre de places, sous forme de tableau.
@@ -168,4 +172,9 @@ void afficherListe(ListeDept ldept)
         // Passage au département suivant
         ldept = ldept->suiv;
     }
+}
+
+void afficheNbPlace(VilleIut **tIut, int nbIut)
+{
+    return ;
 }
