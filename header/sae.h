@@ -214,10 +214,18 @@ Candidat validationCandidat( Candidat c, VilleIut ** tIut, int nbvilles );
 
 // Partie3.c 
 
-ListeDeptV2 configurationDeptV2( ListeDept ldept, float moy );
+//ListeDeptV2 configurationDeptV2( ListeDept ldept, float moy );
+ListeDeptV2 configurationDeptV2( ListeDept ldept );
+
 void menuPartie3( VilleIut ** tIut, int nbvilles );
 int menuResponsableAdmissionPartie3( VilleIut ** tIut, int nbVilles, char ville[], char departement[] );
 ListeDeptV2 miseAJourMoyenneDept( ListeDeptV2 l );
 ListeDeptV2 miseAJourNbAdmisDept( ListeDeptV2 l );
 
+//phase.c
+void afficherMenuAdmin(void);
 
+//sae.c
+void afficheNbPlace(VilleIut ** tIut, int nbIut);
+void menuResponsable(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut);
+int afficherMenuResponsable(void);
