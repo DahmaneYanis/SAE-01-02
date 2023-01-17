@@ -187,9 +187,6 @@ void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles, Candida
             case 3 :
                 c->lchoix = supprimerCandidature(c->lchoix, &c->nbChoix);
                 break;
-            case 4 :
-                //Supprimer une candidature
-                break;
             case 0 :
                 actif = 0;
                 break;
