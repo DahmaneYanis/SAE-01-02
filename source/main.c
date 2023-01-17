@@ -6,11 +6,8 @@ int main(void)
 {
 
 	#ifdef _WIN32
-	color
+	//color
 	#endif
-	//guillaume();
-	//testCharge();
 	testCandidat();
-	//Globale();
 	return 0;
 }

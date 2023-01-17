@@ -11,7 +11,7 @@
 
 #ifdef _WIN32
 #define clean   system("cls"); 
-#define color   system("color 70");
+#define color   system("color 07");
 void testColor(void);
 #endif
 
@@ -113,10 +113,9 @@ void Globale(void);
 Log * chargementLog(char * nomFichier, int * nbLog);
 int existeUtilisateur(char * utilisateur, int * indice, Log * tLog, int nbLog);
 int mdpValide(char * mdp, int indice, Log * tLog);
-//void menuVisiteur(VilleIut *villeIut, int nbVilles);
 void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles);
 void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles, Candidat *c);
-void IntermediaireMenuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles);
+Candidat IntermediaireMenuCandidat(ListeCandidats lCand, int *trouve);
 void saisirCandidature(char ville[], char dep[], VilleIut *tiut[], int nbVille);
 VilleIut *saisieIut(VilleIut *tiut[], int nbVille, int *res);
 int choixMenuCandidat(void);
@@ -126,19 +125,24 @@ int choixMenuVisiteur(void);
 void banniereConnection(void);
 void saisieNomUtilisateur(char * utilisateur);
 void saisieMdp(char * mdp);
+
+int saisirNbPlaceDep(void);
+void saisirRespDep(char *resp);
 void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut);
 void seConnecterTest(void);
 void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut);
 
-int modifiePlacesDept(VilleIut *tiut[], int nbVilles, char *ville, char *nomDept, int nbP);
+int saisirNbPlaceDep(void);
 int modifieRespDept(VilleIut *tiut[], int nbVilles, char ville[], char nomDept[], char nvNomResp[]);
 void afficherDeptIutDonne(VilleIut *tiut[], int nbVilles);
-void afficheIUTDept(VilleIut *tiut[], int nbVilles, char *nomDept);
+void afficheIUTDept(VilleIut *tiut[], int nbVilles);
 void afficheVillesIUT(VilleIut *tiut[], int nbVilles);
-void afficheNbPlacesDep(VilleIut *tiut[], int nbVilles, char nomDept[]);
+void afficheNbPlacesDep(VilleIut *tiut[], int nbVilles);
 int existeVille( VilleIut *tiut[], char ville[], int nbvilles );
 void menuAdmin(VilleIut *tiut[], int nbVilles);
 int saisirVille(VilleIut *tiut[], int nbVilles, char ville[]);
+MaillonDept *saisirDep(ListeDept ldept);
+int saisirNouvDep(char *nomDep, char *resp);
 
 void afficherUnCandidat(Candidat candidat);
 void afficherCandidats(Candidat **candidats, int nbCandidats);
@@ -151,7 +155,7 @@ lChoix creerCandidature(lChoix choixCandid, char ville[50], char departement[50]
 // listeDeparements.c
 ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
 ListeDept supprimerEnTete(ListeDept ldept);
-ListeDept supprimer(ListeDept ldept, char nom[]);
+ListeDept supprimerDept(ListeDept ldept, char nomDep[]);
 ListeDept ajouterDept(ListeDept ldept, char nomDept[], char resp[], int nbP);
 ListeDept listenouv();
 bool vide(ListeDept ldept);
@@ -168,10 +172,6 @@ lChoix listenouvC(void);
 
 
 // chargEtSauvFich.c
-//int chargIutDon(VilleIut *tVilleIut[], int nbMax, char nomFich[]);
-//void lireDep(FILE *flot, char nomDept[], int *nbP, char resp[]);
-//int appartientIut(VilleIut *tVilleIut[], int nb, char nom[], int *trouve);
-//void sauvegarderFichierIutDon(VilleIut *tVilleIut[], int nbVille, char nomFich[]);
 
 void testCharge(void);
 void lectureDep(ListeDept ldept, FILE * fichier);
@@ -219,7 +219,6 @@ Candidat validationCandidat( Candidat c, VilleIut ** tIut, int nbvilles );
 
 // Partie3.c 
 
-//ListeDeptV2 configurationDeptV2( ListeDept ldept, float moy );
 ListeDeptV2 configurationDeptV2( ListeDept ldept );
 
 void menuPartie3( VilleIut ** tIut, int nbvilles );
