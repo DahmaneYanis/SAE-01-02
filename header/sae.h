@@ -125,6 +125,9 @@ int choixMenuVisiteur(void);
 void banniereConnection(void);
 void saisieNomUtilisateur(char * utilisateur);
 void saisieMdp(char * mdp);
+
+int saisirNbPlaceDep(void);
+void saisirRespDep(char *resp);
 void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut);
 void seConnecterTest(void);
 void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut);
