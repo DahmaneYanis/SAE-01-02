@@ -1,4 +1,6 @@
-int menuAdmin(int phase)
+#include "../header/sae.h"
+
+/*int menuAdmin(int phase)
 {
     int choix;
     if (phase < 3)
@@ -15,7 +17,7 @@ int menuAdmin(int phase)
         return choix;
         break;
     }
-}
+}*/
 
 void afficherMenuAdmin(void)
 {

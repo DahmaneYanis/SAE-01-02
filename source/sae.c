@@ -125,7 +125,7 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
                 clean
                 break;
             case 2:
-                afficheNbPlace(tIut, nbIut);
+                //afficheNbPlace(tIut, nbIut);
                 printf("\nAppuyez sur entree pour continuer...");
                 scanf("%*c");
                 clean  
@@ -134,7 +134,8 @@ void menuVisiteur(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
                 afficherDeptIutDonne(tIut, nbIut);
                 break;
             case 4 :
-                afficheIUTRecupDept(tIut, nbIut);
+                printf("En attente de je ne sais qui\n");
+                //afficheIUTRecupDept(tIut, nbIut);
                 break;
             case 5 :
                 seConnecter(tLog, nbLog, tIut, nbIut);
@@ -174,7 +175,7 @@ void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles, Candida
                 break;
             case 2:
                 afficheVillesIUT(tIut, nbVilles - 1);
-                saisirCandidature(ville, dep, tIut, nbVilles);
+                //saisirCandidature(ville, dep, tIut, nbVilles);
                 c->lchoix = creerCandidature(c->lchoix, ville, dep, decision, validation, &c->nbChoix);
                 c->nbChoix += 1;
                 printf("%s\n", c->lchoix->ville);
@@ -195,8 +196,10 @@ void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles, Candida
     }
 }
 
+/*
+FAUX
+*/
 /**
-
     @brief Cette fonction permet à l'utilisateur de saisir les informations sur une candidature. Il doit d'abord saisir le nom de la ville,
     puis le nom du département correspondant. Si les informations saisies ne sont pas valides, l'utilisateur est invité à les resaisir.
     @param ville Nom de la ville saisie
@@ -205,6 +208,7 @@ void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles, Candida
     @param nbVille Nombre de villes dans la liste
     @return void
 */
+/*
 void saisirCandidature(char ville[], char dep[], VilleIut *tiut[], int nbVille)
 {
     int pos, res;
@@ -230,7 +234,7 @@ void saisirCandidature(char ville[], char dep[], VilleIut *tiut[], int nbVille)
         res = existeDept(tiut[pos]->lDept, dep);
     }
 }
-
+*/
 /**
 
 @brief affiche le menu des candidats et renvoie le choix de l'utilisateur
@@ -399,7 +403,7 @@ void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut)
         }
         if(strcmp(tLog[indice].status, "candidat") == 0)
         {
-            IntermediaireMenuCandidat(tLog, nbLog, tIut, nbIut);
+            //IntermediaireMenuCandidat(tLog, nbLog, tIut, nbIut);
         }
         if(strcmp(tLog[indice].status, "responsable") == 0)
         {
@@ -518,7 +522,7 @@ void menuResponsable(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
                 clean
                 break;
             case 9:
-                afficheNbPlace(tIut, nbIut);
+                //afficheNbPlace(tIut, nbIut);
                 printf("\nAppuyez sur entree pour continuer...");
                 scanf("%*c");
                 clean  
@@ -527,7 +531,7 @@ void menuResponsable(Log * tLog, int nbLog, VilleIut *tIut[], int nbIut)
                 afficherDeptIutDonne(tIut, nbIut);
                 break;
             case 11 :
-                afficheIUTRecupDept(tIut, nbIut);
+                //afficheIUTRecupDept(tIut, nbIut);
                 break;
             case 0 :
                 actif = 0;
@@ -1116,6 +1120,10 @@ ListeDeptV2 configurationDeptV2( ListeDept ldept )
     return lDeptV2;
 }
 
+/*
+FAUX
+*/
+/*
 void afficheNbPlace(VilleIut ** tIut, int nbIut)
 {
     char ville[30];
@@ -1124,21 +1132,21 @@ void afficheNbPlace(VilleIut ** tIut, int nbIut)
     MaillonDept *aux;
 
     printf("Veuillez saisir un Iut\n");
-    fscanf("%s", ville);
+    scanf("%s", ville);
     i = existeVille(tIut, ville, nbIut);
     if (i == -1)
     {
         printf("Veuillez saisir un Iut\n");
-        fscanf("%s", ville);
+        scanf("%s", ville);
         i = existeVille(tIut, ville, nbIut);
     }
     printf("Veuillez saisir un departement\n");
-    fscanf("%s", dep);
+    scanf("%s", dep);
     res = existeDept(tIut, nbIut);
     while (res == -1)
     {
         printf("Veuillez saisir un departement\n");
-        fscanf("%s", dep);
+        scanf("%s", dep);
         res = existeDept(tIut, nbIut);
     }
     aux = tIut[i]->lDept;
@@ -1151,7 +1159,7 @@ void afficheNbPlace(VilleIut ** tIut, int nbIut)
         }
     }
 }
-
+*/
 /*
 ================================================
                     Partie 3

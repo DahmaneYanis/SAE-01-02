@@ -135,7 +135,10 @@ int longueur(ListeDept ldept)
     return i;
 }
 
-int existeDept(ListeDept ldept, char nom[])
+/*
+Faux
+*/
+/*int existeDept(ListeDept ldept, char nom[])
 {
     while (ldept)
     {
@@ -144,7 +147,7 @@ int existeDept(ListeDept ldept, char nom[])
         ldept = ldept->suiv;
     }
     return 0;
-}
+}*/
 
 /**
  * @brief Affiche tous les départements d'une liste, avec leurs noms, leurs responsables et leur nombre de places, sous forme de tableau.
