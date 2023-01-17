@@ -140,6 +140,7 @@ int existeVille( VilleIut *tiut[], char ville[], int nbvilles );
 void menuAdmin(VilleIut *tiut[], int nbVilles);
 int saisirVille(VilleIut *tiut[], int nbVilles, char ville[]);
 MaillonDept *saisirDep(ListeDept ldept);
+int saisirNouvDep(char *nomDep, char *resp);
 
 void afficherUnCandidat(Candidat candidat);
 void afficherCandidats(Candidat **candidats, int nbCandidats);

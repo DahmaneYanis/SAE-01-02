@@ -805,7 +805,7 @@ int existeVille(VilleIut *tIut[], char ville[], int nbvilles )
 void menuAdmin(VilleIut **villeIut, int nbVilles)
 {
     int choix;
-    char ville[30];
+    char ville[30], nomDep[30], resp[30];
     int pos, nbP;
     MaillonDept *dep;
 
@@ -837,8 +837,9 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
                 //modifiePlacesDept(villeIut, nbVilles);
                 break;
             case 2:
-                // Création d'un département dans un IUT
                 pos = saisirVille(villeIut, nbVilles, ville);
+                nbP = saisirNouvDep(nomDep, resp);
+                ajouterDept(villeIut[pos]->lDept, nomDep, resp, nbP);
                 //creeDeptIUT(villeIut, nbVilles);
                 break;
             case 3:
@@ -867,6 +868,27 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
             break;
         }
     } while (choix != 7);
+}
+
+/**
+ * @brief saisie les donnees d'un departement
+ * 
+ * @param nomDep nom du departement
+ * @param resp nom du responsable
+ * @return int nombre de places
+ */
+int saisirNouvDep(char *nomDep, char *resp)
+{
+    int nbP;
+
+    printf("Veuillez saisir le nom du nouveau departement\n");
+    scanf("%s", nomDep);
+    printf("Veuillez saisir le nom du responsable\n");
+    scanf("%s", resp);
+    printf("Veuillez saisir le nombre de places du departement\n");
+    scanf("%d", &nbP);
+    return nbP;
+
 }
 
 int saisirVille(VilleIut *tiut[], int nbVilles, char ville[])
