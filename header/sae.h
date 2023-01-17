@@ -153,7 +153,7 @@ lChoix creerCandidature(lChoix choixCandid, char ville[50], char departement[50]
 // listeDeparements.c
 ListeDept ajouterEnTete(ListeDept ldept, char nomDept[], char resp[], int nbP);
 ListeDept supprimerEnTete(ListeDept ldept);
-ListeDept supprimer(ListeDept ldept, char nom[]);
+ListeDept supprimerDept(ListeDept ldept, char nomDep[]);
 ListeDept ajouterDept(ListeDept ldept, char nomDept[], char resp[], int nbP);
 ListeDept listenouv();
 bool vide(ListeDept ldept);

@@ -61,6 +61,23 @@ ListeDept supprimerEnTete(ListeDept ldept)
 }
 
 /**
+ * @brief Supprime un departement d'une liste
+ * 
+ * @param ldept la liste de departement
+ * @param nomDep le nom de departement a enlever
+ * @return ListeDept la liste avec le departement en moins
+ */
+ListeDept supprimerDept(ListeDept ldept, char nomDep[])
+{
+    if (ldept == NULL)
+        return NULL;
+    if (strcmp(ldept->nomDept, nomDep) == 0)
+        return supprimerEnTete(ldept);
+    ldept->suiv = supprimerDept(ldept->suiv, nomDep);
+    return ldept;
+}
+
+/**
  * \brief Ajoute un maillon à la liste de départements, en ordre alphabétique.
  *
  * \param ldept La liste de départements à laquelle le maillon doit être ajouté.

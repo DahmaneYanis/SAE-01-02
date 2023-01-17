@@ -843,6 +843,9 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
                 //creeDeptIUT(villeIut, nbVilles);
                 break;
             case 3:
+                pos = saisirVille(villeIut, nbVilles, ville);
+                dep = saisirDep(villeIut[pos]->lDept);
+                villeIut[pos]->lDept = supprimerDept(villeIut[pos]->lDept, dep->nomDept);
                 // Suppression d'un département d'un IUT
                 //supprimeDeptIUT(villeIut, nbVilles);
                 break;
