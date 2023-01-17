@@ -173,8 +173,3 @@ void afficherListe(ListeDept ldept)
         ldept = ldept->suiv;
     }
 }
-
-void afficheNbPlace(VilleIut **tIut, int nbIut)
-{
-    return ;
-}

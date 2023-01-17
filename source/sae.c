@@ -836,7 +836,7 @@ int existeVille(VilleIut *tIut[], char ville[], int nbvilles )
 void menuAdmin(VilleIut **villeIut, int nbVilles)
 {
     int choix;
-    char *ville;
+    char ville[30];
     int pos;
 
     do
@@ -860,14 +860,13 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
         switch (choix)
         {
             case 1:
-                ville = saisirVille(villeIut, nbVilles, &pos);
+                pos = saisirVille(villeIut, nbVilles, ville);
               //  modifiePlacesDept(villeIut, nbVilles, ville, nomDept, nbP);
                 //modifiePlacesDept(villeIut, nbVilles);
                 break;
             case 2:
                 // Création d'un département dans un IUT
-                ville = saisirVille(villeIut, nbVilles, &pos);
-                villeIut[pos]->lDept = saisirEtAjouterNouvDep(villeIut[pos]->lDept);
+                pos = saisirVille(villeIut, nbVilles, ville);
                 //creeDeptIUT(villeIut, nbVilles);
                 break;
             case 3:
@@ -898,9 +897,8 @@ void menuAdmin(VilleIut **villeIut, int nbVilles)
     } while (choix != 7);
 }
 
-char *saisirVille(VilleIut *tiut[], int nbVilles, int *pos)
+int saisirVille(VilleIut *tiut[], int nbVilles, char ville[])
 {
-    char *ville;
     int res;
 
     afficheVillesIUT(tiut, nbVilles);
@@ -915,23 +913,29 @@ char *saisirVille(VilleIut *tiut[], int nbVilles, int *pos)
         scanf("%s", ville);
         res = existeVille(tiut, ville, nbVilles);
     }
-    *pos = res;
-    return ville;
+    return res;
 }
 
-ListeDept saisirEtAjouterNouvDep(ListeDept ldept)
+MaillonDept *saisirDep(ListeDept ldept)
 {
-    char *nomDep;
-    char *nomResp;
-    int nbP;
+    MaillonDept *m;
+    char nomDep[30];
+    int res;
 
-    printf("Qu'elle est le nom du nouveau departement ?\n");
+    afficherListe(ldept);
+    printf("Veuillez saisir un departement :\n");
     scanf("%s", nomDep);
-    printf("Qu'elle est le nom du responsable ?\n");
-    scanf("%s", nomResp);
-    printf("Combien il y a-t il de places ?\n");
-    scanf("%d", nbP);
-    return ajouterDept(ldept, nomDep, nomResp, nbP);
+    res = existeDept(ldept, nomDep);
+    while (res == -1)
+    {
+        afficherListe(ldept);
+        printf("Invalide\nVeuillez saisir un departement :\n");
+        scanf("%s", nomDep);
+        res = existeDept(ldept, nomDep);
+    }
+    while (ldept->nomDept != nomDep)
+        ldept = ldept->suiv;
+    return ldept;
 }
 
 /*
