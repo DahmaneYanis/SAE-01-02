@@ -278,6 +278,201 @@ void supprimerIut(VilleIut ** tIut, int nbIut, int j)
 ==============================================
 */
 
+MaillonCandidat * lireCandidat(FILE * flot);
+lChoix lireChoix (FILE *flot);
+lChoix recupChoix(FILE *flot, int nbChoix);
+lChoix ajouteChoix(lChoix l, lChoix nouv);
+ListeCandidats ajouteCandidat (ListeCandidats l, MaillonCandidat * nouv);
+
+void testCandidat(void)
+{
+    int nbCandidat;
+    MaillonCandidat * m;
+
+    FILE * flot = fopen("../donnees/candidats.don", "r");
+    if (flot == NULL)
+    {
+        printf("Error : Fichier non ouvert\n");
+        exit(1);
+    }
+
+    if (!feof(flot))
+    {
+
+        fscanf(flot, "%d%*c", &nbCandidat);
+
+        m = NULL;
+        
+        for (int i = 0 ; i < nbCandidat ; i++)
+        {
+            m = ajouteCandidat(m, lireCandidat(flot));
+        }
+    }
+
+    MaillonCandidat * aux;
+    aux = m;
+    lChoix auxLis;
+
+    printf("%d\n", nbCandidat);
+    for (int i = 0 ; i < nbCandidat ; i++)
+    {
+        printf("%d\n", aux->candidat.numero);
+        printf("%s\n", aux->candidat.nom);
+        printf("%s\n", aux->candidat.prenom);
+
+        for (int j = 0 ; j < 4 ; j++)
+        {
+            printf("%f\n", aux->candidat.notes[j]);
+        }
+
+        printf("%d\n", aux->candidat.nbChoix);
+
+
+
+        for (int k  = 0 ; k < aux->candidat.nbChoix; k++)
+        {
+            auxLis = aux->candidat.lchoix;  
+            printf("%s\n", auxLis->ville);
+            printf("%s\n", auxLis->departement);
+            printf("%d\n", auxLis->decisionDepartement);
+            printf("%d\n", auxLis->validationCandidat);
+
+            auxLis = auxLis->suiv;
+        }
+
+        aux = aux->suiv;
+
+    }
+
+    fclose(flot);
+}
+
+ListeCandidats ajouteCandidat (ListeCandidats l, MaillonCandidat * nouv)
+{
+    ListeCandidats aux;
+
+    if(l == NULL)
+        l = nouv;
+    else
+    {
+        aux = l;
+        l = nouv;
+        l->suiv = aux;
+    }
+
+    return l;
+}
+
+MaillonCandidat * lireCandidat(FILE * flot)
+{
+    MaillonCandidat * m;
+
+    if (feof(flot)) 
+    {
+        printf("Error : fin de fichier\n");
+        exit(1);
+    }
+
+    m = (MaillonCandidat *) malloc(sizeof(MaillonCandidat));
+    if (m == NULL)
+    {
+        printf("Error : malloc candidat\n");
+        exit(1);
+    }
+
+    // Lecture
+    fscanf(flot, "%d%*c", &m->candidat.numero);
+    
+    fgets(m->candidat.nom, 50, flot);
+    m->candidat.nom[strlen(m->candidat.nom)-1] = '\0';
+    fgets(m->candidat.prenom, 50, flot);
+    m->candidat.prenom[strlen(m->candidat.prenom)-1] = '\0';
+
+    for (int i = 0; i < 4 ; i++)
+        fscanf(flot, "%f", &m->candidat.notes[i]);
+
+    fscanf(flot, "%d%*c", &m->candidat.nbChoix);
+
+    m->candidat.lchoix = recupChoix(flot, m->candidat.nbChoix);
+
+    return m;
+}
+
+lChoix recupChoix(FILE *flot, int nbChoix)
+{
+
+    lChoix l;
+
+    if (feof(flot))
+    {
+        printf("Error : Fin de fichier\n");
+        exit(1);
+    }
+
+    if (flot == NULL)
+    {
+        printf("Error : Erreur de fichier\n");
+        exit(1);
+    }
+
+    l = NULL;
+
+    // Récupération des choix
+    for (int i = 0; i < nbChoix; i++)
+    {
+        l = ajouteChoix(l, lireChoix(flot));
+    }
+
+    return l;
+}
+
+lChoix ajouteChoix(lChoix l, lChoix nouv)
+{
+    lChoix aux;
+
+    if (l == NULL)
+        l = nouv;
+    else
+    {
+        aux = l;
+        l = nouv;
+        l->suiv = aux;
+    }
+
+    return l;
+}
+
+lChoix lireChoix (FILE *flot)
+{
+    lChoix l;
+    
+    if ((flot == NULL) || (feof(flot)))
+    {
+        printf("Erreur de fichier\n");
+        exit(1);
+    }
+
+    l = (lChoix) malloc(sizeof(Choix));
+    if (l == NULL)
+    {
+        printf("Erreur de malloc\n");
+        exit(1);
+    }   
+
+    fgets(l->ville, 50, flot);
+    l->ville[strlen(l->ville)-1] = '\0';
+
+    fgets(l->departement, 50, flot);
+    l->departement[strlen(l->departement)-1] = '\0';
+
+    fscanf(flot, "%d", &l->decisionDepartement);
+    fscanf(flot, "%d%*c", &l->validationCandidat);
+
+    return l;
+}
+
+
+/*
 void testCandidat(void)
 {
     return;
@@ -398,4 +593,4 @@ ListeCandidats initialiseCandidat(void)
 
     return candidat;
 
-}
+}*/
