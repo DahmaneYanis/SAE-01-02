@@ -8,10 +8,10 @@ int menuAdmin(int phase)
     }
     switch (choix)
     {
-    case : 1
+    case 1 :
         return choix + 1;
         break;
-    case : 2
+    case 2 :
         return choix;
         break;
     }
@@ -20,5 +20,5 @@ int menuAdmin(int phase)
 void afficherMenuAdmin(void)
 {
     printf("1.Passer a la phase suivante (Attention, irréversible)\n");
-    printf("2.Quitter")
+    printf("2.Quitter");
 }
