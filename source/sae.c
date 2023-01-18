@@ -24,14 +24,16 @@ void Globale(void)
     int nbIut, nbIutMax;
 
     //Chargement des fichiers
-    tLog = chargementLog("../donnees/log.don", &nbLog);
-    tIut = chargeIutDon("../donnees/iut.don", &nbIut, &nbIutMax);
+    //tLog = chargementLog("../donnees/log.don", &nbLog);
+    //tIut = chargeIutDon("../donnees/iut.don", &nbIut, &nbIutMax);
     lCand = chargeCandidat(&nbCand);
 
     //Appel du menu visiteur
-    menuVisiteur(tLog, nbLog, tIut, nbIut, lCand);
+    //menuVisiteur(tLog, nbLog, tIut, nbIut, lCand);
 
     //Sauvegarde dans les fichiers
+    //sauvegardeIUT(tIut);
+    sauvegardeCandidat(lCand, nbCand);
 }
 
 /**
@@ -190,9 +192,6 @@ void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles, Candida
     }
 }
 
-/*
-FAUX
-*/
 /**
     @brief Cette fonction permet à l'utilisateur de saisir les informations sur une candidature. Il doit d'abord saisir le nom de la ville,
     puis le nom du département correspondant. Si les informations saisies ne sont pas valides, l'utilisateur est invité à les resaisir.

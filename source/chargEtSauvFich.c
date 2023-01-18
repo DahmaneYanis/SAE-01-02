@@ -302,40 +302,7 @@ ListeCandidats chargeCandidat(int * nbCandidat)
         }
     }
 
-    MaillonCandidat * aux;
-    aux = m;
-    lChoix auxLis;
-
-    printf("%d\n", *nbCandidat);
-    for (int i = 0 ; i < *nbCandidat ; i++)
-    {
-        printf("%d\n", aux->candidat.numero);
-        printf("%s\n", aux->candidat.nom);
-        printf("%s\n", aux->candidat.prenom);
-
-        for (int j = 0 ; j < 4 ; j++)
-        {
-            printf("%f\n", aux->candidat.notes[j]);
-        }
-
-        printf("%d\n", aux->candidat.nbChoix);
-
-
-
-        for (int k  = 0 ; k < aux->candidat.nbChoix; k++)
-        {
-            auxLis = aux->candidat.lchoix;  
-            printf("%s\n", auxLis->ville);
-            printf("%s\n", auxLis->departement);
-            printf("%d\n", auxLis->decisionDepartement);
-            printf("%d\n", auxLis->validationCandidat);
-
-            auxLis = auxLis->suiv;
-        }
-
-        aux = aux->suiv;
-
-    }
+    
 
     fclose(flot);
 
@@ -457,6 +424,9 @@ lChoix lireChoix (FILE *flot)
     fgets(l->ville, 50, flot);
     l->ville[strlen(l->ville)-1] = '\0';
 
+    printf("%s\n", l->ville);
+    printf("%s\n", l->departement);
+
     fgets(l->departement, 50, flot);
     l->departement[strlen(l->departement)-1] = '\0';
 
@@ -466,126 +436,47 @@ lChoix lireChoix (FILE *flot)
     return l;
 }
 
-
-/*
-void testCandidat(void)
+void sauvegardeCandidat(ListeCandidats m, int nbCandidat)
 {
-    return;
-}
+    MaillonCandidat * aux;
+    aux = m;
+    lChoix auxLis;
 
-ListeCandidats chargeCandidat(void)
-{
-    FILE *flot;
-    ListeCandidats lCand;
-    int nbCandidat;
-
-    flot = fopen("../donnees/candidats.don", "r");
-
+    FILE * flot = fopen("../donnees/candidatsTest.don", "w");
     if (flot == NULL)
     {
-        printf("Probleme d'ouverture de fichier\n");
+        printf("Error de fichier - SAuvegarde impossible.\n");
         exit(1);
     }
 
-    lCand = NULL;
-    fscanf(flot, "%d", &nbCandidat);
-
-    int i = 0;
-    while (!feof(flot) && i < nbCandidat)
+    fprintf(flot, "%d\n", nbCandidat);
+    for (int i = 0 ; i < nbCandidat ; i++)
     {
-        ajouteCandidat(lCand, flot);
-        i++;
+        fprintf(flot, "%d\n", aux->candidat.numero);
+        fprintf(flot, "%s\n", aux->candidat.nom);
+        fprintf(flot, "%s\n", aux->candidat.prenom);
+
+        for (int j = 0 ; j < 4 ; j++)
+        {
+            fprintf(flot, "%.2f ", aux->candidat.notes[j]);
+        }
+
+        fprintf(flot, "\n%d\n", aux->candidat.nbChoix);
+
+
+
+        for (int k  = 0 ; k < aux->candidat.nbChoix; k++)
+        {
+            auxLis = aux->candidat.lchoix;  
+            fprintf(flot, "%s\n", auxLis->ville);
+            fprintf(flot, "%s\n", auxLis->departement);
+            fprintf(flot, "%d\n", auxLis->decisionDepartement);
+            fprintf(flot, "%d\n", auxLis->validationCandidat);
+
+            auxLis = auxLis->suiv;
+        }
+
+        aux = aux->suiv;
     }
-
-
     fclose(flot);
 }
-
-void ajouteCandidat(ListeCandidats lCand, FILE * flot)
-{
-    if (lCand == NULL)
-        lCand = lireCandidat(flot);
-    else
-        ajouteCandidat(lCand->suiv, flot);
-}
-
-MaillonCandidat * lireCandidat(FILE *flot)
-{
-    MaillonCandidat * m;
-    m = initialiseCandidat();
-
-    fscanf(flot, "%d", &m->candidat.numero);
-    fgets(m->candidat.nom, 50, flot);
-    fgets(m->candidat.prenom, 50, flot);
-    m->candidat.nom[strlen(m->candidat.nom)-1] = '\0';
-    m->candidat.prenom[strlen(m->candidat.prenom)-1] = '\0';
-    
-    for (int i = 0; i < 4; i++) {
-        fscanf(flot, "%f", &m->candidat.notes[i]);
-    }
-
-    fscanf(flot, "%d", &m->candidat.nbChoix);
-
-    for (int i = 0; i < m->candidat.nbChoix-1; i++)
-    {
-        ajouteChoix(m->candidat.lchoix, lireChoix(flot));
-    }
-
-    return m;
-
-}
-
-void ajouteChoix(lChoix lchoix, Choix * choix)
-{
-    lChoix aux;
-
-    if (lchoix == NULL)
-        lchoix = choix;
-    else 
-    {
-        aux = lchoix;
-        lchoix = choix;
-        choix->suiv = aux;
-    }
-}
-
-lChoix lireChoix(FILE *flot)
-{
-    lChoix choix;
-    choix = initialiseChoix();
-
-    fscanf(flot, "%s %s %d %d", choix->ville, choix->departement, &choix->decisionDepartement, &choix->validationCandidat);
-
-    return choix;
-}
-
-lChoix initialiseChoix(void)
-{
-    lChoix choix;
-
-    choix = (lChoix) malloc(sizeof(Choix));
-    if (choix == NULL)
-    {
-        printf("Probleme de malloc\n");
-        exit(1);
-    }
-
-    return choix;
-
-}
-
-
-ListeCandidats initialiseCandidat(void)
-{
-    ListeCandidats candidat;
-
-    candidat = (ListeCandidats) malloc(sizeof(MaillonCandidat));
-    if (candidat == NULL)
-    {
-        printf("Probleme de malloc\n");
-        exit(1);
-    }
-
-    return candidat;
-
-}*/

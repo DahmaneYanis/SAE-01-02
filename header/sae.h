@@ -173,6 +173,7 @@ lChoix listenouvC(void);
 
 // chargEtSauvFich.c
 
+void sauvegardeCandidat(ListeCandidats m, int nbCandidat);
 void testCharge(void);
 void lectureDep(ListeDept ldept, FILE * fichier);
 ListeDept initialiseDep(void);
