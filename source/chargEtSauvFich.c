@@ -480,3 +480,25 @@ void sauvegardeCandidat(ListeCandidats m, int nbCandidat)
     }
     fclose(flot);
 }
+
+void sauvegardeIut(VilleIut ** tIut, int nbIut)
+{
+    FILE * flot = fopen("../donnees/IUT_Test.don", "w");
+
+    if(flot == NULL)
+    {
+        printf("Error de sauvegarde\n");
+        exit(1);
+    }
+
+    for (int i = 0; i < nbIut; i++)
+    {
+        while(!(tIut[i]->lDept == NULL))
+        {
+            fprintf(flot, "%s\t%s\t%d\t%s\n", tIut[i]->nom, tIut[i]->lDept->nomDept, tIut[i]->lDept->nbP, tIut[i]->lDept->resp);
+            tIut[i]->lDept = tIut[i]->lDept->suiv;
+        }
+    }
+
+    fclose(flot);
+}

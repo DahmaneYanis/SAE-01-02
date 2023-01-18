@@ -24,15 +24,15 @@ void Globale(void)
     int nbIut, nbIutMax;
 
     //Chargement des fichiers
-    //tLog = chargementLog("../donnees/log.don", &nbLog);
-    //tIut = chargeIutDon("../donnees/iut.don", &nbIut, &nbIutMax);
+    tLog = chargementLog("../donnees/log.don", &nbLog);
+    tIut = chargeIutDon("../donnees/iut.don", &nbIut, &nbIutMax);
     lCand = chargeCandidat(&nbCand);
 
     //Appel du menu visiteur
-    //menuVisiteur(tLog, nbLog, tIut, nbIut, lCand);
+    menuVisiteur(tLog, nbLog, tIut, nbIut, lCand);
 
     //Sauvegarde dans les fichiers
-    //sauvegardeIUT(tIut);
+    sauvegardeIut(tIut, nbIut);
     sauvegardeCandidat(lCand, nbCand);
 }
 
@@ -201,35 +201,8 @@ void menuCandidat(Log * tLog, int nbLog, VilleIut *tIut[], int nbVilles, Candida
     @param nbVille Nombre de villes dans la liste
     @return void
 */
-/*
-void saisirCandidature(char ville[], char dep[], VilleIut *tiut[], int nbVille)
-{
-    int pos, res;
 
-    printf("Veuillez saisir le nom de la ville\n");
-    scanf("%s", ville);
-    pos = existeVille(tiut, ville, nbVille);
-    while ( pos == -1)
-    {
-        printf("Veuillez saisir le nom de la ville\n");
-        scanf("%s", ville);
-        pos = existeVille(tiut, ville, nbVille);
-    }
-    afficherListe(tiut[pos]->lDept);
-    printf("Veuilllez saisir le nom de departement\n");
-    scanf("%s", dep);
-    res = existeDept(tiut[pos]->lDept, dep);
-    while (res == 0)
-    {
-        afficherListe(tiut[pos]->lDept);
-        printf("Veuilllez saisir le nom de departement\n");
-        scanf("%s", dep);
-        res = existeDept(tiut[pos]->lDept, dep);
-    }
-}
-*/
 /**
-
 @brief affiche le menu des candidats et renvoie le choix de l'utilisateur
 
 @return int : le choix de l'utilisateur
@@ -396,6 +369,7 @@ void seConnecter(Log * tLog, int nbLog, VilleIut ** tIut, int nbIut, ListeCandid
     saisieNomUtilisateur(utilisateur); // Récupération du nom d'utilisateur
     
     existe = existeUtilisateur(utilisateur, &indice, tLog, nbLog);
+
     if(!existe)
     {
         printf("Utilisateur inexistant !\nAppuyez sur [entrée] pour continuer...");
